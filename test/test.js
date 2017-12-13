@@ -1,3 +1,5 @@
+/* eslint no-unused-vars: "off" */
+
 const XLSX = require("xlsx");
 
 const processWorkBookAndValidate = require("../src/processWorkBookAndValidate");
