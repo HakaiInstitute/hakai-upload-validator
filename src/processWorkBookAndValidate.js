@@ -111,7 +111,7 @@ function processWorkBookAndValidate(
   const metaDataHasErrors = metadataLog.dump().some(r => r.level === "error");
 
   if (metaDataHasErrors) {
-    return { metadataLog };
+    return { metadataLog:metadataLog.dump() };
   }
   // Process Data Sheets
   // There is one 'submission' object for each datasheet
@@ -269,6 +269,6 @@ function processWorkBookAndValidate(
       return submission;
     } // end of Hakai Data worksheets map loop
   );
-  return { metadataLog, submissions };
+  return { metadataLog: metadataLog.dump(), submissions };
 } // end of function
 module.exports = processWorkBookAndValidate;
