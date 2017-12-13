@@ -49,12 +49,12 @@ function processWorkBookAndValidate(
   const dataSheets = workBook.filter(sheet =>
     sheet.name.includes("Hakai Data")
   );
-  const metadataLog = new Memlog();
+  const metaMLog = new Memlog();
   // need a metadatasheet to figure out sample type
 
   if (!metaDataSheets.length) {
-    metadataLog.error("No metadata sheet found");
-    return { metadataLog };
+    metaMLog.error("No metadata sheet found");
+    return { metaMLog };
   }
 
   metaDataSheets.forEach(metaDataSheet => {
@@ -91,13 +91,11 @@ function processWorkBookAndValidate(
   if (metadata.data_type) {
     dataType = metadata.data_type.toUpperCase();
   } else {
-    metadataLog.error("Could not determine data type or find it's definition");
+    metaMLog.error("Could not determine data type or find it's definition");
   }
 
   if (dataType && !columnSchema[dataType]) {
-    metadataLog.error(
-      `Could not determine definition for data type ${dataType}`
-    );
+    metaMLog.error(`Could not determine definition for data type ${dataType}`);
   }
 
   // compile joi object:
@@ -106,12 +104,12 @@ function processWorkBookAndValidate(
   }
 
   if (!dataSheets.length) {
-    metadataLog.error("No data sheets found");
+    metaMLog.error("No data sheets found");
   }
-  const metaDataHasErrors = metadataLog.dump().some(r => r.level === "error");
+  const metaDataHasErrors = metaMLog.dump().some(r => r.level === "error");
 
   if (metaDataHasErrors) {
-    return { metadataLog:metadataLog.dump() };
+    return { metadataLog: metaMLog.dump() };
   }
   // Process Data Sheets
   // There is one 'submission' object for each datasheet
@@ -269,6 +267,6 @@ function processWorkBookAndValidate(
       return submission;
     } // end of Hakai Data worksheets map loop
   );
-  return { metadataLog: metadataLog.dump(), submissions };
+  return { metadataLog: metaMLog.dump(), submissions };
 } // end of function
 module.exports = processWorkBookAndValidate;
