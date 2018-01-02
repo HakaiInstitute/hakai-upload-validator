@@ -4,7 +4,7 @@ module.exports = {
     library: "hakai-upload-validator",
     libraryTarget: "umd",
     umdNamedDefine: true,
-    path: __dirname + "/dist",
+    path: `${__dirname}/dist`,
     filename: "validate.js"
   },
   module: {
