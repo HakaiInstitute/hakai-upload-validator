@@ -5,7 +5,7 @@ module.exports = {
     libraryTarget: "umd",
     umdNamedDefine: true,
     path: `${__dirname}/dist`,
-    filename: "validate.js"
+    filename: "processWorkBookAndValidate.js"
   },
   module: {
     loaders: [
