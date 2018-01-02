@@ -1,7 +1,7 @@
 const { expect } = require("chai");
 
-const columnSchema = require("../../src/columns");
-const getDBFieldByRelatedText = require("../../src/getDBFieldByRelatedText");
+const columnSchema = require("../src/columns");
+const getDBFieldByRelatedText = require("../src/getDBFieldByRelatedText");
 
 describe("getDBFieldByRelatedText", () => {
   it("should get a match for a value and schema and be case insensitive", () => {

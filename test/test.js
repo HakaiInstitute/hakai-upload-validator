@@ -6,7 +6,7 @@ const processWorkBookAndValidate = require("../src/processWorkBookAndValidate");
 
 const prettyConsoleLog = str => console.log(JSON.stringify(str, null, 2));
 
-const fileName = "2017-09-09_HakaiResults_Absorbance_Hakai_Fresh.xlsx";
+const fileName = "2017-11-15_141319_HakaiData_nutrients bad.xlsx";
 
 const workbookRaw = XLSX.readFile(`excelFiles/${fileName}`);
 
@@ -16,14 +16,14 @@ const workbookJSON = Object.keys(workbookRaw.Sheets).map(sheetName => ({
     header: 1
   })
 }));
-const { metadataLog, submissions } = processWorkBookAndValidate(
+const { metadataErrorLog, submissions } = processWorkBookAndValidate(
   workbookJSON,
   "someuser@hakai.org",
   fileName,
-  false
+  false // commit flag
 );
-if (metadataLog.length) {
-  console.error(metadataLog);
+if (metadataErrorLog.length) {
+  console.error(metadataErrorLog);
 } else {
   submissions.forEach(submission => {
     const {
@@ -36,8 +36,7 @@ if (metadataLog.length) {
       validationLog,
       debugObj
     } = submission;
-    // prettyConsoleLog('RESULTS');
-    prettyConsoleLog(submission);
+    prettyConsoleLog(validationLog);
     // prettyConsoleLog(results.inputs);
     // prettyConsoleLog(validationLog.mlog.filter(v=>v.level==='error'));
   });

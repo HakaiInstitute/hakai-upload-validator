@@ -4,7 +4,7 @@ const { toUpperCaseArray, deDupArray } = require("./common.js");
  *   Search for key in fieldGroup. includes searching 'ouput','matches' array
  *   eg getDBFieldByRelatedText('Watershed ID',columnSchema['SUVA']) returns 'watershed'
  *   @param {String} text Value to match. Case insensitive matches anything in 'matches' array, or the 'output' property, or the name of the object itself
- *   @param {Object} fieldGroup an object from columns.js
+ *   @param {Object} fieldGroup an object from columns.js, eg columns.NITRATES
  *   @returns {String} the proper field name to use
  */
 const getDBFieldByRelatedText = (text = "", fieldGroup) => {

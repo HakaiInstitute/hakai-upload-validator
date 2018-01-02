@@ -1,8 +1,13 @@
 const moment = require("moment-timezone");
 
 moment.tz.setDefault("America/Vancouver");
-// Returns a string with the date/time formatted properly
-// cell is just the contents of the cell that we are trying to interpret as date. date is a date from another cell.
+
+/**
+ * Date parsing including parsing of weird Excel dates
+ * @param {String} cell the contents of the cell that we are trying to interpret as date
+ * @param {String} date if cell is a time with no date, date is sent with just the date component (no time)
+ * @returns {String} date/time formatted properly
+ */
 const dateParser = (cell, date = "") => {
   let formattedDateCell;
   // 2015/08/06 00:00:00

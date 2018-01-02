@@ -8,7 +8,7 @@ const {
   toUpperCaseArray,
   arrayIncludesArray,
   arrayFindMultipleIndices
-} = require("../../src/common.js");
+} = require("../src/common.js");
 
 describe("Common functions", () => {
   const testArray = ["a", "b", "b", "c"];
