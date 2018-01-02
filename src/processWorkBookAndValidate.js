@@ -109,7 +109,7 @@ function processWorkBookAndValidate(
   const metaDataHasErrors = metaMLog.dump().some(r => r.level === "error");
 
   if (metaDataHasErrors) {
-    return { metadataLog: metaMLog.dump() };
+    return { metadataErrorLog: metaMLog.dump() };
   }
   // Process Data Sheets
   // There is one 'submission' object for each datasheet
@@ -252,7 +252,7 @@ function processWorkBookAndValidate(
         rowIndicesWithJoiErrors
       };
 
-      // Create submission array to later sending data to the database
+      // Create submission array to later send data to the database
       const submission = {
         results,
         form_name: results["@attributes"].dm_form,
@@ -267,6 +267,6 @@ function processWorkBookAndValidate(
       return submission;
     } // end of Hakai Data worksheets map loop
   );
-  return { metadataLog: metaMLog.dump(), submissions };
+  return { metadataErrorLog: metaMLog.dump(), submissions };
 } // end of function
 module.exports = processWorkBookAndValidate;
