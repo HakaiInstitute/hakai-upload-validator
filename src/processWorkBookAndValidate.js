@@ -61,6 +61,7 @@ function processWorkBookAndValidate(
     // iterate through each row in sheet that has a value at first column
     metaDataSheet.data
       .filter(row => row[0] && row[1] !== undefined)
+      .filter(row => row[0] !== "Metadata property")
       .forEach(row => {
         const [excelField, value] = row;
         const dbField = getDBFieldByRelatedText(
@@ -234,6 +235,7 @@ function processWorkBookAndValidate(
       };
 
       const debugObj = {
+        filename,
         // metadata keys, values
         metadata,
         // array of erroneous duplicates
