@@ -39,6 +39,6 @@ const findDuplicates = (uniqueSets, data) => {
       }
     });
   });
-  return deDupArray(dupes);
+  return deDupArray(dupes).map(dupe=>dupe.replace('||',''));
 };
 module.exports = findDuplicates;
