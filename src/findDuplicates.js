@@ -15,17 +15,20 @@ const findDuplicates = (uniqueSets, data) => {
 
   const headers = Object.keys(data[0]);
 
-  // first check if we even have these sets of headers in this file
-  if (!uniqueSets.some(uniqueSet => arrayIncludesArray(headers, uniqueSet)))
-    return [];
+  // first remove the sets that we dont have all headers for
+  const uniqueSetsMissingHeadersRemoved = uniqueSets.filter(uniqueSet =>
+    arrayIncludesArray(headers, uniqueSet)
+  );
+
+  if (!uniqueSetsMissingHeadersRemoved.length) return [];
 
   // For each for in worksheet, create a string joining the values at the fieldnames given by uniqueSets for comparison
   const uniqueResults = data.map(row =>
-    uniqueSets.map(uniqueSet => uniqueSet.map(field => row[field]).join("|"))
+    uniqueSetsMissingHeadersRemoved.map(uniqueSet => uniqueSet.map(field => row[field]).join("|"))
   );
 
   // remove empty lines
-  const uniqueResultsNoEmpties = uniqueSets.map((set, i) =>
+  const uniqueResultsNoEmpties = uniqueSetsMissingHeadersRemoved.map((set, i) =>
     uniqueResults.map(row => row[i]).filter(r => r !== "||")
   );
 
@@ -39,6 +42,7 @@ const findDuplicates = (uniqueSets, data) => {
       }
     });
   });
+
   return deDupArray(dupes).map(dupe=>dupe.replace('||',''));
 };
 module.exports = findDuplicates;
