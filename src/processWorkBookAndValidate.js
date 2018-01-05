@@ -263,7 +263,8 @@ function processWorkBookAndValidate(
         user: submittingUser,
         worksheet: dataSheet.name,
         validationLog,
-        debugObj
+        debugObj,
+        hasValidationErrors
       };
 
       return submission;
