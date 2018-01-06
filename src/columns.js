@@ -1313,10 +1313,7 @@ const definitions = {
     ...defaultFilters,
     ...{
       _output: "Filters",
-      filter_uid: {
-        output: "filter_uid",
-        matches: ["filter_uid"]
-      }
+      filter_uid: {}
     }
   },
 
