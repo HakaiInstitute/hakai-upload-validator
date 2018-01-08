@@ -32,9 +32,13 @@ const rowCleaner = (row, fieldToIndexMap) => {
     // TODO check for required fields / columns based on sample type
     // cell could be 0 but dont bother if it blank
     if (dbField && cell !== undefined && cell !== "") {
-      if (dateTimeFields.includes(dbField) && fieldToIndexMap.date) {
+      // analyzed is datetime and doesnt need separate date
+      if (dateTimeFields.includes(dbField)) {
         // dateParser needs to know a date to fill date/time fields that only have time
-        cleanedRow[dbField] = dateParser(cell, row[fieldToIndexMap.date]);
+        let date;
+        if (fieldToIndexMap.date) date = row[fieldToIndexMap.date];
+
+        cleanedRow[dbField] = dateParser(cell, date);
       } else if (dbField === "quality_log") {
         // remove \u0000 (null character) values from quality_log
         cleanedRow.quality_log = cell.replace(/\0/g, "");
