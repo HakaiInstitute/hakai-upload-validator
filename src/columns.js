@@ -252,6 +252,7 @@ const defaultMetadata = {
 };
 
 const defaultFilters = {
+  ...defaultHeaders,
   ...{
     _joiobj: defaultHeaders._joiobj,
     weight_before: {
@@ -320,8 +321,7 @@ const defaultFilters = {
         "Acidified at time of filtration A"
       ]
     }
-  },
-  ...defaultHeaders
+  }
 };
 
 const defaultZooplanktonHeaders = {
@@ -703,6 +703,7 @@ const definitions = {
   },
 
   YSI: {
+    ...defaultHeaders,
     ...{
       _output: "YSI",
       ysi_uid: {},
@@ -774,11 +775,11 @@ const definitions = {
         matches: ["Salinity Flag"]
       },
       depth_flag: {}
-    },
-    ...defaultHeaders
+    }
   },
 
   YSI_CALIBRATION: {
+    ...defaultHeaders,
     ...{
       _output: "YSI_CALIBRATION",
       ysi_uid: {},
@@ -898,8 +899,7 @@ const definitions = {
           "traceable thermometer temperature"
         ]
       }
-    },
-    ...defaultHeaders
+    }
   },
 
   SUVA: {
@@ -1470,6 +1470,7 @@ const definitions = {
   },
 
   ZOOPLANKTON_MICROSCOPY: {
+    ...defaultZooplanktonHeaders,
     ...{
       _output: "Zooplankton",
       _joiobj: defaultZooplanktonHeaders._joiobj.concat(
@@ -1501,11 +1502,11 @@ const definitions = {
       sample_splits: {},
       sub_sample: {},
       taxon: {}
-    },
-    ...defaultZooplanktonHeaders
+    }
   },
 
   ZOOPLANKTON_TOW: {
+    ...defaultHeaders,
     ...{
       _output: "Zooplankton_tow",
       _joiobj: defaultHeaders._joiobj.concat(
@@ -1670,8 +1671,7 @@ const definitions = {
         output: "Net_Notes",
         matches: ["Comments", "comments", "comment"]
       }
-    },
-    ...defaultHeaders
+    }
   },
 
   ZOOPLANKTON_TOTAL_BIOMASS: {
@@ -1703,6 +1703,7 @@ const definitions = {
   },
 
   ZOOPLANKTON_BIOMASS: {
+    ...defaultZooplanktonHeaders,
     ...{
       _output: "Zooplankton",
       _joiobj: defaultZooplanktonHeaders._joiobj.concat(
@@ -1732,8 +1733,7 @@ const definitions = {
           .invalid(["na", "nd", "n/d", "n/a"])
           .insensitive()
       }
-    },
-    ...defaultZooplanktonHeaders
+    }
   },
 
   PHYTOPLANKTON: {
@@ -2295,6 +2295,7 @@ const definitions = {
   },
 
   SOLO_DROPS: {
+    ...defaultHeaders,
     _output: "Niskin_and_Solo_ID_s",
     solo_hakai_id: {
       output: "_1__Sample_ID",
@@ -2314,8 +2315,7 @@ const definitions = {
       output: "Depth",
       matches: ["Target Depth", "depth", "target depth (m)"],
       joi: Joi.number().min(0)
-    },
-    ...defaultHeaders
+    }
   }
 };
 
