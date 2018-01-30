@@ -235,6 +235,7 @@ function processWorkBookAndValidate(
       const debugObj = {
         filename,
         user: submittingUser,
+        commit,
         // metadata keys, values
         metadata,
         // array of erroneous duplicates
