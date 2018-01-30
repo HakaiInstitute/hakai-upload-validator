@@ -20,12 +20,51 @@ JSON, and then formats for entry into the database.
 This project is to be used for validation in both browser and server, so
 packages that can run on both are being used, Eg. joi-browser instead of joi.
 
-# Usage
+## Changes to columns.js
 
-Add this package to another project with
+There are some changes to how columns.js works. Output defaults to the categeory
+name, and `matches` includes that name by default so it is optional. For example,
+`gather_location: {}` is now equivalent to:
 
-yarn add github:HakaiInstitute/hakai-upload-validator
+```javascript
+gather_location:{
+  output:'gather_location',
+  matches:['gather_location', 'gather location']
+}
+```
 
-# Testing
+Underscore/space replacement is automatically searched for, you don't need to
+add it explicitly. Also `matches` is not case sensitive, but `output` is.
+
+When there are multiple matches found, the *last* one is taken. See CHLOROPHYLL
+## Usage
+
+Add this package to another project with `yarn add github:HakaiInstitute/hakai-upload-validator`
+
+After making a change to the hakai-upload validator, there are a few steps that need to be done to update both the portal and forms-parser.
+
+- In hakai-upload-validator, run `npm run prepublish`
+- Commit validate.min.js on it's own commit
+- Switch to branch #minified and cherrypick that commit and commit it.
+- Push #minified.
+
+Update the portal:
+
+```javasript
+cd ~/hakai-data-portal-v2
+npm upgrade hakai-upload-validator
+npm run build:hecate
+pm2 restart hakai-data-portal-v2
+```
+
+To update the forms-parser:
+
+```javasript
+cd ~/hakai-database/Form-Parser/EIMS
+npm upgrade hakai-upload-validator
+pm2 restart hakai-data-portal-v2
+```
+
+## Testing
 
 npm test
