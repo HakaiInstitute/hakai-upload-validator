@@ -14,9 +14,7 @@ const joiValidate = require("./joiValidate");
 
 moment.tz.setDefault("America/Vancouver");
 
-// TODO Remove more lines from columns.js
-// TODO write tests for some of the more complicated functions
-// TODO figure out how joiobj.keys() works still
+// TODO write more tests
 
 function processWorkBookAndValidate(
   workBook,
@@ -213,7 +211,7 @@ function processWorkBookAndValidate(
       const validationLog = { joiLog, mlog: mlog.dump() };
 
       const hasValidationErrors =
-        joiLog.length || mlog.dump().some(log => log.level === "error");
+        joiLog.length > 0 || mlog.dump().some(log => log.level === "error");
 
       const results = {
         inputs,
@@ -236,6 +234,7 @@ function processWorkBookAndValidate(
 
       const debugObj = {
         filename,
+        user: submittingUser,
         // metadata keys, values
         metadata,
         // array of erroneous duplicates
