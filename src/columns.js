@@ -310,7 +310,6 @@ const defaultFilters = {
       joi: Joi.number()
     },
     filter_portion: {
-      matches: ["Filter Portion", "Filter_Portion"],
       joi: Joi.number()
     },
     acid_filter: {
@@ -1126,10 +1125,7 @@ const definitions = {
     ...defaultHeaders,
     ...{
       _output: "Nutrients",
-      nutrient_uid: {
-        output: "nutrient_uid",
-        matches: ["nutrient_uid"]
-      },
+      nutrient_uid: {},
       filter_type: {
         output: "Filter_Type"
       },
@@ -1206,17 +1202,14 @@ const definitions = {
       _output: "Nutrients2",
       nutrient_uid: {},
       filter_type: {
-        output: "Filter_Type",
-        matches: ["Filter Type"]
+        output: "Filter_Type"
       },
       volume: {
         output: "_1__Volume",
-        matches: ["Volume (ml)", "volume_ml", "Volume", "volume filtered"]
+        matches: ["Volume (ml)", "volume_ml", "volume filtered"]
       },
       d15nair: {},
-      d15nair_flag: {
-        matches: ["d15nair flag"]
-      }
+      d15nair_flag: {}
     }
   },
 
@@ -1255,18 +1248,14 @@ const definitions = {
       corr_delta15n: {
         matches: ["corr_15N", "d15N"]
       },
-      total_beam_c: {
-        matches: ["Total Beam C"]
-      },
+      total_beam_c: {},
       ug_c: {
-        matches: ["ug_c", "ug C", "C Amount (ug)"]
+        matches: ["C Amount (ug)"]
       },
       per_c: {
         matches: ["%C"]
       },
-      delta_pdb: {
-        matches: ["Delta PDB"]
-      },
+      delta_pdb: {},
       corr_delta13c: {
         matches: ["corr_13C", "d13C"]
       },
@@ -1292,14 +1281,12 @@ const definitions = {
       id_no_acid: {},
       exclude: {},
       acid_to_be_fumed: {
-        output: "acid_to_be_fumed",
         matches: [
           "Samples to be acidified by fuming",
           "Samples to be acidified by fuming A"
         ]
       },
       acid_fuming: {
-        output: "acid_fuming",
         matches: ["Acidified by Fuming Completed"]
       },
       treatment: {
@@ -1321,32 +1308,19 @@ const definitions = {
     ...defaultFilters,
     ...{
       _output: "Chlorophyll",
-      chl_uid: {
-        output: "chl_uid",
-        matches: ["chl_uid"]
-      },
+      chl_uid: {},
       blank: {
-        output: "blank",
-        matches: ["is_blank", "blank"]
+        matches: ["is_blank"]
       },
       solid_standard: {
-        output: "solid_standard",
-        matches: ["is_solid_standard", "solid standard"]
+        matches: ["is_solid_standard"]
       },
       chl_sample_type: {
-        output: "chl_sample_type",
         matches: ["Type"]
       },
-      size_fraction: {
-        output: "size_fraction",
-        matches: ["size_fraction", "size fraction"]
-      },
-      flurometer_uid: {
-        output: "flurometer_uid",
-        matches: ["flurometer_uid"]
-      },
+      size_fraction: {},
+      flurometer_uid: {},
       flurometer_serial_no: {
-        output: "flurometer_serial_no",
         matches: [
           "Flurometer Serial #",
           "Flurometer Serial Number",
@@ -1368,21 +1342,12 @@ const definitions = {
       before_acid: {},
       after_acid: {},
       acid_flag: {},
-      chla: {
-        output: "chla",
-        matches: ["Chla Final"]
-      },
+      chla: {},
       chla_flag: {},
-      chla_final: {
-        matches: ["Chla Fianal"]
-      },
+      chla_final: {},
       phaeo: {},
-      phaeo_flag: {
-        matches: ["Phaeo Flag"]
-      },
-      phaeo_final: {
-        matches: ["Phaeo final"]
-      },
+      phaeo_flag: {},
+      phaeo_final: {},
       filter_uid: {}
     }
   },
@@ -1525,8 +1490,7 @@ const definitions = {
         matches: ["Haul Type"]
       },
       tow_duration: {
-        output: "Tow_Duration__mm_ss_",
-        matches: ["Tow Duration"]
+        output: "Tow_Duration__mm_ss_"
         // "joi": "Joi.any().when('tow_type', {is: 'H', then: Joi.required()})"
       },
       tow_lat: {
@@ -1544,20 +1508,20 @@ const definitions = {
         output: "Net_ID"
       },
       hakai_net_id: {
-        matches: ["hakai net id", "Hakai ID"]
+        matches: ["Hakai ID"]
       },
 
       tow_start_time: {
         output: "Start_Tow_Time",
-        matches: ["Start_Tow_Time", "Start Tow Time", "Tow Start Time"]
+        matches: ["Start_Tow_Time", "Start Tow Time"]
       },
       tow_bottom_time: {
         output: "Bottom_Tow_Time",
-        matches: ["Bottom_Tow_Time", "Bottom Tow Time", "Tow Bottom Time"]
+        matches: ["Bottom_Tow_Time", "Bottom Tow Time"]
       },
       tow_end_time: {
         output: "End_Tow_Time",
-        matches: ["End_Tow_Time", "End Tow Time", "Tow End Time"]
+        matches: ["End_Tow_Time", "End Tow Time"]
       },
       tow_time_flag: {},
       combine_nets: {
@@ -1586,12 +1550,10 @@ const definitions = {
         output: "Flow_Meter_Flag"
       },
       flow_meter_volume: {
-        output: "Flow_meter_volume",
-        matches: ["Flow_Meter_Volume", "Flow Meter Volume"]
+        output: "Flow_meter_volume"
       },
       flow_meter_volume_flag: {
-        output: "Flow_Meter_Volume_Flag",
-        matches: ["Flow Meter Volume Flag"]
+        output: "Flow_Meter_Volume_Flag"
       },
       flow_meter2: {
         output: "Flow_Meter_2",
@@ -1620,9 +1582,7 @@ const definitions = {
         matches: ["Flow Meter Volume Flag 2"]
       },
       depth_volume: {},
-      volume_ratio: {
-        matches: ["Volume Ratio"]
-      },
+      volume_ratio: {},
       net_diameter_cm: {
         output: "Diameter__cm_",
         matches: ["Net Dim. (cm)"],
@@ -1709,21 +1669,16 @@ const definitions = {
       _joiobj: defaultZooplanktonHeaders._joiobj.concat(
         Joi.object().xor("plankton_isotope_id", "plankton_total_biomass_id")
       ),
-      filter_uid: {
-        output: "filter_uid",
-        matches: ["filter_uid"]
-      },
+      filter_uid: {},
       plankton_isotope_id: {
         output: "_1__Filter_No_",
         matches: ["Plankton Isotope ID"]
       },
       plankton_total_biomass_id: {
-        output: "_1__Filter_No_",
-        matches: ["Plankton Total Biomass ID"]
+        output: "_1__Filter_No_"
       },
       plankton_fatty_acids_id: {
-        output: "_1__Filter_No_",
-        matches: ["Plankton Fatty Acids ID"]
+        output: "_1__Filter_No_"
       },
       hakai_biomass_id: {
         matches: ["Hakai ID"],
@@ -1782,8 +1737,7 @@ const definitions = {
     ...{
       _output: "C13_Incubations",
       c13incubations_uid: {
-        output: "c13incubations_uid",
-        matches: ["c13incubations_uid", "c13i_uid"]
+        matches: ["c13i_uid"]
       },
       filter_uid: {},
       sample_type: {
@@ -1794,8 +1748,7 @@ const definitions = {
         output: "Inoculation_Time"
       },
       incubation_start_time: {
-        output: "Incubation_Start_Time",
-        matches: ["Incubation Start Time"]
+        output: "Incubation_Start_Time"
       },
       incubation_end_time: {
         output: "Incubation_End_Time"
@@ -1893,7 +1846,6 @@ const definitions = {
         ])
       },
       density: {
-        output: "density",
         matches: ["density range", "density_range"]
       },
       substrate: {},
@@ -1912,7 +1864,6 @@ const definitions = {
     ...{
       _output: "seagrass_list",
       density: {
-        output: "density",
         matches: ["density_range", "density range"]
       },
       substrate: {},
@@ -1948,7 +1899,6 @@ const definitions = {
         output: "shoot_width",
         matches: [
           "shoot_width",
-          "width_cm",
           "shoot_width_cm",
           "shoot width (cm)",
           "width_mm",
@@ -1960,7 +1910,7 @@ const definitions = {
       shoot_broken: {},
       num_blades: {
         output: "number_of_blades",
-        matches: ["num_blades", "number of blades"],
+        matches: ["number of blades"],
         joi: Joi.number()
       },
       foil_weight: {
@@ -1974,19 +1924,11 @@ const definitions = {
       },
       dry_sample_weight: {
         output: "dry_sample_weight_mg",
-        matches: [
-          "dry_sample_weight_mg",
-          "dry sample weight",
-          "dry sample weight (mg)"
-        ],
+        matches: ["dry_sample_weight_mg", "dry sample weight (mg)"],
         joi: Joi.number()
       },
-      lab_date: {
-        matches: ["lab date"]
-      },
-      seagrass_biomass_notes: {
-        matches: ["seagrass biomass notes"]
-      }
+      lab_date: {},
+      seagrass_biomass_notes: {}
     }
   },
 
@@ -1995,7 +1937,6 @@ const definitions = {
     ...{
       _output: "mesograzers_list",
       density: {
-        output: "density",
         matches: ["density_range", "density range"]
       },
       substrate: {},
@@ -2076,7 +2017,7 @@ const definitions = {
       vegetation_2: {},
       habitat_notes: {},
       result_uid: {
-        matches: ["result uid", "hakai_sample_id", "Hakai ID"],
+        matches: ["hakai_sample_id", "Hakai ID"],
         joi: Joi.alternatives([
           Joi.string().regex(/^[\w\d_-]+$/, { name: "Sample ID" }),
           Joi.number()
@@ -2174,7 +2115,7 @@ const definitions = {
       _output: "clam_samples",
       hakai_sample_id: {
         output: "bag_uid",
-        matches: ["hakai_sample_id", "Hakai ID"],
+        matches: ["Hakai ID"],
         joi: Joi.alternatives([
           Joi.string().regex(/^[\w\d_-]+$/, { name: "Sample ID" }),
           Joi.number()
@@ -2227,7 +2168,6 @@ const definitions = {
     },
     foil_filter_weight_mg: {
       matches: [
-        "foil_filter_weight_mg",
         "foil filter weight mg",
         "foil filter weight (mg)",
         "foil and filter weight (mg)"
@@ -2235,14 +2175,13 @@ const definitions = {
     },
     foil_filter_dry_sample_weight_mg: {
       matches: [
-        "foil_filter_dry_sample_weight_mg",
         "foil filter dry sample weight mg",
         "foil filter dry sample weight (mg)",
         "foil dry sample weight (mg)"
       ]
     },
     dry_sample_weight_mg: {
-      matches: ["dry_sample_weight_mg", "dry sample weight (mg)"]
+      matches: ["dry sample weight (mg)"]
     },
     lab_date: {},
     filtered_epiphyte_notes: {}
@@ -2252,35 +2191,21 @@ const definitions = {
     ...defaultMarineGEO,
     _output: "fish_observations",
     species: {},
-    quantity: {
-      output: "quantity",
-      matches: ["quantity"]
-    },
+    quantity: {},
     length_cm: {
-      output: "length_cm",
-      matches: ["length_cm", "length (cm)"]
+      matches: ["length (cm)"]
     },
-    estimated_quantity: {
-      output: "estimated_quantity",
-      matches: ["estimated_quantity", "estimated quantity"]
-    },
-    notes: {
-      output: "notes",
-      matches: ["notes"]
-    }
+    estimated_quantity: {},
+    notes: {}
   },
 
   MG_SEAGRASS_DENSITY: {
     ...defaultMarineGEO,
     _output: "seagrass_density_observations",
     canopy_height_cm: {
-      output: "canopy_height_cm",
-      matches: ["canopy_height_cm", "canopy height cm", "canopy height (cm)"]
+      matches: ["canopy height (cm)"]
     },
-    notes: {
-      output: "notes",
-      matches: ["notes"]
-    }
+    notes: {}
   },
 
   MG_INVERTS: {
@@ -2299,7 +2224,7 @@ const definitions = {
     _output: "Niskin_and_Solo_ID_s",
     solo_hakai_id: {
       output: "_1__Sample_ID",
-      matches: ["Hakai ID", "hakai_id"],
+      matches: ["Hakai ID"],
       joi: Joi.string()
         .regex(/^[\w\d\s:._-]+$/)
         .min(3)
