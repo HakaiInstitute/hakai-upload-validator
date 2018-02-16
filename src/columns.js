@@ -1841,7 +1841,7 @@ const definitions = {
         output: "bag_uid",
         matches: ["hakai_sample_id", "Hakai ID"],
         joi: Joi.alternatives([
-          Joi.string().regex(/^[\w\d_-]+$/, { name: "Sample ID" }),
+          Joi.string().regex(/^[ \w\d_-]+$/, { name: "Sample ID" }),
         ])
       },
       density: {
