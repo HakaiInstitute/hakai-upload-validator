@@ -2,7 +2,7 @@
   "name": "hakai-upload-validator",
   "version": "1.0.2",
   "description": "",
-  "main": "./dist/validate.min.js",
+  "main": "./src/processWorkBookAndValidate.js",
   "scripts": {
     "prepublish": "npm run build-webpack",
     "build-webpack": "webpack && uglifyjs dist/validate.js -c warnings=false -m >  dist/validate.min.js",
