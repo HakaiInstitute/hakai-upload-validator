@@ -41,13 +41,6 @@ When there are multiple matches found, the *last* one is taken. See CHLOROPHYLL
 
 Add this package to another project with `yarn add github:HakaiInstitute/hakai-upload-validator`
 
-After making a change to the hakai-upload validator, there are a few steps that need to be done to update both the portal and forms-parser.
-
-- In hakai-upload-validator, run `npm run prepublish`
-- Commit validate.min.js on it's own commit
-- Switch to branch #minified and cherrypick that commit and commit it.
-- Push #minified.
-
 Update the portal:
 
 ```javasript
