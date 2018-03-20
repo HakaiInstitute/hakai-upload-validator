@@ -2307,6 +2307,36 @@ const definitions = {
     lab_staff: {},
     species: {},
     standard_length: { matches: ["Standard Length (mm)"] }
+  },
+  CTD_FLAGS: {
+    ...defaultHeaders,
+    _output: "ctd_flags",
+    start_range: {
+      output: "start_range",
+      matches: ["Start Date"],
+      joi: Joi.date(),
+    },
+    end_range: {
+      output: "end_range",
+      matches: ["End Date"],
+      joi: Joi.date(),
+    },
+    device_sn: {
+      output: "device_sn",
+      matches: ["Device Serial Number"],
+    },
+    data_type: {
+      output: "data_type",
+      matches: ["Data Type"],
+    },
+    data_flag: {
+      output: "data_flag",
+      matches: ["Flag Type"],
+    },
+    flagged_by: {
+      output: "flagged_by",
+      matches: ["Flagged By"],
+    },
   }
 };
 
