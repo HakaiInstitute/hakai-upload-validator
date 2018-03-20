@@ -23,7 +23,9 @@ const rowCleaner = (row, fieldToIndexMap) => {
     "incubation_start_time",
     "incubation_end_time",
     "filtering_end_time",
-    "dna_extraction_datetime"
+    "dna_extraction_datetime",
+    "start_range",
+    "end_range",
   ];
   // cleanedRow object  has db fields as keys
   const cleanedRow = {};
