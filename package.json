@@ -5,8 +5,10 @@
   "main": "./src/processWorkBookAndValidate.js",
   "scripts": {
     "prepublish": "npm run build-webpack",
-    "build-webpack": "webpack && uglifyjs dist/validate.js -c warnings=false -m >  dist/validate.min.js",
-    "test": "mocha test/*.spec.js"
+    "build-webpack":
+      "webpack && uglifyjs dist/validate.js -c warnings=false -m >  dist/validate.min.js",
+    "test": "mocha test/*.spec.js",
+    "testexcel": "node test/test.js"
   },
   "author": "",
   "license": "ISC",
