@@ -27,6 +27,8 @@ const xmlnsFromMetadata = metadata => {
     xmlns = "http://hakai.org/xforms/MARINEGEO_DATA";
   } else if (dataTypeLower === "secchi" || dataTypeLower === "ctd") {
     xmlns = "http://hakai.org/xforms/CTD_DATA";
+  } else if (dataTypeLower === "ctd_flags") {
+    xmlns = "http://hakai.org/xforms/CTD_FLAGS";
   } else if (dataTypeLower === "ysi_calibration") {
     xmlns = "http://hakai.org/xforms/YSI_CALIBRATION";
   } else {
