@@ -1,14 +1,13 @@
 /* eslint no-unused-vars: "off" */
+const filePath = process.argv.pop();
 
 const XLSX = require("xlsx");
-
+const path = require("path");
 const processWorkBookAndValidate = require("../src/processWorkBookAndValidate");
 
 const prettyConsoleLog = str => console.log(JSON.stringify(str, null, 2));
 
-const fileName = "2017-09-09_HakaiResults_Absorbance_Hakai_Fresh.xlsx";
-
-const workbookRaw = XLSX.readFile(`excelFiles/${fileName}`);
+const workbookRaw = XLSX.readFile(filePath);
 
 const workbookJSON = Object.keys(workbookRaw.Sheets).map(sheetName => ({
   name: sheetName,
@@ -19,25 +18,13 @@ const workbookJSON = Object.keys(workbookRaw.Sheets).map(sheetName => ({
 const { metadataErrorLog, submissions } = processWorkBookAndValidate(
   workbookJSON,
   "someuser@hakai.org",
-  fileName,
+  path.basename(filePath),
   false // commit flag
 );
 if (metadataErrorLog.length) {
-  console.error(metadataErrorLog);
+  prettyConsoleLog(metadataErrorLog);
 } else {
   submissions.forEach(submission => {
-    const {
-      results,
-      form_name,
-      process,
-      commit,
-      user,
-      worksheet,
-      validationLog,
-      debugObj
-    } = submission;
-    prettyConsoleLog(submission.results);
-    // prettyConsoleLog(results.inputs);
-    // prettyConsoleLog(validationLog.mlog.filter(v=>v.level==='error'));
+    prettyConsoleLog(submission);
   });
 }

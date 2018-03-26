@@ -23,8 +23,8 @@ packages that can run on both are being used, Eg. joi-browser instead of joi.
 ## Changes to columns.js
 
 There are some changes to how columns.js works. Output defaults to the categeory
-name, and `matches` includes that name by default so it is optional. For example,
-`gather_location: {}` is now equivalent to:
+name, and `matches` includes that name by default so it is optional. For
+example, `gather_location: {}` is now equivalent to:
 
 ```javascript
 gather_location:{
@@ -36,10 +36,12 @@ gather_location:{
 Underscore/space replacement is automatically searched for, you don't need to
 add it explicitly. Also `matches` is not case sensitive, but `output` is.
 
-When there are multiple matches found, the *last* one is taken. See CHLOROPHYLL
+When there are multiple matches found, the _last_ one is taken. See CHLOROPHYLL
+
 ## Usage
 
-Add this package to another project with `yarn add github:HakaiInstitute/hakai-upload-validator`
+Add this package to another project with `yarn add
+github:HakaiInstitute/hakai-upload-validator`
 
 Update the portal:
 
@@ -55,9 +57,21 @@ To update the forms-parser:
 ```javasript
 cd ~/hakai-database/Form-Parser/EIMS
 npm upgrade hakai-upload-validator
-pm2 restart hakai-data-portal-v2
+pm2 restart eims-form-parser
 ```
 
 ## Testing
 
-npm test
+To test the changes you have made, run:
+
+`npm run testexcel <path-to-an-excel-file>`
+
+This will spit out a large json file including the output to the database
+(results.input) as well as a ton of debugging info about the excel file.
+
+If you want to test further, you can include a local version of
+hakai-upload-validator before pushing changes by using local patch in
+package.json, See <https://docs.npmjs.com/files/package.json#local-paths>
+
+To run the test suite, which tests various functions used, do `npm test`.
+Currently not all tests passing :(
