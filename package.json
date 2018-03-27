@@ -8,7 +8,7 @@
     "build-webpack":
       "webpack && uglifyjs dist/validate.js -c warnings=false -m >  dist/validate.min.js",
     "test": "mocha test/*.spec.js",
-    "testexcel": "node test/test.js"
+    "testexcel": "node test/testExcel.js"
   },
   "author": "",
   "license": "ISC",
@@ -22,10 +22,7 @@
         }
       ]
     ],
-    "presets": [
-      "es2015",
-      "stage-2"
-    ]
+    "presets": ["es2015", "stage-2"]
   },
   "repository": {
     "type": "git",

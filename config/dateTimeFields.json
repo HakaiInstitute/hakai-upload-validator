@@ -1,0 +1,20 @@
+[
+  "date",
+  "collected",
+  "preserved",
+  "analyzed",
+  "calibration_date",
+  "tow_start_time",
+  "tow_end_time",
+  "tow_bottom_time",
+  "collected_start",
+  "collected_end",
+  "lab_date",
+  "inoculation_time",
+  "incubation_start_time",
+  "incubation_end_time",
+  "filtering_end_time",
+  "dna_extraction_datetime",
+  "start_range",
+  "end_range"
+]

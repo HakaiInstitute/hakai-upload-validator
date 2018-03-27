@@ -1,32 +1,12 @@
 const dateParser = require("./dateParser");
 const { getKeyByValue } = require("./common");
-
+const dateTimeFields = require("../config/dateTimeFields");
 /**
  *  Cleans up row data - parses dates and splits site names into watershed ID, site name
  *  @param {Object} row is an array of raw cell values
  *  @param {Object} fieldToIndexMap is an object that links field names to excel column index {date:0,hakai_id:2}
  */
 const rowCleaner = (row, fieldToIndexMap) => {
-  const dateTimeFields = [
-    "date",
-    "collected",
-    "preserved",
-    "analyzed",
-    "calibration_date",
-    "tow_start_time",
-    "tow_end_time",
-    "tow_bottom_time",
-    "collected_start",
-    "collected_end",
-    "lab_date",
-    "inoculation_time",
-    "incubation_start_time",
-    "incubation_end_time",
-    "filtering_end_time",
-    "dna_extraction_datetime",
-    "start_range",
-    "end_range",
-  ];
   // cleanedRow object  has db fields as keys
   const cleanedRow = {};
   row.forEach((cell, c) => {

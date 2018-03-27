@@ -1,6 +1,6 @@
 const { expect } = require("chai");
 
-const columnSchema = require("../src/columns");
+const columnSchema = require("../config/columns");
 const getDBFieldByRelatedText = require("../src/getDBFieldByRelatedText");
 
 describe("getDBFieldByRelatedText", () => {

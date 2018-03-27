@@ -1,4 +1,4 @@
-const columnSchema = require("./columns");
+const columnSchema = require("../config/columns");
 /**
  * Put data into 'levels', starting from array of objects, one line in an excel sheet being one object
  * Uses columns definitions in columns.js
