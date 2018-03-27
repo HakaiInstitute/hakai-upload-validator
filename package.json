@@ -4,37 +4,18 @@
   "description": "",
   "main": "./src/processWorkBookAndValidate.js",
   "scripts": {
-    "prepublish": "npm run build-webpack",
-    "build-webpack":
-      "webpack && uglifyjs dist/validate.js -c warnings=false -m >  dist/validate.min.js",
     "test": "mocha test/*.spec.js",
     "testexcel": "node test/testExcel.js"
   },
   "author": "",
-  "license": "ISC",
-  "babel": {
-    "plugins": [
-      "transform-es2015-modules-commonjs",
-      [
-        "transform-es2015-classes",
-        {
-          "loose": true
-        }
-      ]
-    ],
-    "presets": ["es2015", "stage-2"]
-  },
   "repository": {
     "type": "git",
-    "url": "http://github.com/jeffbski/joi-browser.git"
+    "url": "https://github.com/HakaiInstitute/hakai-upload-validator.git"
   },
-  "bugs": {
-    "url": "http://github.com/jeffbski/joi-browser/issues"
-  },
+
   "devDependencies": {
     "babel-core": "^6.2.1",
     "babel-loader": "^6.2.0",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.2.0",
     "babel-preset-es2015": "^6.1.18",
     "babel-preset-stage-2": "^6.24.1",
     "chai": "^4.1.2",
@@ -44,13 +25,8 @@
     "eslint-config-prettier": "^2.8.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-prettier": "^2.3.1",
-    "log4js": "^2.3.12",
     "mocha": "^4.0.1",
-    "ngzip": "^1.1.3",
-    "ntee": "^1.1.4",
     "prettier-eslint": "^8.2.2",
-    "uglify-js": "^2.6.1",
-    "webpack": "^2.7.0",
     "xlsx": "^0.11.10"
   },
   "dependencies": {
