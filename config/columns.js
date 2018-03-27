@@ -1056,6 +1056,17 @@ const definitions = {
     }
   },
 
+  TS: {
+    ...defaultHeaders,
+    ...{
+      _output: "TS",
+      tds: {},
+      tss: {},
+      tds_flag: {},
+      tss_flag: {}
+    }
+  },
+
   MICROBIAL: {
     ...defaultHeaders,
     ...{
@@ -1728,7 +1739,84 @@ const definitions = {
     ...defaultFilters,
     ...{
       _output: "HPLC",
-      hplc_uid: {}
+      hplc_uid: {},
+      tac_peak : {},
+      extraction_duration : {},
+      extraction_method : {},
+      initial_extraction_volume : {},
+      volume_filtered_ml : {},
+      final_extraction_volume : {},
+      chl_c3 : {},
+      chllide_a : {},
+      mgdvp : {},
+      chl_c2 : {},
+      chl_c1 : {},
+      me_chlide : {},
+      peri : {},
+      phbide : {},
+      _19_but : {},
+      fuco : {},
+      neo : {},
+      prasino : {},
+      viola : {},
+      _19_hex : {},
+      diadino : {},
+      allo : {},
+      diato : {},
+      zea : {},
+      lutein : {},
+      chl_b : {},
+      c2mgdg : {},
+      dv_chl_a : {},
+      chl_a : {},
+      phphyt : {},
+      b_carot : {},
+      t_chl_a : {},
+    }
+  },
+
+  RAIN: {
+    ...defaultFilters,
+    ...{
+      _output: "Rain_Water_Collection",
+      hakai_id: {
+        output: "_1__Sample_ID",
+        matches: ["Hakai ID"],
+        joi: Joi.string()
+          .regex(/^[\w\d\s._-]+$/)
+          .min(3)
+          .invalid(["na", "nd", "n/d", "n/a"])
+          .insensitive()
+      },
+      filter_no: {
+        output: "_1__Filter_No_",
+        matches: [
+          "Hakai ID"
+        ],
+        joi: Joi.alternatives().try(
+          Joi.number(),
+          Joi.string()
+            .regex(/^[\w\d\s_-]+$/)
+            .min(3)
+            .invalid(["na", "nd", "n/d", "n/a"])
+            .insensitive()
+        )
+      },
+      instalation: {
+        output: "Installation_Date_and_Time",
+        matches: [
+          "installation"
+        ],
+      },
+      weather_observation_notes: {
+        output: "Weather_Observation_Notes"
+        },
+      installation_date_and_time: {
+        output: "Installation_Date_and_Time"
+        },
+      volume_of_water_collected_ml: {
+        output: "Volume_of_Water_Collected__mL_"
+        },
     }
   },
 
