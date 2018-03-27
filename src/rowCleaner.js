@@ -9,6 +9,7 @@ const { getKeyByValue } = require("./common");
 const rowCleaner = (row, fieldToIndexMap) => {
   const dateTimeFields = [
     "date",
+    "instalation",
     "collected",
     "preserved",
     "analyzed",
