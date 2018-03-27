@@ -74,4 +74,3 @@ hakai-upload-validator before pushing changes by using local patch in
 package.json, See <https://docs.npmjs.com/files/package.json#local-paths>
 
 To run the test suite, which tests various functions used, do `npm test`.
-Currently not all tests passing :(
