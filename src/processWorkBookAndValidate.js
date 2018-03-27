@@ -2,13 +2,13 @@ const moment = require("moment-timezone");
 const uuidv4 = require("uuid/v4");
 const Joi = require("joi-browser");
 
-const columnSchema = require("./columns");
+const columnSchema = require("../config/columns");
 const Memlog = require("./memlog");
 const rowCleaner = require("./rowCleaner");
 const findDuplicates = require("./findDuplicates");
 const json2ObjectLevels = require("./json2ObjectLevels");
 const getDBFieldByRelatedText = require("./getDBFieldByRelatedText");
-const xmlnsFromMetadata = require("./xmlnsFromMetadata");
+const xmlnsFromMetadata = require("../config/xmlnsFromMetadata");
 const joiValidate = require("./joiValidate");
 // const { prettyConsoleLog } = require("./common");
 
