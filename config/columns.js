@@ -1616,11 +1616,11 @@ const definitions = {
       distance_from_sample_site: {
         drop: true
       },
-      Revelutions: {
+      Revolutions: {
         drop: true
       },
-      Revelutions2: {
-        matches: ["Revelutions 2"],
+      Revolutions2: {
+        matches: ["Revolutions 2"],
         drop: true
       },
       Tow_Distance: {
