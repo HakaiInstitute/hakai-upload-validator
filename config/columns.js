@@ -2417,8 +2417,8 @@ const definitions = {
       output: "data_type",
       matches: ["Data Type"],
     },
-    data_flag: {
-      output: "data_flag",
+    flag_type: {
+      output: "flag_type",
       matches: ["Flag Type"],
     },
     flagged_by: {
