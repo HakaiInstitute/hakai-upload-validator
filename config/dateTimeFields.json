@@ -1,4 +1,9 @@
 [
+  "date_processed",
+  "fish_time_out",
+  "fish_time_dewar",
+  "survey_time_start",
+  "survey_time_end",
   "date",
   "instalation",
   "collected",

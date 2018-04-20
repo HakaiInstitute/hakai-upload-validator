@@ -323,6 +323,14 @@ const defaultFilters = {
   }
 };
 
+const defaultSEMSPHeaders = {
+  action: defaultHeaders.action,
+  hakai_id: defaultHeaders.hakai_id,
+  sample_notes: defaultHeaders.sample_notes,
+  analyzing_lab: defaultHeaders.analyzing_lab,
+  quality_level: defaultHeaders.quality_level
+};
+
 const defaultZooplanktonHeaders = {
   ...defaultFilters,
   ...{
@@ -1740,38 +1748,38 @@ const definitions = {
     ...{
       _output: "HPLC",
       hplc_uid: {},
-      tac_peak : {},
-      extraction_duration : {},
-      extraction_method : {},
-      initial_extraction_volume : {},
-      volume_filtered_ml : {},
-      final_extraction_volume : {},
-      chl_c3 : {},
-      chllide_a : {},
-      mgdvp : {},
-      chl_c2 : {},
-      chl_c1 : {},
-      me_chlide : {},
-      peri : {},
-      phbide : {},
-      _19_but : {},
-      fuco : {},
-      neo : {},
-      prasino : {},
-      viola : {},
-      _19_hex : {},
-      diadino : {},
-      allo : {},
-      diato : {},
-      zea : {},
-      lutein : {},
-      chl_b : {},
-      c2mgdg : {},
-      dv_chl_a : {},
-      chl_a : {},
-      phphyt : {},
-      b_carot : {},
-      t_chl_a : {},
+      tac_peak: {},
+      extraction_duration: {},
+      extraction_method: {},
+      initial_extraction_volume: {},
+      volume_filtered_ml: {},
+      final_extraction_volume: {},
+      chl_c3: {},
+      chllide_a: {},
+      mgdvp: {},
+      chl_c2: {},
+      chl_c1: {},
+      me_chlide: {},
+      peri: {},
+      phbide: {},
+      _19_but: {},
+      fuco: {},
+      neo: {},
+      prasino: {},
+      viola: {},
+      _19_hex: {},
+      diadino: {},
+      allo: {},
+      diato: {},
+      zea: {},
+      lutein: {},
+      chl_b: {},
+      c2mgdg: {},
+      dv_chl_a: {},
+      chl_a: {},
+      phphyt: {},
+      b_carot: {},
+      t_chl_a: {}
     }
   },
 
@@ -1790,9 +1798,7 @@ const definitions = {
       },
       filter_no: {
         output: "_1__Filter_No_",
-        matches: [
-          "Hakai ID"
-        ],
+        matches: ["Hakai ID"],
         joi: Joi.alternatives().try(
           Joi.number(),
           Joi.string()
@@ -1804,19 +1810,17 @@ const definitions = {
       },
       instalation: {
         output: "Installation_Date_and_Time",
-        matches: [
-          "installation"
-        ],
+        matches: ["installation"]
       },
       weather_observation_notes: {
         output: "Weather_Observation_Notes"
-        },
+      },
       installation_date_and_time: {
         output: "Installation_Date_and_Time"
-        },
+      },
       volume_of_water_collected_ml: {
         output: "Volume_of_Water_Collected__mL_"
-        },
+      }
     }
   },
 
@@ -1929,7 +1933,7 @@ const definitions = {
         output: "bag_uid",
         matches: ["hakai_sample_id", "Hakai ID"],
         joi: Joi.alternatives([
-          Joi.string().regex(/^[ \w\d_-]+$/, { name: "Sample ID" }),
+          Joi.string().regex(/^[ \w\d_-]+$/, { name: "Sample ID" })
         ])
       },
       density: {
@@ -2329,33 +2333,12 @@ const definitions = {
       joi: Joi.number().min(0)
     }
   },
-
-  SEMSP_FISH: {
-    ...defaultHeaders,
-    _output: "semsp_fish",
-    semsp_id: {},
-    seine_id: {},
-    package_id: {},
-    fish_time_out: {},
-    fish_time_dewar: {},
-    date_processed: {},
-    fork_length_field: { matches: ["Fork Length Field (mm)"] },
-    height_field: { matches: ["Height (mm)"] },
-    cwt: { matches: ["Coded Wire Tag"] },
-    adipose: {},
-    weight: { matches: ["Weight (g)"] },
-    weight_field: { matches: ["Weight Field (g)"] },
-    fork_length: { matches: ["Fork Length Lab (mm)"] },
-    photo_number: {},
-    comments_protocol: {},
-    comments_fish_health_lab: {},
-    dissector: {},
-    dissection_protocol: {},
-    qc_data: {},
-    analysis_planned: {},
-    dissection_status: {},
+  SEMSP_LICE: {
+    ...defaultSEMSPHeaders,
+    _output: "semsp_lice",
     cal_cope_field: {},
     lep_cope_field: {},
+    survey_id: {},
     chal_a_field: {},
     chal_b_field: {},
     cal_mot_field: {},
@@ -2391,10 +2374,136 @@ const definitions = {
     lab_count_no: {},
     lab_count_no_id: {},
     lice_id_protocol_lab: {},
-    lice_collection_protocol: {},
+    lice_collection_protocol: {}
+  },
+  SEMSP_FISH: {
+    ...defaultSEMSPHeaders,
+    _output: "semsp_fish",
+    semsp_id: {},
+    seine_id: {},
+    survey_id: {},
+    package_id: {},
+    fish_time_out: {},
+    fish_time_dewar: {},
+    date_processed: {},
+    fork_length_field: { matches: ["Fork Length Field (mm)"] },
+    height_field: { matches: ["Height (mm)"] },
+    cwt: { matches: ["Coded Wire Tag"] },
+    adipose: {},
+    weight: { matches: ["Weight (g)"] },
+    weight_field: { matches: ["Weight Field (g)"] },
+    fork_length: { matches: ["Fork Length Lab (mm)"] },
+    photo_number: {},
+    comments_protocol: {},
+    comments_fish_health_lab: {},
+    dissector: {},
+    dissection_protocol: {},
+    qc_data: {},
+    analysis_planned: {},
+    dissection_status: {},
     lab_staff: {},
     species: {},
     standard_length: { matches: ["Standard Length (mm)"] }
+  },
+  SEMSP_SEINE: {
+    ...defaultSEMSPHeaders,
+    _output: "semsp_seine",
+    seine_id: {},
+    survey_id: {},
+    set_number: {},
+    set_type: {},
+    time_searching: {},
+    so_taken: {},
+    so_total: {},
+    pi_taken: {},
+    pi_total: {},
+    cu_taken: {},
+    cu_total: {},
+    co_taken: {},
+    co_total: {},
+    he_taken: {},
+    he_total: {},
+    ck_taken: {},
+    ck_total: {},
+    preservation_status: {},
+    collection_protocol: {},
+    seine_notes: {}
+  },
+  SEMSP_SURVEY: {
+    ...defaultSEMSPHeaders,
+    _output: "semsp_survey",
+    site_id: defaultHeaders.site_id,
+    date: defaultHeaders.date,
+    sampling_bout: defaultHeaders.sampling_bout,
+    survey: defaultHeaders.survey,
+    survey_id: {},
+    net_sets: {},
+    survey_type: {},
+    survey_time_start: {},
+    survey_time_end: {},
+    survey_notes: {},
+    work_area: {}
+  },
+  SEMSP_DNA: {
+    ...defaultSEMSPHeaders,
+    _output: "semsp_dna",
+    fish_id: {},
+    survey_id: {},
+    stock_1: {},
+    region_1: {},
+    prob_1: {},
+    stock_2: {},
+    region_2: {},
+    prob_2: {},
+    stock_3: {},
+    region_3: {},
+    prob_3: {},
+    stock_4: {},
+    region_4: {},
+    prob_4: {},
+    stock_5: {},
+    region_5: {},
+    prob_5: {},
+    species: {},
+    standard_length: {},
+    seine_id: {}
+  },
+  SEMSP_FIN_CLIP: {
+    ...defaultSEMSPHeaders,
+    _output: "semsp_fin_clip",
+    fish_id: {},
+    survey_id: {},
+    stock_1: {},
+    region_1: {},
+    prob_1: {},
+    stock_2: {},
+    region_2: {},
+    prob_2: {},
+    stock_3: {},
+    region_3: {},
+    prob_3: {},
+    stock_4: {},
+    region_4: {},
+    prob_4: {},
+    stock_5: {},
+    region_5: {},
+    prob_5: {},
+    species: {},
+    standard_length: {},
+    seine_id: {}
+  },
+  SEMSP_BYCATCH_MORT: {
+    ...defaultSEMSPHeaders,
+    _output: "semsp_bycatch_mort",
+    semsp_survey: {},
+    bycatch_id: {},
+    bm_species: {},
+    bm_status: {},
+    bm_ageclass: {},
+    bm_count: {},
+    bm_notes: {},
+    sample_id: {},
+    seine_id: {}
   },
   CTD_FLAGS: {
     ...defaultHeaders,
@@ -2402,29 +2511,29 @@ const definitions = {
     start_range: {
       output: "start_range",
       matches: ["Start Date"],
-      joi: Joi.date(),
+      joi: Joi.date()
     },
     end_range: {
       output: "end_range",
       matches: ["End Date"],
-      joi: Joi.date(),
+      joi: Joi.date()
     },
     device_sn: {
       output: "device_sn",
-      matches: ["Device Serial Number"],
+      matches: ["Device Serial Number"]
     },
     data_type: {
       output: "data_type",
-      matches: ["Data Type"],
+      matches: ["Data Type"]
     },
     flag_type: {
       output: "flag_type",
-      matches: ["Flag Type"],
+      matches: ["Flag Type"]
     },
     flagged_by: {
       output: "flagged_by",
-      matches: ["Flagged By"],
-    },
+      matches: ["Flagged By"]
+    }
   }
 };
 
