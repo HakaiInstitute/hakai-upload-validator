@@ -52,7 +52,7 @@ function processWorkBookAndValidate(
 
   if (!metaDataSheets.length) {
     metaMLog.error("No metadata sheet found");
-    return { metaMLog };
+    return { metadataErrorLog: metaMLog.dump() };
   }
 
   metaDataSheets.forEach(metaDataSheet => {
