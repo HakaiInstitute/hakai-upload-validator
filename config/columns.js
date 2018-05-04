@@ -165,6 +165,11 @@ const defaultHeaders = {
   water_stage_flag: {
     level: 1
   },
+  installed: {
+    output: "Installation_Date_and_Time",
+    matches: ["installed", "Installed Date"],
+    joi: Joi.alternatives().try(Joi.number(), Joi.date().max("now"))
+  },
   collected: {
     matches: ["collected", "Field Time", "Time", "YSI Time"],
     joi: Joi.alternatives().try(Joi.number(), Joi.date().max("now"))
