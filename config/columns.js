@@ -1789,47 +1789,6 @@ const definitions = {
     }
   },
 
-  RAIN: {
-    ...defaultFilters,
-    ...{
-      _output: "Rain_Water_Collection",
-      hakai_id: {
-        output: "_1__Sample_ID",
-        matches: ["Hakai ID"],
-        joi: Joi.string()
-          .regex(/^[\w\d\s._-]+$/)
-          .min(3)
-          .invalid(["na", "nd", "n/d", "n/a"])
-          .insensitive()
-      },
-      filter_no: {
-        output: "_1__Filter_No_",
-        matches: ["Hakai ID"],
-        joi: Joi.alternatives().try(
-          Joi.number(),
-          Joi.string()
-            .regex(/^[\w\d\s_-]+$/)
-            .min(3)
-            .invalid(["na", "nd", "n/d", "n/a"])
-            .insensitive()
-        )
-      },
-      instalation: {
-        output: "Installation_Date_and_Time",
-        matches: ["installation"]
-      },
-      weather_observation_notes: {
-        output: "Weather_Observation_Notes"
-      },
-      installation_date_and_time: {
-        output: "Installation_Date_and_Time"
-      },
-      volume_of_water_collected_ml: {
-        output: "Volume_of_Water_Collected__mL_"
-      }
-    }
-  },
-
   C13INCUBATIONS: {
     ...defaultFilters,
     ...{
