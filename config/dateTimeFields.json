@@ -22,5 +22,7 @@
   "filtering_end_time",
   "dna_extraction_datetime",
   "start_range",
-  "end_range"
+  "end_range",
+  "Installation_Date_and_Time",
+  "installed"
 ]
