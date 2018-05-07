@@ -167,6 +167,7 @@ const defaultHeaders = {
   },
   installed: {
     output: "Installation_Date_and_Time",
+    level: 1,
     matches: ["installed", "Installed Date"],
     joi: Joi.alternatives().try(Joi.number(), Joi.date().max("now"))
   },
