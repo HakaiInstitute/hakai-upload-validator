@@ -1,6 +1,7 @@
 const moment = require("moment-timezone");
 const uuidv4 = require("uuid/v4");
 const Joi = require("joi-browser");
+const uniqueSets = require("../config/uniqueSets");
 
 const columnSchema = require("../config/columns");
 const Memlog = require("./memlog");
@@ -169,14 +170,7 @@ function processWorkBookAndValidate(
       }));
 
       // Find duplicates if data has all these headers
-      const uniqueSets = [
-        ["analyzing_lab", "source", "event_id"],
-        ["analyzing_lab", "source", "project_id"]
-        // ["sampling_bout", "site_id", "quality_level"]
-      ];
-
       // rowCleaner may have added headers, so this is the best check for current headers
-
       const duplicates = findDuplicates(uniqueSets, dataFlatWithMetadata);
 
       if (duplicates.length) {
