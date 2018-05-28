@@ -11,7 +11,6 @@ const uniqueSets = [
   ["hakai_sample_id", "analyzing_lab"],
   ["ysi_hakai_id", "analyzing_lab"],
   ["event_id", "analyzing_lab"],
-  ["hakai_net_id", "analyzing_lab"],
   ["ysi_calibration_hakai_id", "analyzing_lab"],
   ["non_filtered_preserved_sample_id", "analyzing_lab"],
   ["hakai_biomass_id", "analyzing_lab"],
