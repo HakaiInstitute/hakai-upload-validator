@@ -1760,8 +1760,14 @@ const definitions = {
       initial_extraction_volume: {},
       volume_filtered_ml: {},
       final_extraction_volume: {},
-      _19_but: {matches: ["19-but", "19_but"]},
-      _19_hex: {matches: ["19-hex", "19_hex"]},
+      but19: {
+        output: "_19_but",
+        matches: ["19-but", "19_but", "19 but"]
+      },
+      hex19: {
+        output: "_19_hex",
+        matches: ["19-hex", "19_hex", "19 hex"]
+      },
       alloxanthin : {matches: ["allo"]},
       beta_carotene: {matches: ["b_carot"]},
       c2mgdg: {},
