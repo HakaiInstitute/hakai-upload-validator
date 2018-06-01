@@ -186,7 +186,7 @@ const defaultHeaders = {
   analyzing_lab: {
     matches: ["Analyzing Lab", "Analyzing lab"],
     joi: Joi.string()
-      .alphanum()
+      .regex(/^[\w\d_-]+$/)
       .invalid(["na", "nd", "n/d", "n/a"])
       .insensitive()
   },
@@ -1759,6 +1759,7 @@ const definitions = {
       extraction_method: {},
       initial_extraction_volume: {},
       volume_filtered_ml: {},
+      volume_filtered_l: {}, // used to conver to ml
       final_extraction_volume: {},
       but19: {
         output: "_19_but",
@@ -1768,30 +1769,37 @@ const definitions = {
         output: "_19_hex",
         matches: ["19-hex", "19_hex", "19 hex"]
       },
-      alloxanthin : {matches: ["allo"]},
+      alloxanthin : {matches: ["allo","allox"]},
+      antheraxanthin : {matches: ["anther"]},
+      all_chl_a: {},
+      alpha_carotene: {matches: ["a_carot"]},
       beta_carotene: {matches: ["b_carot"]},
       c2mgdg: {},
       chl_a: {},
+      chla_allomer: {},
+      chla_prime: {},
       chl_b: {},
       chl_c1: {},
       chl_c2: {},
       chl_c3: {},
-      chllide_a: {matches: ["chl-ide a"]},
-      diadinoxanthin: {matches: ["diadino"]},
+      chl_c1_c2: {},
+      chl_ide_a: {matches: ["chl-ide a"]},
+      diadinoxanthin: {matches: ["diadino","diad"]},
       diato: {},
       dv_chl_a: {},
       fuco: {},
+      gyroxanthin_diester: {matches: ["gyro"]},
       lutein: {},
       me_chlide: {matches: ["me-chl-ide"]},
       mgdvp: {},
       neoxanthin: {matches: ["neo"]},
-      peri: {},
+      peri: {matches: ["perid"]},
       phbide: {},
       phphyt: {},
       prasinoxanthin : {matches: ["prasino"]},
       total_chl_a: {matches: ["t_chl_a"]},
       violaxanthin: {matches: ["viola"]},
-      zeaxanthin: {matches: ["zea"]},
+      zeaxanthin: {matches: ["zea","zeax"]},
     }
   },
 
