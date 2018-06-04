@@ -648,10 +648,10 @@ const definitions = {
       secchi_depth: {
         output: "Secchi_Depth",
         matches: ["Depth", "depth", "Depth (m)", "sample depth", "Line Out Depth"],
-        joi: Joi.alternatives([
+        joi: Joi.alternatives().try(
           Joi.string().regex(/^\d+-\d+$/, { name: "Depth Range" }),
           Joi.number().min(-1)
-        ])
+        ).required()
       },
       type: {
         output: "Type",
