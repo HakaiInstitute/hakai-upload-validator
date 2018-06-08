@@ -1827,7 +1827,16 @@ const definitions = {
       filtering_end_time: {
         output: "_1__End_Time",
         matches: ["Filtered"]
-      }
+      },
+      delta13c: {
+        matches: ["corr_13C", "d13C"]
+      },
+      ug_c: {
+        matches: ["C Amount (ug)"]
+      },
+      c13_at_per:{
+        matches: ["13C (at-%)"]
+      },
     }
   },
 
