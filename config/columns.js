@@ -1382,13 +1382,12 @@ const definitions = {
     ...{
       _output: "Zooplankton",
       _joiobj: defaultZooplanktonHeaders._joiobj.concat(
-        Joi.object().with(
-          "screen_size",
+        Joi.object().with("screen_size", [
           "date",
           "site_id",
           "sampling_bout",
           "net_mesh_size_um"
-        )
+        ])
       ),
       plankton_isotope_uid: {},
       filter_uid: {},
@@ -1444,13 +1443,12 @@ const definitions = {
     ...{
       _output: "Zooplankton",
       _joiobj: defaultZooplanktonHeaders._joiobj.concat(
-        Joi.object().with(
-          "screen_size",
+        Joi.object().with("screen_size", [
           "date",
           "site_id",
           "sampling_bout",
           "net_mesh_size_um"
-        )
+        ])
       ),
       preservation_method: {
         output: "Filtered_Preservation_Method",
@@ -1464,13 +1462,12 @@ const definitions = {
     ...{
       _output: "Zooplankton",
       _joiobj: defaultZooplanktonHeaders._joiobj.concat(
-        Joi.object().with(
-          "screen_size",
+        Joi.object().with("screen_size", [
           "date",
           "site_id",
           "sampling_bout",
           "net_mesh_size_um"
-        )
+        ])
       ),
       preservation_method: {
         output: "Non_Filtered_Preservation_Method",
@@ -1665,13 +1662,12 @@ const definitions = {
       _output: "Zooplankton",
       // _joiobj may have been a mistake, probably should have been added to ZOOPLANKTON_BIOMASS
       _joiobj: defaultZooplanktonHeaders._joiobj.concat(
-        Joi.object().with(
-          "screen_size",
+        Joi.object().with("screen_size", [
           "date",
           "site_id",
           "sampling_bout",
           "net_mesh_size_um"
-        )
+        ])
       ),
       filter_uid: {},
       // plankton_isotope_id may have been a mistake, probably should have been added to ZOOPLANKTON_BIOMASS
@@ -1863,7 +1859,7 @@ const definitions = {
     ...{
       _output: "POM_Fatty_Acids",
       _joiobj: defaultFilters._joiobj.concat(
-        Joi.object().with("filter_no", "depth", "site_id", "date")
+        Joi.object().with("filter_no", ["depth", "site_id", "date"])
       ),
       pomfas_uid: {},
       filter_uid: {}
