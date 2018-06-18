@@ -21,11 +21,15 @@ const xmlnsFromMetadata = metadata => {
       "mg_mesograzers",
       "mg_seagrass_biomass",
       "mg_seagrass_density",
-      "mg_seagrass_habitat"
+      "mg_seagrass_habitat",
     ].includes(dataTypeLower)
   ) {
     xmlns = "http://hakai.org/xforms/MARINEGEO_DATA";
-  } else if (dataTypeLower === "secchi" || dataTypeLower === "ctd") {
+  } else if (
+    dataTypeLower === "secchi" ||
+    dataTypeLower === "ctd" ||
+    dataTypeLower === "ctd_drops"
+  ) {
     xmlns = "http://hakai.org/xforms/CTD_DATA";
   } else if (dataTypeLower === "ctd_flags") {
     xmlns = "http://hakai.org/xforms/CTD_FLAGS";
