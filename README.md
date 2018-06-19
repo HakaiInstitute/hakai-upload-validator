@@ -52,12 +52,15 @@ npm run build:hecate
 pm2 restart hakai-data-portal-v2
 ```
 
-To update the forms-parser:
+~~To update the forms-parser:~~ The forms parser is not used anymore. It has
+been merged into the API.
+
+To update the API:
 
 ```javasript
-cd ~/hakai-database/Form-Parser/EIMS
+cd ~/hakai-api
 yarn add github:HakaiInstitute/hakai-upload-validator
-pm2 restart eims-form-parser
+pm2 restart hakai-api
 ```
 
 ## Testing
