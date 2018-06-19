@@ -207,23 +207,25 @@ function processWorkBookAndValidate(
       const hasValidationErrors =
         joiLog.length > 0 || mlog.dump().some(log => log.level === "error");
 
+      const attributes = {
+        form_xmlns: xmlnsFromMetadata(metadata),
+        submissionIdentifier: uuidv4(),
+        dm_submit_time: moment.utc().format(),
+        writeTime: moment().format(),
+        dm_form: formname,
+        formVersion: "0.1",
+        source_file: filename,
+        analyzing_lab: metadata.analyzing_lab,
+        program: metadata.program,
+        project: metadata.project,
+        submission_source: submittingUser,
+        dm_submitting_user: "",
+        dm_submitting_device: ""
+      };
+
       const results = {
         inputs,
-        "@attributes": {
-          form_xmlns: xmlnsFromMetadata(metadata),
-          submissionIdentifier: uuidv4(),
-          dm_submit_time: moment.utc().format(),
-          writeTime: moment().format(),
-          dm_form: formname,
-          formVersion: "0.1",
-          source_file: filename,
-          analyzing_lab: metadata.analyzing_lab,
-          program: metadata.program,
-          project: metadata.project,
-          submission_source: submittingUser,
-          dm_submitting_user: "",
-          dm_submitting_device: ""
-        }
+        "@attributes": attributes
       };
 
       const debugObj = {
@@ -232,6 +234,7 @@ function processWorkBookAndValidate(
         commit,
         // metadata keys, values
         metadata,
+        attributes,
         // array of erroneous duplicates
         duplicates,
         joiKeys: Object.keys(joiDefKeys),
