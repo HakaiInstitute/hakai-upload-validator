@@ -45,7 +45,7 @@ github:HakaiInstitute/hakai-upload-validator`
 
 Update the portal:
 
-```javascript
+```bash
 cd ~/hakai-data-portal-v2
 yarn add github:HakaiInstitute/hakai-upload-validator
 npm run build:hecate
@@ -57,7 +57,7 @@ been merged into the API.
 
 To update the API:
 
-```javascript
+```bash
 cd ~/hakai-api
 yarn add github:HakaiInstitute/hakai-upload-validator
 pm2 restart hakai-api
@@ -76,13 +76,13 @@ If you want to test further, you can include a local version of
 hakai-upload-validator before pushing changes by using local paths in
 package.json. Run the following, changing the paths as needed:
 
-```javascript
+```bash
 cd ~/hakai-data-portal-v2
 yarn add file: ../hakai-upload-validator
 <restart pm2 if needed>
 ```
 
-```javascript
+```bash
 cd ~/hakai-api
 yarn add file: ../hakai-upload-validator
 pm2 restart hakai-api
