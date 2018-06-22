@@ -2554,34 +2554,34 @@ const definitions = {
       output: "CTD_ID",
     },
     miscast: {
-      output: "re_drop_",
+      output: "Re_Drop_",
     },
     niskin_drop: {
-      output: "niskin_drop_",
+      output: "Niskin_Drop_",
     },
     gps_site: {
-      output: "station",
+      output: "Station",
     },
     target_depth: {
-      output: "ctd_depth",
+      output: "CTD_Depth",
     },
     drop_start_time: {
-      output: "start_time",
+      output: "Start_Time",
     },
     drop_bottom_time: {
-      output: "bottom_time",
+      output: "Bottom_Time",
     },
     drop_end_time: {
-      output: "end_time",
+      output: "End_Time",
     },
     start_location: {
-      output: "start_coordinates",
+      output: "Start_Location",
     },
     bottom_location: {
-      output: "bottom_coordinates",
+      output: "Bottom_Location",
     },
     end_location: {
-      output: "end_coordinates",
+      output: "End_Location",
     },
   },
 };
