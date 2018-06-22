@@ -24,5 +24,8 @@
   "start_range",
   "end_range",
   "Installation_Date_and_Time",
-  "installed"
+  "installed",
+  "Start_Time",
+  "Bottom_Time",
+  "End_Time"
 ]
