@@ -2567,12 +2567,15 @@ const definitions = {
     },
     drop_start_time: {
       output: "Start_Time",
+      joi: Joi.date(),
     },
     drop_bottom_time: {
       output: "Bottom_Time",
+      joi: Joi.date(),
     },
     drop_end_time: {
       output: "End_Time",
+      joi: Joi.date(),
     },
     start_location: {
       output: "Start_Location",
@@ -2583,6 +2586,21 @@ const definitions = {
     end_location: {
       output: "End_Location",
     },
+    quality_log: {
+      output: "CTD_Notes",
+    },
+    visually_inspected: {
+      output: "Visualy_Inspected",
+    },
+    maintenence_performed: {
+      output: "Maintenance_Performed",
+    },
+    issues: {
+      output: "Issue",
+    },
+    inspectors: {
+      output: "Inspectors_Name"
+    }
   },
 };
 
