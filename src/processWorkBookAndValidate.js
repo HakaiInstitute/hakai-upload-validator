@@ -174,7 +174,10 @@ function processWorkBookAndValidate(
       const duplicates = findDuplicates(uniqueSets, dataFlatWithMetadata);
 
       if (duplicates.length) {
-        mlog.error(`Duplicates found: ${duplicates}`);
+        // join duplicates array with semi colon so it is easyer to group duplicate fields together.
+        // i.e. if duplicate is based on hakai_id and analyzing lab then both columns
+        //   will be reported seporated by a comma.
+        mlog.error(`Duplicates found: ${duplicates.join('; ')}`);
       }
 
       const formname = [
