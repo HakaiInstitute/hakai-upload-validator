@@ -124,6 +124,12 @@ function processWorkBookAndValidate(
       const headerRow = data[0];
       const nonHeaderRows = data.splice(1);
 
+      for (let [key, value] of Object.entries(columnSchema[dataType])) {
+        if (value.joi) {
+          joiDefKeys[key] = value.joi
+        }
+      }
+
       headerRow.forEach((fieldRaw, c) => {
         const sampleTypeDefObj = columnSchema[dataType];
         const field = getDBFieldByRelatedText(fieldRaw, sampleTypeDefObj);
