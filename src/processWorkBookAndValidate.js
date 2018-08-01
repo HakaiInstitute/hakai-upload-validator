@@ -124,11 +124,12 @@ function processWorkBookAndValidate(
       const headerRow = data[0];
       const nonHeaderRows = data.splice(1);
 
-      for (let [key, value] of Object.entries(columnSchema[dataType])) {
+      // add all the keys to the schema. This is needed to test for required columns that are missing
+      Object.entries(columnSchema[dataType]).forEach(([key,value])=>{
         if (value.joi) {
           joiDefKeys[key] = value.joi
         }
-      }
+      })
 
       headerRow.forEach((fieldRaw, c) => {
         const sampleTypeDefObj = columnSchema[dataType];
@@ -137,6 +138,7 @@ function processWorkBookAndValidate(
         if (field) {
           const fieldDefinition = sampleTypeDefObj[field];
           if (fieldDefinition.joi) {
+            // for existing fields, update there label information, used in error reporting later
             joiDefKeys[field] = fieldDefinition.joi.concat(
               Joi.any().label(fieldRaw)
             );
