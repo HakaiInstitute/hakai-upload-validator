@@ -48,7 +48,7 @@ const defaultHeaders = {
     level: 1,
     matches: ["Freshwater/Marine", "FRESH/MARINE"],
     joi: Joi.string()
-      .valid(["Freshwater", "Marine", "F", "M"])
+      .valid(["Freshwater", "Marine", "Snow", "Ice", "F", "M", "S", "I"])
       .insensitive(),
   },
   location: {
