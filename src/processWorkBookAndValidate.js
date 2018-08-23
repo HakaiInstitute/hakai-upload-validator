@@ -61,6 +61,7 @@ function processWorkBookAndValidate(
     metaDataSheet.data
       .filter(row => row[0] && row[1] !== undefined)
       .filter(row => row[0] !== "Metadata property")
+      .filter(row => typeof row[0] === "string")
       .forEach(row => {
         const [excelField, value] = row;
         const dbField = getDBFieldByRelatedText(
