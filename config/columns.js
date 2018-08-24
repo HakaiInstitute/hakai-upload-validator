@@ -71,11 +71,13 @@ const defaultHeaders = {
   },
   lat: {
     output: "latitude",
+    matches: ["site_lat","latitude"],
     level: 1,
     drop: true,
   },
   long: {
     output: "longitude",
+    matches: ["site_long","longitude"],
     level: 1,
     drop: true,
   },
@@ -95,7 +97,7 @@ const defaultHeaders = {
   },
   hakai_id: {
     output: "_1__Sample_ID",
-    matches: ["Hakai ID", "Tube number", "Sample ID"],
+    matches: ["Hakai ID", "Tube number", "Sample ID", "hakai_sample_id"],
     joi: Joi.string()
       .regex(/^[\w\d._-]+$/)
       .min(3)
@@ -222,6 +224,7 @@ const defaultHeaders = {
   },
   replicate_number: {
     output: "Replicate Number",
+    matches: ["rn"],
   },
   no: {},
   date_exported: {
@@ -262,11 +265,11 @@ const defaultFilters = {
   ...{
     _joiobj: defaultHeaders._joiobj,
     weight_before: {
-      matches: ["Weight Before (mg)", "pre_weight_mg"],
+      matches: ["Weight Before (mg)", "pre_weight_mg", "weight_before__mg_"],
       joi: Joi.number(),
     },
     weight_after: {
-      matches: ["Weight After (mg)", "post_weight_mg"],
+      matches: ["Weight After (mg)", "post_weight_mg", "weight_after__mg_"],
       joi: Joi.number(),
     },
     weight_before_flag: {
@@ -410,7 +413,7 @@ const defaultZooplanktonHeaders = {
     volume_ratio: {},
     flow_meter_flag: {
       output: "Flow_Meter_Flag",
-      matches: ["Flow Meter Flag"],
+      matches: ["Flow Meter Flag","flow_flag"],
     },
     flow_meter_volume_flag: {
       output: "Flow_Meter_Volume_Flag",
@@ -419,17 +422,17 @@ const defaultZooplanktonHeaders = {
     flow_meter_ratio: {},
     net_diameter_cm: {
       output: "Diameter__cm_",
-      matches: ["Net Dim. (cm)"],
+      matches: ["Net Dim. (cm)", "net_dim___cm_"],
       joi: Joi.number(),
     },
     net_length_cm: {
       output: "Length__cm_",
-      matches: ["Net Length (cm)"],
+      matches: ["Net Length (cm)", "net_length__cm_"],
       joi: Joi.number(),
     },
     net_mesh_size_um: {
       output: "Mesh_Size",
-      matches: ["Mesh Size (um)"],
+      matches: ["Mesh Size (um)", "mesh_size__um_"],
       joi: Joi.number(),
     },
     net_type: {
@@ -440,7 +443,7 @@ const defaultZooplanktonHeaders = {
       matches: ["Fraction Of Sample", "sample_portion"],
     },
     screen_size: {
-      matches: ["Size Fraction (um)", "Size Fraction", "screen_size"],
+      matches: ["Size Fraction (um)", "Size Fraction", "screen_size", "size_fraction__um_"],
       joi: Joi.alternatives([
         Joi.number()
           .integer()
@@ -606,7 +609,7 @@ const defaultMarineGEO = {
       joi: Joi.number(),
     },
     density_sqm: {
-      matches: ["density (m2)"],
+      matches: ["density (m2)","density_msq"],
       joi: Joi.number(),
     },
   },
@@ -820,6 +823,7 @@ const definitions = {
       },
       ysi_unit: {
         output: "YSI_Unit_ID",
+        matches: ["ysi_unit_sn"],
       },
       sc_standard_id: {},
       ph4_standard_id: {},
@@ -964,7 +968,7 @@ const definitions = {
       joi: Joi.number(),
     },
     slope_275_295_slope_350_400: {
-      matches: ["s275_295_s350_400"],
+      matches: ["s275_295_s350_400","slope_275_295_slope350_400"],
       joi: Joi.number(),
     },
     slope_flag: {},
@@ -991,6 +995,7 @@ const definitions = {
     },
     suva_nrl: {
       drop: true,
+      matches: ["suva_nral","SUVA NRL"],
     },
     a350_doc_nral: {
       matches: ["a350/doc nral"],
@@ -1105,7 +1110,7 @@ const definitions = {
       },
       sample_type: {
         output: "Type",
-        matches: ["Sample Type", "Type"],
+        matches: ["Sample Type", "Type", "microbial_sample_type"],
       },
       dna_extraction_datetime: {
         matches: ["DNA Extraction Date", "DNA Extraction Time"],
@@ -1370,11 +1375,15 @@ const definitions = {
         output: "calibration",
       },
       calibration_slope: {},
-      acidification_coefficient: {},
+      acidification_coefficient: {
+        matches:[
+          "acid_coefficient"
+        ],
+      },
       acid_ratio_correction_factor: {},
       acetone_volume: {
         output: "acetone_volume",
-        matches: ["volume of acetone (ml)"],
+        matches: ["volume of acetone (ml)","acetone_volume_ml"],
         joi: Joi.number(),
       },
       before_acid: {},
@@ -1583,12 +1592,15 @@ const definitions = {
       },
       flow_meter_flag: {
         output: "Flow_Meter_Flag",
+        matches: ["flowmeter_flag"],
       },
       flow_meter_volume: {
         output: "Flow_meter_volume",
+        matches: ["flowmeter_volume"],
       },
       flow_meter_volume_flag: {
         output: "Flow_Meter_Volume_Flag",
+        matches: ["flowmeter_volume_flag"],
       },
       flow_meter2: {
         output: "Flow_Meter_2",
@@ -1606,31 +1618,35 @@ const definitions = {
       },
       flow_meter_flag2: {
         output: "Flow_Meter_Flag2",
-        matches: ["Flow Meter Flag 2"],
+        matches: ["Flow Meter Flag 2","flowmeter_flag2","flow_flag2"],
       },
       flow_meter_volume2: {
         output: "Flow_meter_volume2",
-        matches: ["Flow_Meter_Volume_2", "Flow Meter Volume 2"],
+        matches: ["Flow_Meter_Volume_2", "Flow Meter Volume 2","flowmeter_volume2"],
       },
       flow_meter_volume_flag2: {
         output: "Flow_Meter_Volume_Flag2",
-        matches: ["Flow Meter Volume Flag 2"],
+        matches: ["Flow Meter Volume Flag 2","flowmeter_volume_flag2"],
+      },
+      flowmeter_ratio: {
+        matches: ["Flow Meter Ratio"],
+        drop: true,
       },
       depth_volume: {},
       volume_ratio: {},
       net_diameter_cm: {
         output: "Diameter__cm_",
-        matches: ["Net Dim. (cm)"],
+        matches: ["Net Dim. (cm)", "net_dim___cm_"],
         joi: Joi.number(),
       },
       net_length_cm: {
         output: "Length__cm_",
-        matches: ["Net Length (cm)"],
+        matches: ["Net Length (cm)", "net_length__cm_"],
         joi: Joi.number(),
       },
       net_mesh_size_um: {
         output: "Mesh_Size",
-        matches: ["Mesh Size (um)"],
+        matches: ["Mesh Size (um)", "mesh_size__um_"],
         joi: Joi.number(),
       },
       net_type: {
@@ -1660,6 +1676,10 @@ const definitions = {
         drop: true,
       },
       microscopy: {
+        drop: true,
+      },
+      quality_log_other: {
+        matches: ["Quality Log (Assosiated Samples, Read Only)"],
         drop: true,
       },
       net_notes: {
@@ -1794,7 +1814,9 @@ const definitions = {
       chl_c1_c2: {},
       chl_ide_a: { matches: ["chl-ide a"] },
       diadinoxanthin: { matches: ["diadino", "diad"] },
-      diato: {},
+      diato: {
+        matches: ["diatoxanthin"],
+      },
       dv_chl_a: {},
       fuco: {},
       gyroxanthin_diester: { matches: ["gyro"] },
@@ -1826,12 +1848,15 @@ const definitions = {
       },
       inoculation_time: {
         output: "Inoculation_Time",
+        matches: ["inoculated"],
       },
       incubation_start_time: {
         output: "Incubation_Start_Time",
+        matches: ["start_incubation"],
       },
       incubation_end_time: {
         output: "Incubation_End_Time",
+        matches: ["end_incubation"],
       },
       filtering_end_time: {
         output: "_1__End_Time",
@@ -1880,46 +1905,48 @@ const definitions = {
   },
 
   MUSSELS: {
-    _output: "Mussels",
-
-    start_purge_datetime: {},
-    start_purge_water_temp: {},
-    stop_purge_datetime: {},
-    stop_purge_water_temp: {},
-    mussel_length: {},
-    mussel_gross_weight: {},
-    mussel_weight_weight: {},
-    mussel_dry_weight: {},
-    corr_delta13c: {
-      matches: ["corr_13C", "d13C"],
-    },
-    ug_c: {
-      matches: ["C Amount (ug)"],
-    },
-    corr_delta15n: {
-      matches: ["corr_15N", "d15N"],
-    },
-    ug_n: {
-      matches: ["N Amount (ug)"],
-    },
-    c_flag: {},
-    n_flag: {
-      matches: ["N Flag"],
-    },
-    analyzed_weight_mg: {
-      output: "analyzed_weight",
-      matches: ["Amount (mg)", "weight_mg", "Analyzed Weight (mg)"],
-    },
-    analyzed_material_type: {
-      matches: ["Type of Material"],
-    },
-    analysis_performed: {
-      matches: ["Analysis"],
-    },
-    was_enriched: {
-      matches: ["Enriched?"],
-    },
-    estimated_enrichment: {},
+    ...defaultHeaders,
+    ...{
+      _output: "Mussels",
+      start_purge_datetime: {},
+      start_purge_water_temp: {},
+      stop_purge_datetime: {},
+      stop_purge_water_temp: {},
+      mussel_length: {},
+      mussel_gross_weight: {},
+      mussel_weight_weight: {},
+      mussel_dry_weight: {},
+      corr_delta13c: {
+        matches: ["corr_13C", "d13C"],
+      },
+      ug_c: {
+        matches: ["C Amount (ug)"],
+      },
+      corr_delta15n: {
+        matches: ["corr_15N", "d15N"],
+      },
+      ug_n: {
+        matches: ["N Amount (ug)"],
+      },
+      c_flag: {},
+      n_flag: {
+        matches: ["N Flag"],
+      },
+      analyzed_weight_mg: {
+        output: "analyzed_weight",
+        matches: ["Amount (mg)", "weight_mg", "Analyzed Weight (mg)"],
+      },
+      analyzed_material_type: {
+        matches: ["Type of Material"],
+      },
+      analysis_performed: {
+        matches: ["Analysis"],
+      },
+      was_enriched: {
+        matches: ["Enriched?"],
+      },
+      estimated_enrichment: {},
+    }
   },
 
   MG_SEAGRASS_HABITAT: {
@@ -2326,7 +2353,7 @@ const definitions = {
     drop_type: {},
     target_depth_m: {
       output: "Depth",
-      matches: ["Target Depth", "depth", "target depth (m)"],
+      matches: ["Target Depth", "depth", "target depth (m)", "target_depth_m"],
       joi: Joi.number().min(0),
     },
   },
@@ -2610,9 +2637,11 @@ const definitions = {
     _output: "ctd_drops",
     serial_number: {
       output: "CTD_ID",
+      matches: ["sn"],
     },
     miscast: {
       output: "Re_Drop_",
+      matches: ["re_drop"],
     },
     niskin_drop: {
       output: "Niskin_Drop_",
@@ -2658,20 +2687,57 @@ const definitions = {
     },
     inspectors: {
       output: "Inspectors_Name"
+    },
+    pk: {
+      matches: ["Primary Key"],
+      drop: true,
+    },
+    drop_lat: {
+      drop: true,
+    },
+    drop_long: {
+      drop: true,
+    },
+    distance_from_sample_site: {
+      drop: true,
+    },
+    distance_from_gps_site: {
+      drop: true,
     }
   },
+
+  STAFF_GAUGE: {
+    ...defaultHeaders,
+    _output: "staff_gauge",
+    gauge_reading: {
+      output: "Water_Stage__cm_",
+      level: 1,
+      matches: ["Water_Stage__cm_"],
+      joi: Joi.number(),
+    },
+    water_stage_flag: {
+      level: 1,
+      matches: ["gauge_flag"],
+      joi: Joi.string(),
+    },
+
+  }
 };
 
 definitions.CHLOROPHYLL_BLANKS = {
   ...definitions.CHLOROPHYLL,
-  _output: "Chlorophyll",
-  _joiobj: Joi.any(),
+  ...{
+    _output: "Chlorophyll",
+    _joiobj: Joi.object(),
+  },
 };
 
 definitions.CHLOROPHYLL_SOLID_STANDARDS = {
   ...definitions.CHLOROPHYLL,
-  _output: "Chlorophyll",
-  _joiobj: Joi.any(),
+  ...{
+    _output: "Chlorophyll",
+    _joiobj: Joi.object(),
+  },
 };
 // const module  = {};
 module.exports = definitions;
