@@ -937,6 +937,15 @@ const definitions = {
     ...defaultHeaders,
     ...{
       _output: "YSI_CALIBRATION_STANDARDS",
+      standard_id: {
+        output: "Standard_ID",
+        matches: ["Hakai ID"],
+        joi: Joi.string()
+          .regex(/^[\w\d\s._-]+$/)
+          .min(3)
+          .invalid(["na", "nd", "n/d", "n/a"])
+          .insensitive(),
+      },
       date_opened: {
         output: "Date Opened",
       },
