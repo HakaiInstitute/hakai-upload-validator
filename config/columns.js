@@ -932,6 +932,29 @@ const definitions = {
     },
   },
 
+
+  YSI_CALIBRATION_STANDARDS: {
+    ...defaultHeaders,
+    ...{
+      _output: "YSI_CALIBRATION_STANDARDS",
+      date_opened: {
+        output: "Date Opened",
+      },
+      expiration_date: {
+        output: "Expiration Date",
+      },
+      label_specs: {
+        output: "Label Specs",
+      },
+      lot_number: {
+        output: "Lot Number",
+      },
+      standard_type: {
+        output: "Standard Type",
+      },
+    },
+  },
+
   SUVA: {
     ...defaultHeaders,
     _output: "SUVA",
