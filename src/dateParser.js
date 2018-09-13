@@ -36,6 +36,7 @@ const dateParser = (cell, date = "") => {
       [
         "YYYY/MM/DD HH:mm:ss",
         "YYYY-MM-DD HH:mm:ssZZ",
+        "YYYY-MM-DDTHH:mm:ssZZ",
         "YYYY-MM-DD HH:mm:ss",
         "YYYY-MM-DD",
         "MM-DD-YYYY",
