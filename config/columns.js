@@ -1125,9 +1125,30 @@ const definitions = {
     ...{
       _output: "TS",
       tds: {},
-      tss: {},
+      tss: {matches: ["tss (mg/l)", "tss_mg_l"],},
       tds_flag: {},
       tss_flag: {},
+      weight_before: {
+        matches: ["Weight Before (mg)", "pre_weight_mg", "weight_before__mg_"],
+        joi: Joi.number(),
+      },
+      weight_after: {
+        matches: ["Weight After (mg)", "post_weight_mg", "weight_after__mg_"],
+        joi: Joi.number(),
+      },
+      weight_before_flag: {
+        matches: ["Weight Before Flag", "pre_weight_flag"],
+        joi: Joi.string(),
+      },
+      weight_after_flag: {
+        matches: ["Weight After Flag", "post_weight_flag"],
+        joi: Joi.string(),
+      },
+      volume: {
+        output: "_1__Volume",
+        matches: ["Volume", "Volume (ml)", "volume_ml", "volume filtered"],
+        joi: Joi.number(),
+      },
     },
   },
 
