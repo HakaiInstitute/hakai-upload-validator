@@ -534,11 +534,6 @@ const defaultZooplanktonHeaders = {
     estimated_total_density_m3: {
       matches: ["Estimated Total Density (m3)"],
     },
-    process: {
-      output: "Size_Fraction__Unfiltered_or_Total_Biomass",
-      matches: ["Process", "Size_Fraction__Unfiltered_or_Total_Biomass"],
-      joi: Joi.string().required(),
-    },
   },
 };
 
@@ -1510,6 +1505,11 @@ const definitions = {
         output: "plankton_total_biomass_id",
         matches: ["Plankton Total Biomass ID"],
       },
+      process: {
+        output: "Size_Fraction__Unfiltered_or_Total_Biomass",
+        matches: ["Process", "Size_Fraction__Unfiltered_or_Total_Biomass"],
+        joi: Joi.string().required(),
+      },
     },
   },
 
@@ -1528,6 +1528,11 @@ const definitions = {
       preservation_method: {
         output: "Filtered_Preservation_Method",
         matches: ["Preservation Method"],
+      },
+      process: {
+        output: "Size_Fraction__Unfiltered_or_Total_Biomass",
+        matches: ["Process", "Size_Fraction__Unfiltered_or_Total_Biomass"],
+        joi: Joi.string().required(),
       },
     },
   },
@@ -1765,6 +1770,11 @@ const definitions = {
       plankton_total_biomass_id: {
         output: "_1__Filter_No_",
         matches: ["Plankton Total Biomass ID"],
+      },
+      process: {
+        output: "Size_Fraction__Unfiltered_or_Total_Biomass",
+        matches: ["Process", "Size_Fraction__Unfiltered_or_Total_Biomass"],
+        joi: Joi.string().required(),
       },
     },
   },
