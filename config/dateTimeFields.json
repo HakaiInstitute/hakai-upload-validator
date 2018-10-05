@@ -29,5 +29,6 @@
   "drop_bottom_time",
   "drop_end_time",
   "date_opened",
-  "expiration_date"
+  "expiration_date",
+  "date_liced"
 ]
