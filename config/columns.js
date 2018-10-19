@@ -2685,10 +2685,18 @@ const definitions = {
     action: defaultHeaders.action,
     fish_id: {}
   },
-  JSP_RNA: {
+  JSP_RNA_MUSCLE: {
     ...defaultJSPHeaders,
-    _output: "jsp_rna",
+    _output: "jsp_rna_muscle",
     action: defaultHeaders.action,
+    jsp_sample_type: {},
+    fish_id: {}
+  },
+  JSP_RNA_PATHOGEN: {
+    ...defaultJSPHeaders,
+    _output: "jsp_rna_pathogen",
+    action: defaultHeaders.action,
+    jsp_sample_type: {},
     fish_id: {}
   },
   JSP_OTOLITH: {
@@ -2701,7 +2709,7 @@ const definitions = {
     ...defaultJSPHeaders,
     _output: "jsp_lice_sample",
     action: defaultHeaders.action,
-    lice_species: {},
+    jsp_sample_type: {},
     fish_id: {}
   },
   CTD_FLAGS: {
