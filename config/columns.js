@@ -2463,8 +2463,6 @@ const definitions = {
     caf_field: {},
     lab_count_motiles: {},
     lab_count_no_id: { matches: ["Lice Count"] },
-    lice_id_protocol_lab: {},
-    lice_collection_protocol: {}
   },
   JSP_LICE_FINESCALE: {
     ...defaultJSPHeaders,
