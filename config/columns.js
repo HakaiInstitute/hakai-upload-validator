@@ -806,6 +806,7 @@ const definitions = {
     ...defaultHeaders,
     ...{
       _output: "YSI_CALIBRATION",
+      _joiobj: Joi.object(),
       ysi_uid: {},
       ysi_calibration_hakai_id: {
         output: "_1__Sample_ID",
@@ -932,6 +933,7 @@ const definitions = {
     ...defaultHeaders,
     ...{
       _output: "YSI_CALIBRATION_STANDARDS",
+      _joiobj: Joi.object(),
       standard_id: {
         output: "Standard_ID",
         matches: ["Hakai ID"],
