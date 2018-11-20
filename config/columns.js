@@ -241,6 +241,10 @@ const defaultHeaders = {
     output: "Flag",
     matches: ["Flags"],
   },
+  process: { // added here so that it works when entered on the metadata tab. technicly only relevent to zooplankton samples
+    output: "Size_Fraction__Unfiltered_or_Total_Biomass",
+    matches: ["Process", "Size_Fraction__Unfiltered_or_Total_Biomass"],
+  },
 };
 
 const defaultMetadata = {

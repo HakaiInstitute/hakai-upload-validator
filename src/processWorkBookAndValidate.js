@@ -168,7 +168,8 @@ function processWorkBookAndValidate(
       // will take datasheet value
       const metaDataFieldsToAddToRows = {
         source: metadata.source,
-        analyzing_lab: metadata.analyzing_lab
+        analyzing_lab: metadata.analyzing_lab,
+        process: metadata.process
       };
 
       // combine certain metadata fields with the rows output
