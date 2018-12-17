@@ -1,7 +1,7 @@
 const Joi = require("joi-browser");
 
 const defaultHeaders = {
-  _joiobj: Joi.object().and("date", "site_id", "sampling_bout"),
+  _joiobj: Joi.object(),
   action: {},
   uid: {
     matches: ["suva_uid", "doc_uid", "do13c_uid", "nutrient_uid"],
