@@ -1811,6 +1811,11 @@ const definitions = {
           .invalid(["na", "nd", "n/d", "n/a"])
           .insensitive(),
       },
+      process: { // This is added here to overwrite the default global. process is not required for zooplankton_biomass
+        output: "Size_Fraction__Unfiltered_or_Total_Biomass",
+        matches: ["Process", "Size_Fraction__Unfiltered_or_Total_Biomass"],
+        joi: Joi.string(),
+      },
     },
   },
 
