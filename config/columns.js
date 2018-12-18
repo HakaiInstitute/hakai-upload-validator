@@ -1790,7 +1790,7 @@ const definitions = {
     ...{
       _output: "Zooplankton",
       _joiobj: defaultZooplanktonHeaders._joiobj.concat(
-        Joi.object().xor("plankton_isotope_id", "plankton_total_biomass_id"),
+        Joi.object().xor("plankton_isotope_id", "plankton_total_biomass_id", "plankton_fatty_acids_id"),
       ),
       filter_uid: {},
       plankton_isotope_id: {
