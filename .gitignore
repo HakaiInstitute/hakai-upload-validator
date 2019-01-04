@@ -3,3 +3,5 @@ npm-debug.log
 yarn-error.log
 dist/validate.js
 test/excelFiles
+
+yarn\.lock
