@@ -1945,6 +1945,7 @@ const definitions = {
       c13_at_per: {
         matches: ["13C (at-%)"],
       },
+      c_flag: {},
     },
   },
 
