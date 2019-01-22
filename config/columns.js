@@ -1125,7 +1125,7 @@ const definitions = {
     ...defaultHeaders,
     ...{
       _output: "TS",
-      tds: {},
+      tds: {matches: ["tds (mg/l)", "tds_mg_l"]},
       tss: {matches: ["tss (mg/l)", "tss_mg_l"],},
       tds_flag: {},
       tss_flag: {},
