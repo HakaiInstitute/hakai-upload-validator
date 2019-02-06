@@ -16,6 +16,8 @@ const defaultHeaders = {
   },
   organization: {
     level: 1,
+    joi: Joi.string(),
+    output: "Organization",
   },
   project: {
     level: 1,
