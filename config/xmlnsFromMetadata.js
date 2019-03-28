@@ -31,8 +31,8 @@ const xmlnsFromMetadata = metadata => {
     dataTypeLower === "ctd_drops"
   ) {
     xmlns = "http://hakai.org/xforms/CTD_DATA";
-  } else if (dataTypeLower === "ctd_flags") {
-    xmlns = "http://hakai.org/xforms/CTD_FLAGS";
+  } else if (dataTypeLower === "ctd_qc") {
+    xmlns = "http://hakai.org/xforms/CTD_QC";
   } else if (dataTypeLower === "ysi_calibration") {
     xmlns = "http://hakai.org/xforms/YSI_CALIBRATION";
   } else {

@@ -101,7 +101,7 @@ const defaultHeaders = {
     output: "_1__Sample_ID",
     matches: ["Hakai ID", "Tube number", "Sample ID", "hakai_sample_id"],
     joi: Joi.string()
-      .regex(/^[\w\d._-]+$/)
+      .regex(/^[\w\d.:_-]+$/)
       .min(3)
       .invalid(["na", "nd", "n/d", "n/a"])
       .insensitive(),
@@ -2767,6 +2767,86 @@ const definitions = {
     flagged_by: {
       output: "flagged_by",
       matches: ["Flagged By"],
+    },
+  },
+  CTD_QC: {
+    ...defaultHeaders,
+    _output: "ctd_qc",
+    niskin_drop: {
+      output: "niskin_drop",
+      matches: ["Drop With Niskin Bottles"],
+    },
+    conductivity_flag: {
+      output: "conductivity_flag",
+      matches: ["Conductivity Flag"]
+    },
+    temperature_flag: {
+      output: "temperature_flag",
+      matches: ["Temperature Flag"]
+    },
+    depth_flag: {
+      output: "depth_flag",
+      matches: ["Depth Flag"]
+    },
+    pressure_flag: {
+      output: "pressure_flag",
+      matches: ["Pressure Flag"]
+    },
+    par_flag: {
+      output: "par_flag",
+      matches: ["PAR Flag"]
+    },
+    flc_flag: {
+      output: "flc_flag",
+      matches: ["FLC Flag"]
+    },
+    turbidity_flag: {
+      output: "turbidity_flag",
+      matches: ["Turbidity Flag"]
+    },
+    salinity_flag: {
+      output: "salinity_flag",
+      matches: ["Salinity Flag"]
+    },
+    spec_cond_flag: {
+      output: "spec_cond_flag",
+      matches: ["Specific Conductivity Flag"]
+    },
+    dissolved_oxygen_ml_l_flag: {
+      output: "dissolved_oxygen_ml_l_flag",
+      matches: ["Dissolved Oxygen (mL/L) Flag"]
+    },
+    dissolved_oxygen_percent_flag: {
+      output: "dissolved_oxygen_percent_flag",
+      matches: ["Dissolved Oxygen (%) Flag"]
+    },
+    descent_rate_flag: {
+      output: "descent_rate_flag",
+      matches: ["Descent Rate Flag"]
+    },
+    absolute_salinity_flag: {
+      output: "absolute_salinity_flag",
+      matches: ["Absolute Salinity Flag"]
+    },
+    conservative_temperature_flag: {
+      output: "conservative_temperature_flag",
+      matches: ["Conservative Temperature Flag"]
+    },
+    density_flag: {
+      output: "density_flag",
+      matches: ["Density Flag"]
+    },
+    sos_un_flag: {
+      output: "sos_un_flag",
+      matches: ["SOS UN Flag"]
+    },
+    c_star_at_flag: {
+      output: "c_star_at_flag",
+      matches: ["Beam Attenuation Flag"]
+    },
+    rinko_do_ml_l_flag: {
+      output: "rinko_do_ml_l_flag",
+      matches: ["Rinko Dissolved Oxygen (mL/L) Flag"]
     },
   },
   // don't update disance from sample site, which is calculated from lat long
