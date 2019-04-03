@@ -2771,6 +2771,7 @@ const definitions = {
   },
   CTD_QC: {
     ...defaultHeaders,
+     _joiobj: Joi.object(),
     _output: "ctd_qc",
     niskin_drop: {
       output: "niskin_drop",
