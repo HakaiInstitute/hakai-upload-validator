@@ -2779,75 +2779,96 @@ const definitions = {
     },
     conductivity_flag: {
       output: "conductivity_flag",
-      matches: ["Conductivity Flag"]
+      matches: ["Conductivity Flag"],
+      joi: Joi.string().valid(["AV", "SVC", "SVD", "NA"]),
+
     },
     temperature_flag: {
       output: "temperature_flag",
-      matches: ["Temperature Flag"]
+      matches: ["Temperature Flag"],
+      joi: Joi.string().valid(["AV", "SVC", "SVD", "NA"]),
+
     },
     depth_flag: {
       output: "depth_flag",
-      matches: ["Depth Flag"]
+      matches: ["Depth Flag"],
+      joi: Joi.string().valid(["AV", "SVC", "SVD", "NA"]),
     },
     pressure_flag: {
       output: "pressure_flag",
-      matches: ["Pressure Flag"]
+      matches: ["Pressure Flag"],
+      joi: Joi.string().valid(["AV", "SVC", "SVD", "NA"]),
     },
     par_flag: {
       output: "par_flag",
-      matches: ["PAR Flag"]
+      matches: ["PAR Flag"],
+      joi: Joi.string().valid(["AV", "SVC", "SVD", "NA"]),
     },
     flc_flag: {
       output: "flc_flag",
-      matches: ["FLC Flag"]
+      matches: ["FLC Flag"],
+      joi: Joi.string().valid(["AV", "SVC", "SVD", "NA"]),
     },
     turbidity_flag: {
       output: "turbidity_flag",
-      matches: ["Turbidity Flag"]
+      matches: ["Turbidity Flag"],
+      joi: Joi.string().valid(["AV", "SVC", "SVD", "NA"]),
     },
     salinity_flag: {
       output: "salinity_flag",
-      matches: ["Salinity Flag"]
+      matches: ["Salinity Flag"],
+      joi: Joi.string().valid(["AV", "SVC", "SVD", "NA"]),
     },
     spec_cond_flag: {
       output: "spec_cond_flag",
-      matches: ["Specific Conductivity Flag"]
+      matches: ["Specific Conductivity Flag"],
+      joi: Joi.string().valid(["AV", "SVC", "SVD", "NA"]),
+
     },
     dissolved_oxygen_ml_l_flag: {
       output: "dissolved_oxygen_ml_l_flag",
-      matches: ["Dissolved Oxygen (mL/L) Flag"]
+      matches: ["Dissolved Oxygen (mL/L) Flag"],
+      joi: Joi.string().valid(["AV", "SVC", "SVD", "NA"]),
     },
     dissolved_oxygen_percent_flag: {
       output: "dissolved_oxygen_percent_flag",
-      matches: ["Dissolved Oxygen (%) Flag"]
+      matches: ["Dissolved Oxygen (%) Flag"],
+      joi: Joi.string().valid(["AV", "SVC", "SVD", "NA"]),
     },
     descent_rate_flag: {
       output: "descent_rate_flag",
-      matches: ["Descent Rate Flag"]
+      matches: ["Descent Rate Flag"],
+      joi: Joi.string().valid(["AV", "SVC", "SVD", "NA"]),
     },
     absolute_salinity_flag: {
       output: "absolute_salinity_flag",
-      matches: ["Absolute Salinity Flag"]
+      matches: ["Absolute Salinity Flag"],
+      joi: Joi.string().valid(["AV", "SVC", "SVD", "NA"]),
     },
     conservative_temperature_flag: {
       output: "conservative_temperature_flag",
-      matches: ["Conservative Temperature Flag"]
+      matches: ["Conservative Temperature Flag"],
+      joi: Joi.string().valid(["AV", "SVC", "SVD", "NA"]),
     },
     density_flag: {
       output: "density_flag",
-      matches: ["Density Flag"]
+      matches: ["Density Flag"],
+      joi: Joi.string().valid(["AV", "SVC", "SVD", "NA"]),
     },
     sos_un_flag: {
       output: "sos_un_flag",
-      matches: ["SOS UN Flag"]
+      matches: ["SOS UN Flag"],
+      joi: Joi.string().valid(["AV", "SVC", "SVD", "NA"]),
     },
     c_star_at_flag: {
       output: "c_star_at_flag",
-      matches: ["Beam Attenuation Flag"]
+      matches: ["Beam Attenuation Flag"],
+      joi: Joi.string().valid(["AV", "SVC", "SVD", "NA"]),
     },
     rinko_do_ml_l_flag: {
       output: "rinko_do_ml_l_flag",
-      matches: ["Rinko Dissolved Oxygen (mL/L) Flag"]
+      matches: ["Rinko Dissolved Oxygen (mL/L) Flag"],
+      joi: Joi.string().valid(["AV", "SVC", "SVD", "NA"]),
     },
   },
   // don't update disance from sample site, which is calculated from lat long
