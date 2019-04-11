@@ -43,24 +43,35 @@ When there are multiple matches found, the _last_ one is taken. See CHLOROPHYLL
 Add this package to another project with `yarn add
 github:HakaiInstitute/hakai-upload-validator`
 
-Update the portal:
+New update method as of 2019-04-11 that doesn't require ssh to server:
+- update validator locally
+- commit new yarn.lock file that includes the updated validator commit hash to api and portal
+- push updated api and portal branches to server
+
+Update the portal (locally then push):
 
 ```bash
 cd ~/hakai-data-portal-v2
 yarn add github:HakaiInstitute/hakai-upload-validator
-npm run build:hecate
-pm2 restart hakai-data-portal-v2
 ```
+Commit the new yarn.lock file
+```bash
+git push hecate master
+```
+
 
 ~~To update the forms-parser:~~ The forms parser is not used anymore. It has
 been merged into the API.
 
-To update the API:
+To update the API (locally then push):
 
 ```bash
 cd ~/hakai-api
 yarn add github:HakaiInstitute/hakai-upload-validator
-pm2 restart hakai-api
+```
+Commit the new yarn.lock file
+```bash
+git push hecate master
 ```
 
 ## Testing
