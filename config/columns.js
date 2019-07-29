@@ -1840,15 +1840,15 @@ const definitions = {
     ...defaultHeaders,
     ...{
       _output: "Phytoplankton",
-      net_diameter_cm: {
+      net_dim___cm_: {
         output: "Diameter__cm_",
         matches: ["Net Dim. (cm)"],
       },
-      net_length_cm: {
+      net_length__cm_: {
         output: "Length__cm_",
         matches: ["Net Length (cm)"],
       },
-      net_mesh_size_um: {
+      mesh_size__um_: {
         output: "Mesh_Size",
         matches: ["Mesh Size (um)"],
       },
