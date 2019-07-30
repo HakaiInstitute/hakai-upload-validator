@@ -2431,7 +2431,7 @@ const definitions = {
     _output: "Niskin_and_Solo_ID_s",
     solo_hakai_id: {
       output: "_1__Sample_ID",
-      matches: ["Hakai ID"],
+      matches: ["Hakai ID", "hakai_sample_id"],
       joi: Joi.string()
         .regex(/^[\w\d\s:._-]+$/)
         .min(3)
