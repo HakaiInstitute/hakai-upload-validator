@@ -1892,6 +1892,7 @@ const definitions = {
       alloxanthin: { matches: ["allo", "allox"] },
       antheraxanthin: { matches: ["anther"] },
       all_chl_a: {},
+      all_chl_a_flag: {},
       alpha_carotene: { matches: ["a_carot"] },
       beta_carotene: { matches: ["b_carot"] },
       c2mgdg: {},
