@@ -27,7 +27,12 @@ const rowCleaner = (row, fieldToIndexMap) => {
       } else if (dbField === "site_id" && cell.includes(" ")) {
         // get watershed from site id if not already set.
         // eg "site_id": "819 WTW25" becomes "Watershed_ID": "819","Site_ID": "WTW25"
-        const [watershedID, siteID] = cell.split(" ");
+        let watershedID, siteID, lakeID;
+        [watershedID, siteID] = cell.split(" ");
+        if (siteID.includes("_")){
+          [lakeID, siteID] = siteID.split("_");
+          cleanedRow.lake = lakeID;
+        }
         // set watershed ID this way if either watershed's not a header or it is but there's no data there
         if (
           siteID &&

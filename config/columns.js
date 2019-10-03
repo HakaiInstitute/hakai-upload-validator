@@ -40,6 +40,12 @@ const defaultHeaders = {
     matches: ["Watershed ID"],
     joi: Joi.string(),
   },
+  lake: {
+    output: "Lake_ID",
+    level: 1,
+    matches: ["Lake ID"],
+    joi: Joi.string(),
+  },
   site_id: {
     output: "Site_ID",
     level: 1,
