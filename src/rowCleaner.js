@@ -1,5 +1,7 @@
 const dateParser = require("./dateParser");
-const { getKeyByValue } = require("./common");
+const {
+  getKeyByValue
+} = require("./common");
 const dateTimeFields = require("../config/dateTimeFields");
 /**
  *  Cleans up row data - parses dates and splits site names into watershed ID, site name
@@ -27,7 +29,16 @@ const rowCleaner = (row, fieldToIndexMap) => {
       } else if (dbField === "site_id" && cell.includes(" ")) {
         // get watershed from site id if not already set.
         // eg "site_id": "819 WTW25" becomes "Watershed_ID": "819","Site_ID": "WTW25"
-        const [watershedID, siteID] = cell.split(" ");
+        let watershedID, siteID, lakeID;
+        const splitSite = cell.split(" ");
+        if (splitSite.length === 2) {
+          [watershedID, siteID] = splitSite;
+        } else if (splitSite.length === 3) {
+          [watershedID, lakeID, siteID] = splitSite;
+          cleanedRow.lake = lakeID;
+        } else {
+          [siteID] = splitSite;
+        }
         // set watershed ID this way if either watershed's not a header or it is but there's no data there
         if (
           siteID &&
