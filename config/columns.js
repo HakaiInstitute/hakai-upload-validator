@@ -2899,6 +2899,7 @@ const definitions = {
       output: "Station",
     },
     target_depth: {
+      matches: ["Target Depth", "depth", "target depth (m)", "target_depth_m"],
       output: "CTD_Depth",
     },
     drop_start_time: {
