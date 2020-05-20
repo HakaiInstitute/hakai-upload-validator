@@ -1210,6 +1210,15 @@ const definitions = {
       extracting_lab: {
         matches: ["Extraction Lab"],
       },
+      primer_16s: {
+        matches: ["16S Primer"],
+      },
+      primer_18s: {
+        matches: ["18S Primer"],
+      },
+      primer_co1: {
+        matches: ["CO1 Primer"],
+      }
     },
   },
 
