@@ -1316,6 +1316,7 @@ const definitions = {
       po4punfl_flag: {},
       no3nunfl_flag: {},
       nh4nunfl_flag: {},
+      metadata_qc_flag: {},
     },
   },
 
