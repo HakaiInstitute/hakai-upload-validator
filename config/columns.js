@@ -1210,14 +1210,21 @@ const definitions = {
       extracting_lab: {
         matches: ["Extraction Lab"],
       },
-      primer_16s: {
-        matches: ["16S Primer"],
+      p_16s_v4v5_amplified: {
+        output: "16S-V4V5_amplified",
+        matches: ["16S-V4V5_amplified"],
       },
-      primer_18s: {
-        matches: ["18S Primer"],
+      p_16s_v4_amplified: {
+        output: "16S-V4_amplified",
+        matches: ["16S-V4_amplified"],
       },
-      primer_co1: {
-        matches: ["CO1 Primer"],
+      p_18s_v4_amplified: {
+        output: "18S-V4_amplified",
+        matches: ["18S-V4_amplified"],
+      },
+      p_coi_amplified: {
+        output: "COI_amplified",
+        matches: ["COI_amplified"],
       }
     },
   },
