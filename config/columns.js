@@ -1210,6 +1210,22 @@ const definitions = {
       extracting_lab: {
         matches: ["Extraction Lab"],
       },
+      p_16s_v4v5_amplified: {
+        output: "16S-V4V5_amplified",
+        matches: ["16S-V4V5_amplified"],
+      },
+      p_16s_v4_amplified: {
+        output: "16S-V4_amplified",
+        matches: ["16S-V4_amplified"],
+      },
+      p_18s_v4_amplified: {
+        output: "18S-V4_amplified",
+        matches: ["18S-V4_amplified"],
+      },
+      p_coi_amplified: {
+        output: "COI_amplified",
+        matches: ["COI_amplified"],
+      }
     },
   },
 
