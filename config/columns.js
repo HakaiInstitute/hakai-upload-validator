@@ -1253,6 +1253,9 @@ const definitions = {
         output: "_1__Volume",
         matches: ["Volume (ml)", "volume_ml", "Volume", "volume filtered"],
       },
+      is_replicate: {
+        output: "_1__Replicate_",
+      },
       nh4_: {
         matches: ["NH4NFilt", "NH4+", "NH4 (ug/L)", "NH4+ (ug/L)"],
       },
@@ -1313,6 +1316,7 @@ const definitions = {
       po4punfl_flag: {},
       no3nunfl_flag: {},
       nh4nunfl_flag: {},
+      metadata_qc_flag: {},
     },
   },
 
