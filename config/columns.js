@@ -2908,6 +2908,9 @@ const definitions = {
       output: "CTD_ID",
       matches: ["sn"],
     },
+    cast_type: {
+      output: "Cast Type",
+    },
     miscast: {
       output: "Re_Drop_",
       matches: ["re_drop"],
