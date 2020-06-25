@@ -2909,7 +2909,7 @@ const definitions = {
       matches: ["sn"],
     },
     cast_type: {
-      output: "Cast Type",
+      output: "Cast_Type",
     },
     miscast: {
       output: "Re_Drop_",
