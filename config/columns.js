@@ -1299,8 +1299,12 @@ const definitions = {
       srp: {
         matches: ["SRP (ug/L)"],
       },
-      po4: {},
-      sio2: {},
+      po4: {
+        matches: ["PO4 (uM)"],
+      },
+      sio2: {
+        matches: ["SiO2 (uM)"],
+      },
       po4pfilt: {},
       no3nfilt: {},
       po4punfl: {},
