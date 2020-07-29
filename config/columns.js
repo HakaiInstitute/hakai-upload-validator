@@ -2965,6 +2965,15 @@ const definitions = {
     inspectors: {
       output: "Inspectors_Name"
     },
+    sky_cover: {
+      output: "Sky_Cover",
+    },
+    wind: {
+      output: "Wind",
+    },
+    swell: {
+      output: "Swell",
+    },
     pk: {
       matches: ["Primary Key"],
       drop: true,
