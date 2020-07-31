@@ -2989,7 +2989,14 @@ const definitions = {
     },
     distance_from_gps_site: {
       drop: true,
-    }
+    },
+    // Nature Trust Specific Columns
+    weather: {},
+    tide: {},
+    soak_start: {},
+    soak_end: {},
+    water_depth: {},
+    sensors_submerged: {},
   },
 
   STAFF_GAUGE: {
