@@ -2993,8 +2993,12 @@ const definitions = {
     // Nature Trust Specific Columns
     weather: {},
     tide: {},
-    soak_start: {},
-    soak_end: {},
+    soak_start: {
+      joi: Joi.date(),
+    },
+    soak_end: {
+      joi: Joi.date(),
+    },
     water_depth: {},
     sensors_submerged: {},
   },
