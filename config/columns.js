@@ -2965,8 +2965,7 @@ const definitions = {
     inspectors: {
       output: "Inspectors_Name"
     },
-    cloud_cover: {
-      matches: ["Sky_Cover", "Sky Cover"],
+    sky_cover: {
       output: "Sky_Cover",
     },
     wind_speed: {
