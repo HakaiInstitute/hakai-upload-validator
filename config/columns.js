@@ -2965,13 +2965,16 @@ const definitions = {
     inspectors: {
       output: "Inspectors_Name"
     },
-    sky_cover: {
+    cloud_cover: {
+      matches: ["Sky_Cover", "Sky Cover"],
       output: "Sky_Cover",
     },
-    wind: {
+    wind_speed: {
+      matches: ["Wind"],
       output: "Wind",
     },
-    swell: {
+    swell_height: {
+      matches: ["Swell"],
       output: "Swell",
     },
     pk: {
@@ -2991,7 +2994,7 @@ const definitions = {
       drop: true,
     },
     // Nature Trust Specific Columns
-    weather: {},
+    weather_notes: {},
     tide: {},
     soak_start: {
       joi: Joi.date(),
@@ -2999,7 +3002,9 @@ const definitions = {
     soak_end: {
       joi: Joi.date(),
     },
-    water_depth: {},
+    water_depth: {
+      matches: ["Water Depth (m)"],
+    },
     sensors_submerged: {},
   },
 
