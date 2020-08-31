@@ -1149,7 +1149,7 @@ const definitions = {
     ...{
       _output: "TS",
       tds: {matches: ["tds (mg/l)", "tds_mg_l"]},
-      tss: {matches: ["tss (mg/l)", "tss_mg_l"],},
+      tss: {matches: ["tss (mg/l)", "tss_mg_l"]},
       tds_flag: {},
       tss_flag: {},
       weight_before: {
@@ -2969,13 +2969,14 @@ const definitions = {
       output: "Sky_Cover",
     },
     wind_speed: {
-      matches: ["Wind"],
+      matches: ["Wind", "Wind Speed (knots)"],
       output: "Wind",
     },
     swell_height: {
-      matches: ["Swell"],
+      matches: ["Swell", "Swell Height (m)"],
       output: "Swell",
     },
+    ctd_cast_id: {},
     pk: {
       matches: ["Primary Key"],
       drop: true,
