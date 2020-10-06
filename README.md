@@ -38,6 +38,10 @@ add it explicitly. Also `matches` is not case sensitive, but `output` is.
 
 When there are multiple matches found, the _last_ one is taken. See CHLOROPHYLL
 
+## Adding date/time columns
+
+When adding a date/time to `columns.js` the column name also has to be added to `dateTimeFields.json`. If this is not done the timezone is set incorrectly on file upload.
+
 ## Usage
 
 Add this package to another project with `yarn add
