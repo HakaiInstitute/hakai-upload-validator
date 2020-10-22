@@ -104,3 +104,27 @@ pm2 restart hakai-api
 ```
 
 To run the test suite, which tests various functions used, do `npm test`.
+
+## Use local files for development
+
+[yarn link](https://classic.yarnpkg.com/en/docs/cli/link)
+
+To use a local verion of hakai-upload-validator, run the following in `hakai-upload-validator/`:
+
+```bash
+yarn link && yarn
+```
+
+And then in `hakai-api/` and `hakai-data-portal-v2/` run:
+
+```bash
+yarn link hakai-upload-validator && yarn
+```
+
+[yarn unlink](https://classic.yarnpkg.com/en/docs/cli/unlink)
+
+To return to using the github files, in `hakai-api/` and `hakai-data-portal-v2/` run:
+
+```bash
+yarn unlink hakai-upload-validator && yarn install --force
+```
