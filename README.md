@@ -103,6 +103,8 @@ yarn add file: ../hakai-upload-validator
 pm2 restart hakai-api
 ```
 
+If having trouble getting the updated version of the validator, try rebuilding the packages with `yarn`.
+
 To run the test suite, which tests various functions used, do `npm test`.
 
 ## Use local files for development
