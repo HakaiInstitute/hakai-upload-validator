@@ -1262,6 +1262,9 @@ const definitions = {
     ...{
       _output: "Nutrients",
       nutrient_uid: {},
+      filtered: {
+        output: "Filtered_",
+      },
       filter_type: {
         output: "Filter_Type",
       },
