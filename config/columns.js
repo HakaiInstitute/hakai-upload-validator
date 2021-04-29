@@ -1493,6 +1493,10 @@ const definitions = {
       before_acid: {},
       after_acid: {},
       acid_flag: {},
+      dilution_factor: {
+        output: "dilution_factor",
+        matches: ["Dilution factor"],
+      },
       chla: {},
       chla_flag: {},
       chla_final: {},
