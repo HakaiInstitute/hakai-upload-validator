@@ -1494,7 +1494,6 @@ const definitions = {
       after_acid: {},
       acid_flag: {},
       dilution_factor: {
-        output: "dilution_factor",
         matches: ["Dilution factor"],
       },
       chla: {},
