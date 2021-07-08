@@ -220,6 +220,7 @@ function processWorkBookAndValidate(
       const hasValidationErrors =
         joiLog.length > 0 || mlog.dump().some(log => log.level === "error");
 
+      // Faking submission from device magic?
       const attributes = {
         form_xmlns: xmlnsFromMetadata(metadata),
         submissionIdentifier: uuidv4(),
