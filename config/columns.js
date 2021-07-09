@@ -190,7 +190,7 @@ const defaultHeaders = {
     joi: Joi.alternatives().try(Joi.number(), Joi.date().max("now")),
   },
   analyzed: {
-    matches: ["analyzed", "Analyzed Date"],
+    matches: ["analyzed", "Analyzed Date", "Analyzed Datetime"],
     joi: Joi.alternatives().try(Joi.number(), Joi.date().max("now")),
   },
   analyzing_lab: {
@@ -688,7 +688,6 @@ const definitions = {
     ...{
       _output: "AKAN_CAT_PH",
       ph_ions_uid: {},
-      analyzed_datetime: {},
       acidity: {},
       alkh: {},
       ph: {},
