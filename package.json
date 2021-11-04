@@ -5,14 +5,15 @@
   "main": "./src/processWorkBookAndValidate.js",
   "scripts": {
     "test": "mocha test/*.spec.js",
-    "testexcel": "node test/testExcel.js"
+    "testexcel": "node test/testExcel.js",
+    "postinstall": "husky install"
+
   },
   "author": "",
   "repository": {
     "type": "git",
     "url": "https://github.com/HakaiInstitute/hakai-upload-validator.git"
   },
-
   "devDependencies": {
     "babel-core": "^6.2.1",
     "babel-loader": "^6.2.0",
@@ -25,6 +26,7 @@
     "eslint-config-prettier": "^2.8.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-prettier": "^2.3.1",
+    "husky": "^7.0.4",
     "mocha": "^5.2.0",
     "prettier-eslint": "^8.2.2",
     "xlsx": "^0.11.10"
