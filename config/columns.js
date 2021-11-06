@@ -1234,6 +1234,12 @@ const definitions = {
       stock_dna_concentration: {
         matches: ["Stock DNA Conentration (ng/ul)"],
       },
+      rna_extraction_date: {
+        matches: ["RNA Extraction Date", "rna_extraction_date"]
+      },
+      rna_concentration: {
+        matches: ["RNA concentration (ng/ul)", "RNA concentration", "rna_concentration"]
+      },
       extracting_staff: {
         matches: ["Extraction Staff"],
       },
