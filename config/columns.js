@@ -784,6 +784,7 @@ const definitions = {
       },
       ysi_unit: {
         output: "YSI_Unit_ID",
+        matches: ["ysi_unit_sn"],
       },
       ysi_time: {
         output: "YSI_Time",
