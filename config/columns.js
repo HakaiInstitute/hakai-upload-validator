@@ -1238,7 +1238,7 @@ const definitions = {
         matches: ["RNA Extraction Date", "rna_extraction_date"]
       },
       rna_concentration: {
-        matches: ["RNA concentration (ng/ul)", "RNA concentration", "rna_concentration"]
+        matches: ["RNA Concentration (ng/ul)", "RNA Concentration", "rna_concentration"]
       },
       extracting_staff: {
         matches: ["Extraction Staff"],
