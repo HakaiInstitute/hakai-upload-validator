@@ -21,6 +21,7 @@
   "incubation_end_time",
   "filtering_end_time",
   "dna_extraction_datetime",
+  "rna_extraction_date",
   "start_range",
   "end_range",
   "Installation_Date_and_Time",
