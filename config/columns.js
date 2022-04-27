@@ -1541,6 +1541,14 @@ const definitions = {
     },
   },
 
+  FLOWMETER_CALIBRATION: {
+    sn: {},
+    calibration_date: {matches: ["Calibration Date"]},
+    distance_actual: {matches: ["Distance Actual"]},
+    avg_counts: {matches: ["Average Counts"]},
+    counts_per_m: {matches: ["Counts Per M"]}
+  },
+
   ZOOPLANKTON_ISOTOPE: {
     ...defaultZooplanktonHeaders,
     ...{
