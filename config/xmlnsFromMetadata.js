@@ -35,6 +35,8 @@ const xmlnsFromMetadata = metadata => {
     xmlns = "http://hakai.org/xforms/CTD_QC";
   } else if (dataTypeLower === "ysi_calibration") {
     xmlns = "http://hakai.org/xforms/YSI_CALIBRATION";
+  } else if (dataTypeLower === "flowmeter_calibration") {
+    xmlns = "http://hakai.org/xforms/FLOWMETER_CALIBRATION";
   } else {
     xmlns = "http://hakai.org/xforms/SAMPLING_DATA";
   }
