@@ -1543,7 +1543,7 @@ const definitions = {
 
   FLOWMETER_CALIBRATION: {
     _output: "FLOWMETER_CALIBRATION",
-    sn: {},
+    sn: { matches: ["Serial Number", "sn"]},
     calibration_date: {matches: ["Calibration Date"]},
     distance_actual: {matches: ["Distance Actual"]},
     avg_counts: {matches: ["Average Counts"]},
