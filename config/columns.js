@@ -1550,7 +1550,8 @@ const definitions = {
       distance_actual: {matches: ["Distance Actual"]},
       avg_counts: {matches: ["Average Counts"]},
       counts_per_m: {matches: ["Counts Per M"]},
-
+      percent_deviation: {},
+      calibration_coefficient: {},
     }
   },
 
