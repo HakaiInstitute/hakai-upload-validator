@@ -1567,7 +1567,7 @@ const definitions = {
       fluorometer:{},
       point:{},
       chl_stock_conc_ug_L:{},
-      mL_standard_in_10ml_acetone:{},
+      mL_standard_in_acetone:{},
       volume_acetone_mL:{},
       total_volume:{},
       chl_standard_conc_ug_L:{},
