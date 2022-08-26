@@ -1545,6 +1545,9 @@ const definitions = {
     ...defaultHeaders,
     ...{
       _output: "FLOWMETER_CALIBRATION",
+      lab:{},
+      flurometer:{},
+      point:{},
       sn: { matches: ["Serial Number", "sn"]},
       calibration_date: {matches: ["Calibration Date"]},
       distance_actual: {matches: ["Distance Actual"]},
@@ -1552,6 +1555,34 @@ const definitions = {
       counts_per_m: {matches: ["Counts Per M"]},
       percent_deviation: {},
       calibration_coefficient: {},
+    }
+  },
+
+  FLUROMETER_CALIBRATION_DETAIL:{
+    ...defaultHeaders,
+    ...{
+      _output: "FLUROMETER_CALIBRATION_DETAIL",
+      date: {},
+      lab:{},
+      fluorometer:{},
+      point:{},
+      chl_stock_conc_ug_L:{},
+      mL_standard_in_10ml_acetone:{},
+      volume_acetone_mL:{},
+      total_volume:{},
+      chl_standard_conc_ug_L:{},
+      blank_before_acid:{},
+      blank_after_acid:{},
+      rb_raw:{},
+      rb_blank_subtracted:{},
+      ra_raw:{},
+      ra_blank_subtracted:{},
+      fm_blank_subtracted:{},
+      fm_flag:{},
+      slope:{},
+      avg_fm:{},
+      r2:{},
+      comments:{},
     }
   },
 
