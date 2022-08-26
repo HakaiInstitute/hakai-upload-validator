@@ -1562,7 +1562,7 @@ const definitions = {
     ...defaultHeaders,
     ...{
       _output: "FLUROMETER_CALIBRATION_DETAIL",
-      date: {},
+      calibration_date: {matches: ["date"]},
       lab:{},
       fluorometer:{},
       point:{},
