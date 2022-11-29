@@ -134,7 +134,7 @@ function processWorkBookAndValidate(
 
       headerRow.forEach((fieldRaw, c) => {
         const sampleTypeDefObj = columnSchema[dataType];
-        const field = getDBFieldByRelatedText(fieldRaw, sampleTypeDefObj);
+        const field = getDBFieldByRelatedText(fieldRaw.trim(), sampleTypeDefObj);
 
         if (field) {
           const fieldDefinition = sampleTypeDefObj[field];
