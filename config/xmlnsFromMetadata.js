@@ -37,6 +37,8 @@ const xmlnsFromMetadata = metadata => {
     xmlns = "http://hakai.org/xforms/YSI_CALIBRATION";
   } else if (dataTypeLower === "flowmeter_calibration") {
     xmlns = "http://hakai.org/xforms/FLOWMETER_CALIBRATION";
+  } else if (dataTypeLower === "flurometer_calibration_detail") {
+    xmlns = "http://hakai.org/xforms/FLUROMETER_CALIBRATION_DETAIL";
   } else {
     xmlns = "http://hakai.org/xforms/SAMPLING_DATA";
   }
