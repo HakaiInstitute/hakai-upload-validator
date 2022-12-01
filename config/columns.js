@@ -341,6 +341,10 @@ const defaultFilters = {
         "Acidified at time of filtration A",
       ],
     },
+    encapsulation_weight_mg:{
+      joi: Joi.number(),
+      matches: ["encapsulation_weight", "Encapsulation Weight (mg)"],
+    }
   },
 };
 
