@@ -1266,6 +1266,65 @@ const definitions = {
     },
   },
 
+  EDNA: {
+    ...defaultHeaders,
+    ...{
+      _output: "EDNA",
+      edna_uid: {},
+      volume: {
+        output: "Volume",
+        matches: ["Volume (ml)", "volume_ml", "Volume", "volume filtered"],
+      },
+      sample_type: {
+        output: "Type",
+        matches: ["Sample Type", "Type", "edna_sample_type"],
+      },
+      dna_extraction_datetime: {
+        matches: ["DNA Extraction Date", "DNA Extraction Time"],
+      },
+      dna_volume: {
+        matches: ["DNA Volume (ul)"],
+      },
+      dna_volume_te_wash: {
+        matches: ["DNA Volume with TE Wash (ul)"],
+      },
+      qubit_dna_concentration: {
+        matches: ["Qubit DNA Concentration (ng/ml)"],
+      },
+      stock_dna_concentration: {
+        matches: ["Stock DNA Conentration (ng/ul)"],
+      },
+      // rna_extraction_date: {
+      //   matches: ["RNA Extraction Date", "rna_extraction_date"]
+      // },
+      // rna_concentration: {
+      //   matches: ["RNA Concentration (ng/ul)", "RNA Concentration", "rna_concentration"]
+      // },
+      extracting_staff: {
+        matches: ["Extraction Staff"],
+      },
+      extracting_lab: {
+        matches: ["Extraction Lab"],
+      // },
+      // p_16s_v4v5_amplified: {
+      //   output: "16S-V4V5_amplified",
+      //   matches: ["16S-V4V5_amplified"],
+      // },
+      // p_16s_v4_amplified: {
+      //   output: "16S-V4_amplified",
+      //   matches: ["16S-V4_amplified"],
+      // },
+      // p_18s_v4_amplified: {
+      //   output: "18S-V4_amplified",
+      //   matches: ["18S-V4_amplified"],
+      // },
+      // p_coi_amplified: {
+      //   output: "COI_amplified",
+      //   matches: ["COI_amplified"],
+      }
+    },
+  },
+
   DO13C: {
     ...defaultHeaders,
     ...{
