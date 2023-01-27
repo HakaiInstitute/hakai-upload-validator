@@ -1272,11 +1272,11 @@ const definitions = {
       _output: "EDNA",
       edna_uid: {},
       volume: {
-        output: "Volume",
+        output: "_1__Volume",
         matches: ["Volume (ml)", "volume_ml", "Volume", "volume filtered"],
       },
       sample_type: {
-        output: "Type",
+        output: "_1__Type",
         matches: ["Sample Type", "Type", "edna_sample_type"],
       },
       dna_extraction_datetime: {
