@@ -2949,6 +2949,15 @@ const definitions = {
     ...defaultHeaders,
      _joiobj: Joi.object(),
     _output: "ctd_qc",
+    target_depth: {
+      matches: ["Target Depth", "depth", "target depth (m)", "target_depth_m"],
+      output: "CTD_Depth",
+    },
+    start_depth: {
+      output: "start_depth",
+    },
+    ctd_pk: {},
+    processing_stage: {},
     niskin_drop: {
       output: "niskin_drop",
       matches: ["Drop With Niskin Bottles"],
