@@ -20,6 +20,11 @@ JSON, and then formats for entry into the database.
 This project is to be used for validation in both browser and server, so
 packages that can run on both are being used, Eg. joi-browser instead of joi.
 
+## Where is it Deployed
+as this package is used by both the hakai front end portal and api services it is included any where these services are running. currently that is on
+* hecate at https://hecate.hakai.org/api/ and https://hecate.hakai.org/portal2/
+* goose  at https://goose.hakai.org/api/ and https://goose.hakai.org/portal2/
+
 ## Changes to columns.js
 
 There are some changes to how columns.js works. Output defaults to the categeory
