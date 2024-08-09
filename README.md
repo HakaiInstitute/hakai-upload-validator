@@ -20,7 +20,7 @@ JSON, and then formats for entry into the database.
 This project is to be used for validation in both browser and server, so
 packages that can run on both are being used, Eg. joi-browser instead of joi.
 
-## Where is it Deployed
+## The URL where this code is deployed
 as this package is used by both the hakai front end portal and api services it is included any where these services are running. currently that is on
 * hecate at https://hecate.hakai.org/api/ and https://hecate.hakai.org/portal2/
 * goose  at https://goose.hakai.org/api/ and https://goose.hakai.org/portal2/
@@ -47,11 +47,12 @@ When there are multiple matches found, the _last_ one is taken. See CHLOROPHYLL
 
 When adding a date/time to `columns.js` the column name also has to be added to `dateTimeFields.json`. If this is not done the timezone is set incorrectly on file upload.
 
-## Usage
+## How to install this code
 
 Add this package to another project with `yarn add
 github:HakaiInstitute/hakai-upload-validator`
 
+## How to run/deploy this code
 New update method as of 2019-04-11 that doesn't require ssh to server:
 - update validator locally
 - commit new yarn.lock file that includes the updated validator commit hash to api and portal
