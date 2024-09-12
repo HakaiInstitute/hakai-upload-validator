@@ -79,13 +79,13 @@ const defaultHeaders = {
   },
   lat: {
     output: "latitude",
-    matches: ["site_lat","latitude"],
+    matches: ["site_lat", "latitude"],
     level: 1,
     drop: true,
   },
   long: {
     output: "longitude",
-    matches: ["site_long","longitude"],
+    matches: ["site_long", "longitude"],
     level: 1,
     drop: true,
   },
@@ -425,7 +425,7 @@ const defaultZooplanktonHeaders = {
     volume_ratio: {},
     flow_meter_flag: {
       output: "Flow_Meter_Flag",
-      matches: ["Flow Meter Flag","flow_flag"],
+      matches: ["Flow Meter Flag", "flow_flag"],
     },
     flow_meter_volume_flag: {
       output: "Flow_Meter_Volume_Flag",
@@ -616,7 +616,7 @@ const defaultMarineGEO = {
       joi: Joi.number(),
     },
     density_sqm: {
-      matches: ["density (m2)","density_msq"],
+      matches: ["density (m2)", "density_msq"],
       joi: Joi.number(),
     },
   },
@@ -1055,7 +1055,7 @@ const definitions = {
       joi: Joi.number(),
     },
     slope_275_295_slope_350_400: {
-      matches: ["s275_295_s350_400","slope_275_295_slope350_400"],
+      matches: ["s275_295_s350_400", "slope_275_295_slope350_400"],
       joi: Joi.number(),
     },
     slope_flag: {},
@@ -1082,7 +1082,7 @@ const definitions = {
     },
     suva_nrl: {
       drop: true,
-      matches: ["suva_nral","SUVA NRL"],
+      matches: ["suva_nral", "SUVA NRL"],
     },
     a350_doc_nral: {
       matches: ["a350/doc nral"],
@@ -1179,8 +1179,8 @@ const definitions = {
     ...defaultHeaders,
     ...{
       _output: "TS",
-      tds: {matches: ["tds (mg/l)", "tds_mg_l"]},
-      tss: {matches: ["tss (mg/l)", "tss_mg_l"]},
+      tds: { matches: ["tds (mg/l)", "tds_mg_l"] },
+      tss: { matches: ["tss (mg/l)", "tss_mg_l"] },
       tds_flag: {},
       tss_flag: {},
       weight_before: {
@@ -1305,22 +1305,22 @@ const definitions = {
       },
       extracting_lab: {
         matches: ["Extraction Lab"],
-      // },
-      // p_16s_v4v5_amplified: {
-      //   output: "16S-V4V5_amplified",
-      //   matches: ["16S-V4V5_amplified"],
-      // },
-      // p_16s_v4_amplified: {
-      //   output: "16S-V4_amplified",
-      //   matches: ["16S-V4_amplified"],
-      // },
-      // p_18s_v4_amplified: {
-      //   output: "18S-V4_amplified",
-      //   matches: ["18S-V4_amplified"],
-      // },
-      // p_coi_amplified: {
-      //   output: "COI_amplified",
-      //   matches: ["COI_amplified"],
+        // },
+        // p_16s_v4v5_amplified: {
+        //   output: "16S-V4V5_amplified",
+        //   matches: ["16S-V4V5_amplified"],
+        // },
+        // p_16s_v4_amplified: {
+        //   output: "16S-V4_amplified",
+        //   matches: ["16S-V4_amplified"],
+        // },
+        // p_18s_v4_amplified: {
+        //   output: "18S-V4_amplified",
+        //   matches: ["18S-V4_amplified"],
+        // },
+        // p_coi_amplified: {
+        //   output: "COI_amplified",
+        //   matches: ["COI_amplified"],
       }
     },
   },
@@ -1576,14 +1576,14 @@ const definitions = {
       },
       calibration_slope: {},
       acidification_coefficient: {
-        matches:[
+        matches: [
           "acid_coefficient"
         ],
       },
       acid_ratio_correction_factor: {},
       acetone_volume: {
         output: "acetone_volume",
-        matches: ["volume of acetone (ml)","acetone_volume_ml"],
+        matches: ["volume of acetone (ml)", "acetone_volume_ml"],
         joi: Joi.number(),
       },
       before_acid: {},
@@ -1600,48 +1600,48 @@ const definitions = {
     },
   },
 
-  FLOWMETER_CALIBRATION:{
+  FLOWMETER_CALIBRATION: {
     ...defaultHeaders,
     ...{
       _output: "FLOWMETER_CALIBRATION",
-      lab:{},
-      flurometer:{},
-      point:{},
-      sn: { matches: ["Serial Number", "sn"]},
-      calibration_date: {matches: ["Calibration Date"]},
-      distance_actual: {matches: ["Distance Actual"]},
-      avg_counts: {matches: ["Average Counts"]},
-      counts_per_m: {matches: ["Counts Per M"]},
+      lab: {},
+      flurometer: {},
+      point: {},
+      sn: { matches: ["Serial Number", "sn"] },
+      calibration_date: { matches: ["Calibration Date"] },
+      distance_actual: { matches: ["Distance Actual"] },
+      avg_counts: { matches: ["Average Counts"] },
+      counts_per_m: { matches: ["Counts Per M"] },
       percent_deviation: {},
       calibration_coefficient: {},
     }
   },
 
-  FLUROMETER_CALIBRATION_DETAIL:{
+  FLUROMETER_CALIBRATION_DETAIL: {
     ...defaultHeaders,
     ...{
       _output: "FLUROMETER_CALIBRATION_DETAIL",
-      calibration_date: {matches: ["date"]},
-      lab:{},
-      fluorometer:{},
-      point:{},
-      chl_stock_conc_ug_L:{},
-      mL_standard_in_acetone:{},
-      volume_acetone_mL:{},
-      total_volume:{},
-      chl_standard_conc_ug_L:{},
-      blank_before_acid:{},
-      blank_after_acid:{},
-      rb_raw:{},
-      rb_blank_subtracted:{},
-      ra_raw:{},
-      ra_blank_subtracted:{},
-      fm_blank_subtracted:{},
-      fm_flag:{},
-      slope:{},
-      avg_fm:{},
-      r2:{},
-      comments:{},
+      calibration_date: { matches: ["date"] },
+      lab: {},
+      fluorometer: {},
+      point: {},
+      chl_stock_conc_ug_L: {},
+      mL_standard_in_acetone: {},
+      volume_acetone_mL: {},
+      total_volume: {},
+      chl_standard_conc_ug_L: {},
+      blank_before_acid: {},
+      blank_after_acid: {},
+      rb_raw: {},
+      rb_blank_subtracted: {},
+      ra_raw: {},
+      ra_blank_subtracted: {},
+      fm_blank_subtracted: {},
+      fm_flag: {},
+      slope: {},
+      avg_fm: {},
+      r2: {},
+      comments: {},
     }
   },
 
@@ -1762,11 +1762,56 @@ const definitions = {
       },
       pm_uid: {},
       pmt_uid: {},
-      count: {},
-      count_sm: {},
       sample_splits: {},
       sub_sample: {},
-      taxon: {},
+      dfo_id: {},
+      hakai_microscopy_id: {},
+      phylum: {},
+      class: {},
+      order: {},
+      family: {},
+      name: {},
+      abundance_per_m3: {
+        matches: ["Abundance (#/m3)"],
+      },
+      biomass_mg_per_m3: {
+        matches: ["Biomass (mg/m3)"],
+      },
+      number_of_species: {},
+      station_diversity: {},
+      station_equitability: {},
+    },
+  },
+
+  ZOOPLANKTON_MICROSCOPY_TAXA: {
+    ...defaultZooplanktonHeaders,
+    ...{
+      _output: "Zooplankton",
+      _joiobj: Joi.object(),
+      filter_no: {},
+      hakai_sample_id: {
+        matches: ["Hakai ID"],
+        joi: Joi.alternatives([
+          Joi.string().regex(/^[\w\d_-]+$/, { name: "Sample ID" }),
+          Joi.number(),
+        ]),
+      },
+      dfo_id: {},
+      hakai_microscopy_id: {},
+      phylum: {},
+      class: {},
+      order: {},
+      family: {},
+      name: {},
+      abundance_per_m3: {
+        matches: ["Abundance (#/m3)"],
+      },
+      biomass_mg_per_m3: {
+        matches: ["Biomass (mg/m3)"],
+      },
+      number_of_species: {},
+      station_diversity: {},
+      station_equitability: {},
     },
   },
 
@@ -1874,15 +1919,15 @@ const definitions = {
       },
       flow_meter_flag2: {
         output: "Flow_Meter_Flag2",
-        matches: ["Flow Meter Flag 2","flowmeter_flag2","flow_flag2"],
+        matches: ["Flow Meter Flag 2", "flowmeter_flag2", "flow_flag2"],
       },
       flow_meter_volume2: {
         output: "Flow_meter_volume2",
-        matches: ["Flow_Meter_Volume_2", "Flow Meter Volume 2","flowmeter_volume2"],
+        matches: ["Flow_Meter_Volume_2", "Flow Meter Volume 2", "flowmeter_volume2"],
       },
       flow_meter_volume_flag2: {
         output: "Flow_Meter_Volume_Flag2",
-        matches: ["Flow Meter Volume Flag 2","flowmeter_volume_flag2"],
+        matches: ["Flow Meter Volume Flag 2", "flowmeter_volume_flag2"],
       },
       flowmeter_ratio: {
         matches: ["Flow Meter Ratio"],
@@ -2732,7 +2777,7 @@ const definitions = {
     lab_staff: {},
     species: {},
     standard_length: { matches: ["Standard Length (mm)"] },
-    lice_id_protocol: { matches:["Lice ID Protocol"]},
+    lice_id_protocol: { matches: ["Lice ID Protocol"] },
     lice_collection_protocol: { matches: ["Lice Collection Protocol"] }
   },
   JSP_SEINE: {
@@ -2947,7 +2992,7 @@ const definitions = {
   },
   CTD_QC: {
     ...defaultHeaders,
-     _joiobj: Joi.object(),
+    _joiobj: Joi.object(),
     _output: "ctd_qc",
     target_depth: {
       matches: ["Target Depth", "depth", "target depth (m)", "target_depth_m"],
