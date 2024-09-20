@@ -196,7 +196,7 @@ const defaultHeaders = {
   analyzing_lab: {
     matches: ["Analyzing Lab", "Analyzing lab"],
     joi: Joi.string()
-      .regex(/^[\w\d_-]+$/)
+      .regex(/^[\w\d_- ]+$/)
       .invalid(["na", "nd", "n/d", "n/a"])
       .insensitive(),
   },
