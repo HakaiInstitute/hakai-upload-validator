@@ -2294,6 +2294,10 @@ const definitions = {
       density: {
         matches: ["density_range", "density range"],
       },
+      sheath_length_cm: {
+        output: "Sheath_length__cm_",
+        matches: ["sheath_length_cm", "Sheath Length (cm)"],
+      },
       substrate: {},
       patchiness: {},
       adj_habitat_1: {},
@@ -2632,6 +2636,22 @@ const definitions = {
     _output: "seagrass_density_observations",
     canopy_height_cm: {
       matches: ["canopy height (cm)"],
+    },
+    flowering_quadrat_density: {
+      output: "Zostera_flowering_quadrat_density",
+      matches: ["flowering_quadrat_density", "Zostera flowering quadrat density"]
+    },
+    quadrat_percent_cover: {
+          output: "zostera_quadrat_percent_cover",
+          matches: ["quadrat_percent_cover", "Zostera quadrat percent cover"]
+    },
+    phyllospadix_present: {
+          output: "Phyllospadix_present_",
+          matches: ["phyllospadix_present", "Phyllospadix present"]
+    },
+    phyllospadix_quadrat_density: {
+          output: "Phyllospadix_quadrat_density",
+          matches: ["phyllospadix_quadrat_density", "Phyllospadix Quadrat Density"]
     },
     notes: {},
   },
