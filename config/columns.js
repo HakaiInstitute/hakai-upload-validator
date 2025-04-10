@@ -2283,6 +2283,9 @@ const definitions = {
       sample_collected: {},
       vegetation_1: {},
       vegetation_2: {},
+      flowering_shoots: {},
+      vegetation_1_percent_cover: {},
+      vegetation_2_percent_cover: {},
       notes: {},
     },
   },
@@ -2636,6 +2639,9 @@ const definitions = {
     _output: "seagrass_density_observations",
     canopy_height_cm: {
       matches: ["canopy height (cm)"],
+    },
+    flowering_shoots: {
+      output: "Flowering_Shoots"
     },
     flowering_quadrat_density: {
       output: "Zostera_flowering_quadrat_density",
