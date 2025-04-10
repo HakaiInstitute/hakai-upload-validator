@@ -2641,7 +2641,8 @@ const definitions = {
       matches: ["canopy height (cm)"],
     },
     flowering_shoots: {
-      output: "Flowering_Shoots"
+      output: "Flowering_Shoots",
+      matches: ["flowering_shoots", "Flowering Shoots"]
     },
     flowering_quadrat_density: {
       output: "Zostera_flowering_quadrat_density",
