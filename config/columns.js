@@ -2363,7 +2363,14 @@ const definitions = {
         joi: Joi.number(),
       },
       lab_date: {},
-      seagrass_biomass_notes: {},
+      seagrass_biomass_notes: {}, 
+      bag_uid: {
+        level: 1,
+        joi: Joi.alternatives([
+          Joi.string().regex(/^[\w\d_-]+$/, { name: "Sample ID" }),
+          Joi.number(),
+        ]),
+      },
     },
   },
 
@@ -2431,6 +2438,13 @@ const definitions = {
         matches: ["lab date"],
       },
       mesograzer_notes: {},
+      bag_uid: {
+        level: 1,
+        joi: Joi.alternatives([
+          Joi.string().regex(/^[\w\d_-]+$/, { name: "Sample ID" }),
+          Joi.number(),
+        ]),
+      },
     },
   },
 
@@ -2473,6 +2487,13 @@ const definitions = {
       },
       lab_date: {},
       macroalgae_notes: {},
+      bag_uid: {
+        level: 1,
+        joi: Joi.alternatives([
+          Joi.string().regex(/^[\w\d_-]+$/, { name: "Sample ID" }),
+          Joi.number(),
+        ]),
+      },
     },
   },
 
@@ -2541,6 +2562,13 @@ const definitions = {
       },
       lab_date: {},
       epiphyte_notes: {},
+      bag_uid: {
+        level: 1,
+        joi: Joi.alternatives([
+          Joi.string().regex(/^[\w\d_-]+$/, { name: "Sample ID" }),
+          Joi.number(),
+        ]),
+      },      
     },
   },
 
@@ -2620,6 +2648,13 @@ const definitions = {
     },
     lab_date: {},
     filtered_epiphyte_notes: {},
+    bag_uid: {
+      level: 1,
+      joi: Joi.alternatives([
+        Joi.string().regex(/^[\w\d_-]+$/, { name: "Sample ID" }),
+        Joi.number(),
+      ]),
+    },
   },
 
   MG_FISH: {
