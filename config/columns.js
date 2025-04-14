@@ -570,7 +570,7 @@ const defaultMarineGEO = {
     hakai_sample_id: {
       matches: ["Hakai ID"],
       joi: Joi.alternatives([
-        Joi.string().regex(/^[\w\d_-]+$/, { name: "Sample ID" }),
+        Joi.string().regex(/^[\w\d_- ]+$/, { name: "Sample ID" }),
         Joi.number(),
       ]),
     },
@@ -584,7 +584,7 @@ const defaultMarineGEO = {
     },
     bag_uid: {
       joi: Joi.alternatives([
-        Joi.string().regex(/^[\w\d_-]+$/, { name: "Sample ID" }),
+        Joi.string().regex(/^[\w\d_- ]+$/, { name: "Sample ID" }),
         Joi.number(),
       ]),
     },
@@ -1792,7 +1792,7 @@ const definitions = {
       hakai_sample_id: {
         matches: ["Hakai ID"],
         joi: Joi.alternatives([
-          Joi.string().regex(/^[\w\d_-]+$/, { name: "Sample ID" }),
+          Joi.string().regex(/^[\w\d_- ]+$/, { name: "Sample ID" }),
           Joi.number(),
         ]),
       },
@@ -2291,6 +2291,7 @@ const definitions = {
   },
 
   MG_SEAGRASS_BIOMASS: {
+    // _joiobj: Joi.object().or("sample_uid", "seagrass_habitat_id", "bag_uid"),
     ...defaultMarineGEO,
     ...{
       _output: "seagrass_list",
@@ -2312,7 +2313,7 @@ const definitions = {
       result_uid: {
         matches: ["hakai_sample_id", "Hakai ID"],
         joi: Joi.alternatives([
-          Joi.string().regex(/^[\w\d_-]+$/, { name: "Sample ID" }),
+          Joi.string().regex(/^[\w\d_- ]+$/, { name: "Sample ID" }),
           Joi.number(),
         ]),
       },
@@ -2367,7 +2368,7 @@ const definitions = {
       bag_uid: {
         level: 1,
         joi: Joi.alternatives([
-          Joi.string().regex(/^[\w\d_-]+$/, { name: "Sample ID" }),
+          Joi.string().regex(/^[\w\d_- ]+$/, { name: "Sample ID" }),
           Joi.number(),
         ]),
       },
@@ -2392,7 +2393,7 @@ const definitions = {
       result_uid: {
         matches: ["hakai_sample_id", "Hakai ID"],
         joi: Joi.alternatives([
-          Joi.string().regex(/^[\w\d_-]+$/, { name: "Sample ID" }),
+          Joi.string().regex(/^[\w\d_- ]+$/, { name: "Sample ID" }),
           Joi.number(),
         ]),
       },
@@ -2441,7 +2442,7 @@ const definitions = {
       bag_uid: {
         level: 1,
         joi: Joi.alternatives([
-          Joi.string().regex(/^[\w\d_-]+$/, { name: "Sample ID" }),
+          Joi.string().regex(/^[\w\d_- ]+$/, { name: "Sample ID" }),
           Joi.number(),
         ]),
       },
@@ -2468,7 +2469,7 @@ const definitions = {
       result_uid: {
         matches: ["hakai_sample_id", "Hakai ID"],
         joi: Joi.alternatives([
-          Joi.string().regex(/^[\w\d_-]+$/, { name: "Sample ID" }),
+          Joi.string().regex(/^[\w\d_- ]+$/, { name: "Sample ID" }),
           Joi.number(),
         ]),
       },
@@ -2490,7 +2491,7 @@ const definitions = {
       bag_uid: {
         level: 1,
         joi: Joi.alternatives([
-          Joi.string().regex(/^[\w\d_-]+$/, { name: "Sample ID" }),
+          Joi.string().regex(/^[\w\d_- ]+$/, { name: "Sample ID" }),
           Joi.number(),
         ]),
       },
@@ -2515,7 +2516,7 @@ const definitions = {
       result_uid: {
         matches: ["hakai_sample_id", "Hakai ID"],
         joi: Joi.alternatives([
-          Joi.string().regex(/^[\w\d_-]+$/, { name: "Sample ID" }),
+          Joi.string().regex(/^[\w\d_- ]+$/, { name: "Sample ID" }),
           Joi.number(),
         ]),
       },
@@ -2565,7 +2566,7 @@ const definitions = {
       bag_uid: {
         level: 1,
         joi: Joi.alternatives([
-          Joi.string().regex(/^[\w\d_-]+$/, { name: "Sample ID" }),
+          Joi.string().regex(/^[\w\d_- ]+$/, { name: "Sample ID" }),
           Joi.number(),
         ]),
       },      
@@ -2580,7 +2581,7 @@ const definitions = {
         output: "bag_uid",
         matches: ["Hakai ID"],
         joi: Joi.alternatives([
-          Joi.string().regex(/^[\w\d_-]+$/, { name: "Sample ID" }),
+          Joi.string().regex(/^[\w\d_- ]+$/, { name: "Sample ID" }),
           Joi.number(),
         ]),
       },
@@ -2625,7 +2626,7 @@ const definitions = {
     result_uid: {
       matches: ["result uid", "hakai_sample_id", "Hakai ID"],
       joi: Joi.alternatives([
-        Joi.string().regex(/^[\w\d_-]+$/, { name: "Sample ID" }),
+        Joi.string().regex(/^[\w\d_- ]+$/, { name: "Sample ID" }),
         Joi.number(),
       ]),
     },
@@ -2651,7 +2652,7 @@ const definitions = {
     bag_uid: {
       level: 1,
       joi: Joi.alternatives([
-        Joi.string().regex(/^[\w\d_-]+$/, { name: "Sample ID" }),
+        Joi.string().regex(/^[\w\d_- ]+$/, { name: "Sample ID" }),
         Joi.number(),
       ]),
     },
