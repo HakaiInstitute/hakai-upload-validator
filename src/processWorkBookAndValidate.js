@@ -1,6 +1,6 @@
 const moment = require("moment-timezone");
 const uuidv4 = require("uuid/v4");
-const Joi = require("joi-browser");
+const Joi = require("joi");
 const uniqueSets = require("../config/uniqueSets");
 
 const columnSchema = require("../config/columns");

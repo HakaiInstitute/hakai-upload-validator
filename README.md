@@ -18,7 +18,8 @@ JSON, and then formats for entry into the database.
   object
 
 This project is to be used for validation in both browser and server, so
-packages that can run on both are being used, Eg. joi-browser instead of joi.
+packages that can run on both are being used. Noet that as of v16 joi now 
+supports browsers nativly.
 
 ## The URL where this code is deployed
 as this package is used by both the hakai front end portal and api services it is included any where these services are running. currently that is on

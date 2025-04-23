@@ -1,4 +1,4 @@
-const Joi = require("joi-browser");
+const Joi = require("joi");
 
 const defaultHeaders = {
   _joiobj: Joi.object().and("date", "site_id", "sampling_bout"),
@@ -56,7 +56,7 @@ const defaultHeaders = {
     level: 1,
     matches: ["Freshwater/Marine", "FRESH/MARINE"],
     joi: Joi.string()
-      .valid(["Freshwater", "Marine", "Snow", "Ice", "F", "M", "S", "I"])
+      .valid("Freshwater", "Marine", "Snow", "Ice", "F", "M", "S", "I")
       .insensitive(),
   },
   location: {
@@ -100,7 +100,7 @@ const defaultHeaders = {
     output: "sample_id_other",
     matches: ["Project Specific ID", "project_sample_id"],
     joi: Joi.string()
-      .invalid(["na", "nd", "n/d", "n/a"])
+      .invalid("na", "nd", "n/d", "n/a")
       .insensitive(),
   },
   hakai_id: {
@@ -109,7 +109,7 @@ const defaultHeaders = {
     joi: Joi.string()
       .regex(/^[\w\d.:_-]+$/)
       .min(3)
-      .invalid(["na", "nd", "n/d", "n/a"])
+      .invalid("na", "nd", "n/d", "n/a")
       .insensitive(),
   },
   depth: {
@@ -197,7 +197,7 @@ const defaultHeaders = {
     matches: ["Analyzing Lab", "Analyzing lab"],
     joi: Joi.string()
       .regex(/^[\w\d\s_-]+$/)
-      .invalid(["na", "nd", "n/d", "n/a"])
+      .invalid("na", "nd", "n/d", "n/a")
       .insensitive(),
   },
   row_flag: {
@@ -307,7 +307,7 @@ const defaultFilters = {
         Joi.string()
           .regex(/^[\w\d_-]+$/)
           .min(3)
-          .invalid(["na", "nd", "n/d", "n/a"])
+          .invalid("na", "nd", "n/d", "n/a")
           .insensitive(),
       ),
     },
@@ -459,7 +459,7 @@ const defaultZooplanktonHeaders = {
       joi: Joi.alternatives([
         Joi.number()
           .integer()
-          .valid([4000, 2000, 1000, 500, 250, 125, 64])
+          .valid(4000, 2000, 1000, 500, 250, 125, 64)
           .when("process", { is: "Size Fraction", then: Joi.required() }),
         Joi.string().valid("total"),
       ]),
@@ -644,7 +644,7 @@ const definitions = {
       joi: Joi.string()
         .regex(/^[\w\d_-\s:]+$/)
         .min(3)
-        .invalid(["na", "nd", "n/d", "n/a"])
+        .invalid("na", "nd", "n/d", "n/a")
         .insensitive(),
     },
     event_notes: {
@@ -779,7 +779,7 @@ const definitions = {
         joi: Joi.string()
           .regex(/^[\w\d\s:._-]+$/)
           .min(3)
-          .invalid(["na", "nd", "n/d", "n/a"])
+          .invalid("na", "nd", "n/d", "n/a")
           .insensitive(),
       },
       ysi_unit: {
@@ -865,7 +865,7 @@ const definitions = {
         joi: Joi.string()
           .regex(/^[\w\d\s:._-]+$/)
           .min(3)
-          .invalid(["na", "nd", "n/d", "n/a"])
+          .invalid("na", "nd", "n/d", "n/a")
           .insensitive(),
       },
       ysi_unit: {
@@ -998,7 +998,7 @@ const definitions = {
         joi: Joi.string()
           .regex(/^[\w\d\s._-]+$/)
           .min(3)
-          .invalid(["na", "nd", "n/d", "n/a"])
+          .invalid("na", "nd", "n/d", "n/a")
           .insensitive(),
       },
       date_opened: {
@@ -1470,7 +1470,7 @@ const definitions = {
         joi: Joi.alternatives([
           Joi.number()
             .integer()
-            .valid([4000, 2000, 1000, 500, 250, 125, 64])
+            .valid(4000, 2000, 1000, 500, 250, 125, 64)
             .when("process", { is: "Size Fraction", then: Joi.required() }),
           Joi.string().valid("total"),
         ]),
@@ -1614,6 +1614,7 @@ const definitions = {
       counts_per_m: { matches: ["Counts Per M"] },
       percent_deviation: {},
       calibration_coefficient: {},
+      distance_calculated: {},
     }
   },
 
@@ -1757,7 +1758,7 @@ const definitions = {
         joi: Joi.string()
           .regex(/^[\w\d_-]+$/)
           .min(3)
-          .invalid(["na", "nd", "n/d", "n/a"])
+          .invalid("na", "nd", "n/d", "n/a")
           .insensitive(),
       },
       pm_uid: {},
@@ -1821,13 +1822,17 @@ const definitions = {
       _output: "Zooplankton_tow",
       _joiobj: defaultHeaders._joiobj.concat(
         Joi.object()
-          .and("flow_meter", "flow_in", "flow_out")
-          .and(
-            "net_diameter_cm",
-            "net_length_cm",
-            "net_mesh_size_um",
-            "net_type",
-          ),
+        .and(
+          "net_diameter_cm",
+          "net_length_cm",
+          "net_mesh_size_um",
+          "net_type",
+        )
+        .when(
+          Joi.object({ flow_meter: "NO FLOWMETER" }).unknown(), {
+          then: Joi.object().and("flow_meter"),
+          otherwise: Joi.object().and("flow_meter", "flow_in", "flow_out")
+        })
         // ".and('tow_duration','tow_start_time','tow_end_time')"
       ),
       tow_type: {
@@ -1987,6 +1992,8 @@ const definitions = {
         output: "Net_Notes",
         matches: ["Comments", "comments", "comment"],
       },
+      net_1_counts_per_m: {},
+      net_2_counts_per_m: {},
     },
   },
 
@@ -2045,7 +2052,7 @@ const definitions = {
         joi: Joi.string()
           .regex(/^[\w\d_-]+$/)
           .min(3)
-          .invalid(["na", "nd", "n/d", "n/a"])
+          .invalid("na", "nd", "n/d", "n/a")
           .insensitive(),
       },
       process: { // This is added here to overwrite the default global. process is not required for zooplankton_biomass
@@ -2719,7 +2726,7 @@ const definitions = {
       joi: Joi.string()
         .regex(/^[\w\d\s:._-]+$/)
         .min(3)
-        .invalid(["na", "nd", "n/d", "n/a"])
+        .invalid("na", "nd", "n/d", "n/a")
         .insensitive(),
     },
     solo_unit_sn: {
@@ -3073,95 +3080,95 @@ const definitions = {
     conductivity_flag: {
       output: "conductivity_flag",
       matches: ["Conductivity Flag"],
-      joi: Joi.string().valid(["AV", "SVC", "SVD", "NA"]),
+      joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
 
     },
     temperature_flag: {
       output: "temperature_flag",
       matches: ["Temperature Flag"],
-      joi: Joi.string().valid(["AV", "SVC", "SVD", "NA"]),
+      joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
 
     },
     depth_flag: {
       output: "depth_flag",
       matches: ["Depth Flag"],
-      joi: Joi.string().valid(["AV", "SVC", "SVD", "NA"]),
+      joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
     },
     pressure_flag: {
       output: "pressure_flag",
       matches: ["Pressure Flag"],
-      joi: Joi.string().valid(["AV", "SVC", "SVD", "NA"]),
+      joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
     },
     par_flag: {
       output: "par_flag",
       matches: ["PAR Flag"],
-      joi: Joi.string().valid(["AV", "SVC", "SVD", "NA"]),
+      joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
     },
     flc_flag: {
       output: "flc_flag",
       matches: ["FLC Flag"],
-      joi: Joi.string().valid(["AV", "SVC", "SVD", "NA"]),
+      joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
     },
     turbidity_flag: {
       output: "turbidity_flag",
       matches: ["Turbidity Flag"],
-      joi: Joi.string().valid(["AV", "SVC", "SVD", "NA"]),
+      joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
     },
     salinity_flag: {
       output: "salinity_flag",
       matches: ["Salinity Flag"],
-      joi: Joi.string().valid(["AV", "SVC", "SVD", "NA"]),
+      joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
     },
     spec_cond_flag: {
       output: "spec_cond_flag",
       matches: ["Specific Conductivity Flag"],
-      joi: Joi.string().valid(["AV", "SVC", "SVD", "NA"]),
+      joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
 
     },
     dissolved_oxygen_ml_l_flag: {
       output: "dissolved_oxygen_ml_l_flag",
       matches: ["Dissolved Oxygen (mL/L) Flag"],
-      joi: Joi.string().valid(["AV", "SVC", "SVD", "NA"]),
+      joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
     },
     dissolved_oxygen_percent_flag: {
       output: "dissolved_oxygen_percent_flag",
       matches: ["Dissolved Oxygen (%) Flag"],
-      joi: Joi.string().valid(["AV", "SVC", "SVD", "NA"]),
+      joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
     },
     descent_rate_flag: {
       output: "descent_rate_flag",
       matches: ["Descent Rate Flag"],
-      joi: Joi.string().valid(["AV", "SVC", "SVD", "NA"]),
+      joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
     },
     absolute_salinity_flag: {
       output: "absolute_salinity_flag",
       matches: ["Absolute Salinity Flag"],
-      joi: Joi.string().valid(["AV", "SVC", "SVD", "NA"]),
+      joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
     },
     conservative_temperature_flag: {
       output: "conservative_temperature_flag",
       matches: ["Conservative Temperature Flag"],
-      joi: Joi.string().valid(["AV", "SVC", "SVD", "NA"]),
+      joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
     },
     density_flag: {
       output: "density_flag",
       matches: ["Density Flag"],
-      joi: Joi.string().valid(["AV", "SVC", "SVD", "NA"]),
+      joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
     },
     sos_un_flag: {
       output: "sos_un_flag",
       matches: ["SOS UN Flag"],
-      joi: Joi.string().valid(["AV", "SVC", "SVD", "NA"]),
+      joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
     },
     c_star_at_flag: {
       output: "c_star_at_flag",
       matches: ["Beam Attenuation Flag"],
-      joi: Joi.string().valid(["AV", "SVC", "SVD", "NA"]),
+      joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
     },
     rinko_do_ml_l_flag: {
       output: "rinko_do_ml_l_flag",
       matches: ["Rinko Dissolved Oxygen (mL/L) Flag"],
-      joi: Joi.string().valid(["AV", "SVC", "SVD", "NA"]),
+      joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
     },
   },
   // don't update disance from sample site, which is calculated from lat long
