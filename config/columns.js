@@ -2406,6 +2406,12 @@ const definitions = {
       },
       species: {},
       quantity: {},
+      quantity_flag: {},
+      avg_length_flag: {},
+      min_length_flag: {},
+      max_length_flag: {},
+      foil_weight_flag: {},
+      foil_dry_sample_weight_flag: {},
       avg_length_mm: {
         output: "avg_length",
         matches: [
