@@ -2278,6 +2278,7 @@ const definitions = {
         matches: ["hakai_sample_id", "Hakai ID"],
         joi: Joi.alternatives([
           Joi.string().regex(/^[ \.\w\d_-]+$/, { name: "Sample ID" }),
+          Joi.number(),
         ]),
       },
       density: {
