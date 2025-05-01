@@ -1822,17 +1822,17 @@ const definitions = {
       _output: "Zooplankton_tow",
       _joiobj: defaultHeaders._joiobj.concat(
         Joi.object()
-        .and(
-          "net_diameter_cm",
-          "net_length_cm",
-          "net_mesh_size_um",
-          "net_type",
-        )
-        .when(
-          Joi.object({ flow_meter: "NO FLOWMETER" }).unknown(), {
-          then: Joi.object().and("flow_meter"),
-          otherwise: Joi.object().and("flow_meter", "flow_in", "flow_out")
-        })
+          .and(
+            "net_diameter_cm",
+            "net_length_cm",
+            "net_mesh_size_um",
+            "net_type",
+          )
+          .when(
+            Joi.object({ flow_meter: "NO FLOWMETER" }).unknown(), {
+            then: Joi.object().and("flow_meter"),
+            otherwise: Joi.object().and("flow_meter", "flow_in", "flow_out")
+          })
         // ".and('tow_duration','tow_start_time','tow_end_time')"
       ),
       tow_type: {
@@ -2303,6 +2303,9 @@ const definitions = {
     ...defaultMarineGEO,
     ...{
       _output: "seagrass_list",
+      _joiobj: defaultMarineGEO._joiobj.concat(
+        Joi.object().or("seagrass_habitat_id", "bag_uid", "sample_uid")
+      ),
       density: {
         matches: ["density_range", "density range"],
       },
@@ -2372,7 +2375,7 @@ const definitions = {
         joi: Joi.number(),
       },
       lab_date: {},
-      seagrass_biomass_notes: {}, 
+      seagrass_biomass_notes: {},
       bag_uid: {
         level: 1,
         joi: Joi.alternatives([
@@ -2387,6 +2390,9 @@ const definitions = {
     ...defaultMarineGEO,
     ...{
       _output: "mesograzers_list",
+      _joiobj: defaultMarineGEO._joiobj.concat(
+        Joi.object().or("seagrass_habitat_id", "bag_uid", "sample_uid")
+      ),
       density: {
         matches: ["density_range", "density range"],
       },
@@ -2403,7 +2409,7 @@ const definitions = {
         joi: Joi.alternatives([
           Joi.string().regex(/^[ \w\d_-]+$/, { name: "Sample ID" }),
           Joi.number(),
-        ]),
+        ]).required(),
       },
       species: {},
       quantity: {},
@@ -2467,6 +2473,9 @@ const definitions = {
     ...defaultMarineGEO,
     ...{
       _output: "macroalgae_list",
+      _joiobj: defaultMarineGEO._joiobj.concat(
+        Joi.object().or("seagrass_habitat_id", "bag_uid", "sample_uid")
+      ),
       density: {
         matches: ["density_range", "density range"],
       },
@@ -2516,6 +2525,9 @@ const definitions = {
     ...defaultMarineGEO,
     ...{
       _output: "epiphytes_list",
+      _joiobj: defaultMarineGEO._joiobj.concat(
+        Joi.object().or("seagrass_habitat_id", "bag_uid", "sample_uid")
+      ),
       density: {
         matches: ["density_range", "density range"],
       },
@@ -2583,7 +2595,7 @@ const definitions = {
           Joi.string().regex(/^[ \.\w\d_-]+$/, { name: "Sample ID" }),
           Joi.number(),
         ]),
-      },      
+      },
     },
   },
 
@@ -2623,420 +2635,144 @@ const definitions = {
 
   MG_FILTERED_EPIPHYTES: {
     ...defaultMarineGEO,
-    _output: "filtered_epiphytes_list",
-    density: {
-      matches: ["density_range", "density range"],
-    },
-    substrate: {},
-    patchiness: {},
-    adj_habitat_1: {},
-    adj_habitat_2: {},
-    sample_collected: {},
-    vegetation_1: {},
-    vegetation_2: {},
-    habitat_notes: {
-      matches: ["habitat_notes", "habitat notes"],
-    },
-    result_uid: {
-      matches: ["result uid", "hakai_sample_id", "Hakai ID"],
-      joi: Joi.alternatives([
-        Joi.string().regex(/^[ \w\d_-]+$/, { name: "Sample ID" }),
-        Joi.number(),
-      ]),
-    },
-    foil_filter_weight_mg: {
-      matches: [
-        "foil filter weight mg",
-        "foil filter weight (mg)",
-        "foil and filter weight (mg)",
-      ],
-    },
-    foil_filter_dry_sample_weight_mg: {
-      matches: [
-        "foil filter dry sample weight mg",
-        "foil filter dry sample weight (mg)",
-        "foil dry sample weight (mg)",
-      ],
-    },
-    dry_sample_weight_mg: {
-      matches: ["dry sample weight (mg)"],
-    },
-    lab_date: {},
-    filtered_epiphyte_notes: {},
-    bag_uid: {
-      level: 1,
-      joi: Joi.alternatives([
-        Joi.string().regex(/^[ \.\w\d_-]+$/, { name: "Sample ID" }),
-        Joi.number(),
-      ]),
-    },
+    ...{
+      _output: "filtered_epiphytes_list",
+      _joiobj: defaultMarineGEO._joiobj.concat(
+        Joi.object().or("seagrass_habitat_id", "bag_uid", "sample_uid")
+      ),
+      density: {
+        matches: ["density_range", "density range"],
+      },
+      substrate: {},
+      patchiness: {},
+      adj_habitat_1: {},
+      adj_habitat_2: {},
+      sample_collected: {},
+      vegetation_1: {},
+      vegetation_2: {},
+      habitat_notes: {
+        matches: ["habitat_notes", "habitat notes"],
+      },
+      result_uid: {
+        matches: ["result uid", "hakai_sample_id", "Hakai ID"],
+        joi: Joi.alternatives([
+          Joi.string().regex(/^[ \w\d_-]+$/, { name: "Sample ID" }),
+          Joi.number(),
+        ]),
+      },
+      foil_filter_weight_mg: {
+        matches: [
+          "foil filter weight mg",
+          "foil filter weight (mg)",
+          "foil and filter weight (mg)",
+        ],
+      },
+      foil_filter_dry_sample_weight_mg: {
+        matches: [
+          "foil filter dry sample weight mg",
+          "foil filter dry sample weight (mg)",
+          "foil dry sample weight (mg)",
+        ],
+      },
+      dry_sample_weight_mg: {
+        matches: ["dry sample weight (mg)"],
+      },
+      lab_date: {},
+      filtered_epiphyte_notes: {},
+      bag_uid: {
+        level: 1,
+        joi: Joi.alternatives([
+          Joi.string().regex(/^[ \.\w\d_-]+$/, { name: "Sample ID" }),
+          Joi.number(),
+        ]),
+      },
+    }
   },
 
   MG_FISH: {
     ...defaultMarineGEO,
-    _output: "fish_observations",
-    species: {},
-    quantity: {},
-    length_cm: {
-      matches: ["length (cm)"],
-    },
-    estimated_quantity: {},
-    notes: {},
+    ...{
+      _output: "fish_observations",
+      species: {},
+      quantity: {},
+      length_cm: {
+        matches: ["length (cm)"],
+      },
+      estimated_quantity: {},
+      notes: {},
+    }
   },
 
   MG_SEAGRASS_DENSITY: {
     ...defaultMarineGEO,
-    _output: "seagrass_density_observations",
-    canopy_height_cm: {
-      matches: ["canopy height (cm)"],
+    ...{
+      _output: "seagrass_density_observations",
+      canopy_height_cm: {
+        matches: ["canopy height (cm)"],
+      },
+      flowering_shoots: {
+        output: "Flowering_Shoots",
+        matches: ["flowering_shoots", "Flowering Shoots"]
+      },
+      flowering_quadrat_density: {
+        output: "Zostera_flowering_quadrat_density",
+        matches: ["flowering_quadrat_density", "Zostera flowering quadrat density"]
+      },
+      quadrat_percent_cover: {
+        output: "zostera_quadrat_percent_cover",
+        matches: ["quadrat_percent_cover", "Zostera quadrat percent cover"]
+      },
+      phyllospadix_present: {
+        output: "Phyllospadix_present_",
+        matches: ["phyllospadix_present", "Phyllospadix present"]
+      },
+      phyllospadix_quadrat_density: {
+        output: "Phyllospadix_quadrat_density",
+        matches: ["phyllospadix_quadrat_density", "Phyllospadix Quadrat Density"]
+      },
+      notes: {},
     },
-    flowering_shoots: {
-      output: "Flowering_Shoots",
-      matches: ["flowering_shoots", "Flowering Shoots"]
-    },
-    flowering_quadrat_density: {
-      output: "Zostera_flowering_quadrat_density",
-      matches: ["flowering_quadrat_density", "Zostera flowering quadrat density"]
-    },
-    quadrat_percent_cover: {
-          output: "zostera_quadrat_percent_cover",
-          matches: ["quadrat_percent_cover", "Zostera quadrat percent cover"]
-    },
-    phyllospadix_present: {
-          output: "Phyllospadix_present_",
-          matches: ["phyllospadix_present", "Phyllospadix present"]
-    },
-    phyllospadix_quadrat_density: {
-          output: "Phyllospadix_quadrat_density",
-          matches: ["phyllospadix_quadrat_density", "Phyllospadix Quadrat Density"]
-    },
-    notes: {},
   },
 
   MG_INVERTS: {
     ...defaultMarineGEO,
-    _output: "invertebrates_list",
-    species: {},
-    quantity: {},
-    size_cm: {
-      matches: ["size (cm)"],
-    },
-    notes: {},
+    ...{
+      _output: "invertebrates_list",
+      species: {},
+      quantity: {},
+      size_cm: {
+        matches: ["size (cm)"],
+      },
+      notes: {},
+    }
   },
 
   SOLO_DROPS: {
     ...defaultHeaders,
-    _output: "Niskin_and_Solo_ID_s",
-    solo_hakai_id: {
-      output: "_1__Sample_ID",
-      matches: ["Hakai ID", "hakai_sample_id"],
-      joi: Joi.string()
-        .regex(/^[\w\d\s:._-]+$/)
-        .min(3)
-        .invalid("na", "nd", "n/d", "n/a")
-        .insensitive(),
+    ...{
+      _output: "Niskin_and_Solo_ID_s",
+      solo_hakai_id: {
+        output: "_1__Sample_ID",
+        matches: ["Hakai ID", "hakai_sample_id"],
+        joi: Joi.string()
+          .regex(/^[\w\d\s:._-]+$/)
+          .min(3)
+          .invalid("na", "nd", "n/d", "n/a")
+          .insensitive(),
+      },
+      solo_unit_sn: {
+        output: "Solo_ID",
+        matches: ["solo unit"],
+      },
+      drop_type: {},
+      target_depth_m: {
+        output: "Depth",
+        matches: ["Target Depth", "depth", "target depth (m)", "target_depth_m"],
+        joi: Joi.number().min(0),
+      },
     },
-    solo_unit_sn: {
-      output: "Solo_ID",
-      matches: ["solo unit"],
-    },
-    drop_type: {},
-    target_depth_m: {
-      output: "Depth",
-      matches: ["Target Depth", "depth", "target depth (m)", "target_depth_m"],
-      joi: Joi.number().min(0),
-    },
   },
-  JSP_LICE: {
-    ...defaultJSPHeaders,
-    _output: "jsp_lice",
-    cal_cope_field: { matches: ["Caligus Copepodid (field)"] },
-    lep_cope_field: { matches: ["Lep Copepodid (field)"] },
-    chal_a_field: { matches: ["Chalimus A (field)"] },
-    chal_b_field: { matches: ["Chalibus B (field)"] },
-    cal_mot_field: { matches: ["Caligus Motile (field)"] },
-    cgf_field: { matches: ["Caligus Gravid Female (field)"] },
-    lpam_field: { matches: ["Lep Pre-adult Male (field)"] },
-    lpaf_field: { matches: ["Lep Pre-adult Female (field)"] },
-    lam_field: { matches: ["Lep Adult Male (field)"] },
-    laf_field: { matches: ["Lep Adult Female (field)"] },
-    lgf_field: { matches: ["Lep Gravid Female (field)"] },
-    unid_cope_field: { matches: ["Unidentified Copepodid (field)"] },
-    unid_chal_field: { matches: ["Unidentified Chalimus (field)"] },
-    chal_scar: { matches: ["Chalimus Scar"] },
-    mot_scar: { matches: ["Motile Scar"] },
-    pred_scar: { matches: ["Predator Scar"] },
-    hemorrhaging: {},
-    eroded_gill_plate: {},
-    grazed_gill_plate: {},
-    mate_guarding: {},
-    pinched_belly: {},
-    comments_fish_health_field: {},
-    licing_protocol_field: { matches: ["Field Licing Protocol"] },
-    cm_lab: { matches: ["Caligus Male (lab)"] },
-    cpaf_lab: { matches: ["Caligus Pre-adult Female (lab)"] },
-    caf_lab: { matches: ["Caligus Adult Female (lab)"] },
-    cgf_lab: { matches: ["Caligus Gravid Female (lab)"] },
-    lgf_lab: { matches: ["Lep Gravid Female (lab)"] },
-    laf_lab: { matches: ["Lep Adult Female (lab)"] },
-    lpaf_lab: { matches: ["Lep Pre-adult Female (lab)"] },
-    lpam_lab: { matches: ["Lep Pre-adult Male (lab)"] },
-    lam_lab: { matches: ["Lep Adult Male (lab)"] },
-    ucal_lab: { matches: ["Unidentified Caligus (lab)"] },
-    ulep_lab: { matches: ["Unidentified Lep (lab)"] },
-    lab_count_no: {},
-    cm_field: {},
-    cpaf_field: {},
-    caf_field: {},
-    lab_count_motiles: {},
-    lab_count_no_id: { matches: ["Lice Count"] },
-  },
-  JSP_LICE_FINESCALE: {
-    ...defaultJSPHeaders,
-    _output: "jsp_lice_finescale",
-    date_liced: {},
-    lab_count_fine_no_id: {},
-    lab_count_fine_total: {},
-    lep_cop: {},
-    lep_cunifer_cop: {},
-    lep_chal_a: {},
-    lep_chal_b: {},
-    lep_pa_m_1: {},
-    lep_pa_m_2: {},
-    lep_pa_f_1: {},
-    lep_pa_f_2: {},
-    lep_pa_unid: {},
-    lep_a_m: {},
-    lep_a_f: {},
-    lep_grav_f: {},
-    cal_cop: {},
-    cal_chal_a_1: {},
-    cal_chal_a_2: {},
-    cal_chal_b_3: {},
-    cal_chal_b_4_f: {},
-    cal_chal_b_4_m: {},
-    cal_chal_4_unid: {},
-    cal_chal_a_unid: {},
-    cal_chal_b_unid: {},
-    cal_pa_m: {},
-    cal_pa_f: {},
-    cal_a_m: {},
-    cal_a_f: {},
-    cal_grav_f: {},
-    cal_mot_unid: {},
-    unid_louse: {},
-    sealice_comments: {},
-  },
-  JSP_FISH: {
-    ...defaultJSPHeaders,
-    _output: "jsp_fish",
-    seine_id: {},
-    semsp_id: {},
-    package_id: {},
-    fish_time_out: { matches: ["Time Out"] },
-    fish_time_dewar: { matches: ["Time Dewar"] },
-    date_processed: {},
-    fork_length_field: { matches: ["Fork Length Field (mm)"] },
-    height_field: { matches: ["Height (mm)", "Height Field (mm)"] },
-    cwt: { matches: ["Coded Wire Tag"] },
-    adipose: { matches: ["Clipped Adipose Fin"] },
-    weight: { matches: ["Weight (g)"] },
-    weight_field: { matches: ["Weight Field (g)"] },
-    fork_length: { matches: ["Fork Length Lab (mm)", "Fork Length (mm)"] },
-    photo_number: {},
-    comments_protocol: { matches: ["Protocol Comments"] },
-    comments_fish_health_lab: { matches: ["Fish Health Comments"] },
-    dissector: {},
-    dissection_protocol: {},
-    qc_data: {},
-    analysis_planned: {},
-    dissection_status: { matches: ["Fish Status"] },
-    lab_staff: {},
-    species: {},
-    standard_length: { matches: ["Standard Length (mm)"] },
-    lice_id_protocol: { matches: ["Lice ID Protocol"] },
-    lice_collection_protocol: { matches: ["Lice Collection Protocol"] }
-  },
-  JSP_SEINE: {
-    ...defaultJSPHeaders,
-    _output: "jsp_seine",
-    seine_id: {},
-    jsp_survey_id: { matches: ["Survey ID"] },
-    set_time: {},
-    gather_lat: {},
-    gather_long: {},
-    set_number: {},
-    set_type: {},
-    time_searching: {},
-    so_taken: { matches: ["Sockeye Taken"] },
-    so_total: { matches: ["Sockeye Total"] },
-    pi_taken: { matches: ["Pink Taken"] },
-    pi_total: { matches: ["Pink Total"] },
-    cu_taken: { matches: ["Chum Taken"] },
-    cu_total: { matches: ["Chum Total"] },
-    co_taken: { matches: ["Coho Taken"] },
-    co_total: { matches: ["Coho Total"] },
-    he_taken: { matches: ["Herring Taken"] },
-    he_total: { matches: ["Herring Total"] },
-    ck_taken: { matches: ["Chinook Taken"] },
-    ck_total: { matches: ["Chinook Total"] },
-    set_sliders: {},
-    set_poppers: {},
-    set_dimpling: {},
-    fish_retained: {},
-    preservation_status: {},
-    collection_protocol: {},
-    seine_notes: {}
-  },
-  JSP_SURVEY: {
-    ...defaultJSPHeaders,
-    _output: "jsp_survey",
-    site_id: defaultHeaders.site_id,
-    date: defaultHeaders.date,
-    sampling_bout: defaultHeaders.sampling_bout,
-    survey: defaultHeaders.survey,
-    jsp_survey_id: { matches: ["Survey ID", "JSP Survey ID"] },
-    net_sets: { matches: ["Number of Net Sets"] },
-    // Date	Site ID	Site Name	Sampling Bout	Field Staff	Precipitation				Survey Time Start	Survey Time End	Work Area	Number of Net Sets	survey_type	survey_notes	seines_included	Survey	CTD Cast ID	secchi_id	zooplankton_tow_id
-    survey_type: {},
-    survey_time_start: {},
-    survey_time_end: {},
-    survey_notes: {},
-    work_area: {},
-    field_staff: {},
-    precip: { matches: ["Precipitation"] },
-    cloud_cover: { matches: ["Cloud Cover (%)"] },
-    sea_state: {},
-    wind_speed: { matches: ["Wind Speed (knots)"] },
-    wind_direction: {},
-    tide_state: { matches: ["Tidal State"] }
-  },
-  JSP_DNA: {
-    ...defaultJSPHeaders,
-    _output: "jsp_dna",
-    fish_id: {},
-    stock_1: {},
-    region_1: {},
-    prob_1: {},
-    stock_2: {},
-    region_2: {},
-    prob_2: {},
-    stock_3: {},
-    region_3: {},
-    prob_3: {},
-    stock_4: {},
-    region_4: {},
-    prob_4: {},
-    stock_5: {},
-    region_5: {},
-    prob_5: {},
-    species: {},
-    standard_length: {},
-    seine_id: {}
-  },
-  JSP_FIN_CLIP: {
-    ...defaultJSPHeaders,
-    _output: "jsp_fin_clip",
-    fish_id: {},
-    survey_id: {},
-    stock_1: {},
-    region_1: {},
-    prob_1: {},
-    stock_2: {},
-    region_2: {},
-    prob_2: {},
-    stock_3: {},
-    region_3: {},
-    prob_3: {},
-    stock_4: {},
-    region_4: {},
-    prob_4: {},
-    stock_5: {},
-    region_5: {},
-    prob_5: {},
-    species: {},
-    standard_length: {},
-    seine_id: {}
-  },
-  JSP_BYCATCH_MORT: {
-    ...defaultJSPHeaders,
-    _output: "jsp_bycatch_mort",
-    jsp_survey: {},
-    bycatch_id: {},
-    bm_species: { matches: ["Species"] },
-    bm_status: { matches: ["Status"] },
-    bm_ageclass: { matches: ["Age Class"] },
-    bm_count: { matches: ["Count"] },
-    bm_notes: {},
-    sample_id: {},
-    seine_id: {}
-  },
-  JSP_SITE_ACTIVITY: {
-    _output: "jsp_site_activity",
-    action: defaultHeaders.action,
-    jsp_survey_id: { matches: ["Survey ID"] },
-    school_number: {},
-    school_sliders: {},
-    school_poppers: {},
-    school_dimpling: {}
-  },
-  JSP_EXTRA_MUSCLE: {
-    ...defaultJSPHeaders,
-    _output: "jsp_extra_muscle",
-    action: defaultHeaders.action,
-    fish_id: {}
-  },
-  JSP_ISOTOPE: {
-    ...defaultJSPHeaders,
-    _output: "jsp_isotope",
-    action: defaultHeaders.action,
-    fish_id: {}
-  },
-  JSP_FATTY_ACID: {
-    ...defaultJSPHeaders,
-    _output: "jsp_fatty_acid",
-    action: defaultHeaders.action,
-    fish_id: {}
-  },
-  JSP_STOMACH: {
-    ...defaultJSPHeaders,
-    _output: "jsp_stomach",
-    action: defaultHeaders.action,
-    fish_id: {}
-  },
-  JSP_SCALE: {
-    ...defaultJSPHeaders,
-    _output: "jsp_scale",
-    action: defaultHeaders.action,
-    fish_id: {}
-  },
-  JSP_RNA_MUSCLE: {
-    ...defaultJSPHeaders,
-    _output: "jsp_rna_muscle",
-    action: defaultHeaders.action,
-    jsp_sample_type: {},
-    fish_id: {}
-  },
-  JSP_RNA_PATHOGEN: {
-    ...defaultJSPHeaders,
-    _output: "jsp_rna_pathogen",
-    action: defaultHeaders.action,
-    jsp_sample_type: {},
-    fish_id: {}
-  },
-  JSP_OTOLITH: {
-    ...defaultJSPHeaders,
-    _output: "jsp_otolith",
-    action: defaultHeaders.action,
-    fish_id: {}
-  },
-  JSP_LICE_SAMPLE: {
-    ...defaultJSPHeaders,
-    _output: "jsp_lice_sample",
-    action: defaultHeaders.action,
-    jsp_sample_type: {},
-    fish_id: {}
-  },
+
   CTD_FLAGS: {
     ...defaultHeaders,
     _output: "ctd_flags",
@@ -3067,237 +2803,245 @@ const definitions = {
       matches: ["Flagged By"],
     },
   },
+
   CTD_QC: {
     ...defaultHeaders,
-    _joiobj: Joi.object(),
-    _output: "ctd_qc",
-    target_depth: {
-      matches: ["Target Depth", "depth", "target depth (m)", "target_depth_m"],
-      output: "CTD_Depth",
-    },
-    start_depth: {
-      output: "start_depth",
-    },
-    cast_pk: {},
-    processing_stage: {},
-    niskin_drop: {
-      output: "niskin_drop",
-      matches: ["Drop With Niskin Bottles"],
-    },
-    conductivity_flag: {
-      output: "conductivity_flag",
-      matches: ["Conductivity Flag"],
-      joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
+    ...{
+      _joiobj: Joi.object(),
+      _output: "ctd_qc",
+      target_depth: {
+        matches: ["Target Depth", "depth", "target depth (m)", "target_depth_m"],
+        output: "CTD_Depth",
+      },
+      start_depth: {
+        output: "start_depth",
+      },
+      cast_pk: {},
+      processing_stage: {},
+      niskin_drop: {
+        output: "niskin_drop",
+        matches: ["Drop With Niskin Bottles"],
+      },
+      conductivity_flag: {
+        output: "conductivity_flag",
+        matches: ["Conductivity Flag"],
+        joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
 
-    },
-    temperature_flag: {
-      output: "temperature_flag",
-      matches: ["Temperature Flag"],
-      joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
+      },
+      temperature_flag: {
+        output: "temperature_flag",
+        matches: ["Temperature Flag"],
+        joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
 
-    },
-    depth_flag: {
-      output: "depth_flag",
-      matches: ["Depth Flag"],
-      joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
-    },
-    pressure_flag: {
-      output: "pressure_flag",
-      matches: ["Pressure Flag"],
-      joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
-    },
-    par_flag: {
-      output: "par_flag",
-      matches: ["PAR Flag"],
-      joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
-    },
-    flc_flag: {
-      output: "flc_flag",
-      matches: ["FLC Flag"],
-      joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
-    },
-    turbidity_flag: {
-      output: "turbidity_flag",
-      matches: ["Turbidity Flag"],
-      joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
-    },
-    salinity_flag: {
-      output: "salinity_flag",
-      matches: ["Salinity Flag"],
-      joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
-    },
-    spec_cond_flag: {
-      output: "spec_cond_flag",
-      matches: ["Specific Conductivity Flag"],
-      joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
+      },
+      depth_flag: {
+        output: "depth_flag",
+        matches: ["Depth Flag"],
+        joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
+      },
+      pressure_flag: {
+        output: "pressure_flag",
+        matches: ["Pressure Flag"],
+        joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
+      },
+      par_flag: {
+        output: "par_flag",
+        matches: ["PAR Flag"],
+        joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
+      },
+      flc_flag: {
+        output: "flc_flag",
+        matches: ["FLC Flag"],
+        joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
+      },
+      turbidity_flag: {
+        output: "turbidity_flag",
+        matches: ["Turbidity Flag"],
+        joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
+      },
+      salinity_flag: {
+        output: "salinity_flag",
+        matches: ["Salinity Flag"],
+        joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
+      },
+      spec_cond_flag: {
+        output: "spec_cond_flag",
+        matches: ["Specific Conductivity Flag"],
+        joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
 
-    },
-    dissolved_oxygen_ml_l_flag: {
-      output: "dissolved_oxygen_ml_l_flag",
-      matches: ["Dissolved Oxygen (mL/L) Flag"],
-      joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
-    },
-    dissolved_oxygen_percent_flag: {
-      output: "dissolved_oxygen_percent_flag",
-      matches: ["Dissolved Oxygen (%) Flag"],
-      joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
-    },
-    descent_rate_flag: {
-      output: "descent_rate_flag",
-      matches: ["Descent Rate Flag"],
-      joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
-    },
-    absolute_salinity_flag: {
-      output: "absolute_salinity_flag",
-      matches: ["Absolute Salinity Flag"],
-      joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
-    },
-    conservative_temperature_flag: {
-      output: "conservative_temperature_flag",
-      matches: ["Conservative Temperature Flag"],
-      joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
-    },
-    density_flag: {
-      output: "density_flag",
-      matches: ["Density Flag"],
-      joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
-    },
-    sos_un_flag: {
-      output: "sos_un_flag",
-      matches: ["SOS UN Flag"],
-      joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
-    },
-    c_star_at_flag: {
-      output: "c_star_at_flag",
-      matches: ["Beam Attenuation Flag"],
-      joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
-    },
-    rinko_do_ml_l_flag: {
-      output: "rinko_do_ml_l_flag",
-      matches: ["Rinko Dissolved Oxygen (mL/L) Flag"],
-      joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
+      },
+      dissolved_oxygen_ml_l_flag: {
+        output: "dissolved_oxygen_ml_l_flag",
+        matches: ["Dissolved Oxygen (mL/L) Flag"],
+        joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
+      },
+      dissolved_oxygen_percent_flag: {
+        output: "dissolved_oxygen_percent_flag",
+        matches: ["Dissolved Oxygen (%) Flag"],
+        joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
+      },
+      descent_rate_flag: {
+        output: "descent_rate_flag",
+        matches: ["Descent Rate Flag"],
+        joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
+      },
+      absolute_salinity_flag: {
+        output: "absolute_salinity_flag",
+        matches: ["Absolute Salinity Flag"],
+        joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
+      },
+      conservative_temperature_flag: {
+        output: "conservative_temperature_flag",
+        matches: ["Conservative Temperature Flag"],
+        joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
+      },
+      density_flag: {
+        output: "density_flag",
+        matches: ["Density Flag"],
+        joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
+      },
+      sos_un_flag: {
+        output: "sos_un_flag",
+        matches: ["SOS UN Flag"],
+        joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
+      },
+      c_star_at_flag: {
+        output: "c_star_at_flag",
+        matches: ["Beam Attenuation Flag"],
+        joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
+      },
+      rinko_do_ml_l_flag: {
+        output: "rinko_do_ml_l_flag",
+        matches: ["Rinko Dissolved Oxygen (mL/L) Flag"],
+        joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
+      },
     },
   },
+  
   // don't update disance from sample site, which is calculated from lat long
   // redrop is the same as miscast, output twice in the view
   // drop lat and long are pulled from the first available of start, bottom, end location
   CTD_DROPS: {
     ...defaultHeaders,
-    _output: "ctd_drops",
-    serial_number: {
-      output: "CTD_ID",
-      matches: ["sn"],
+    ...{
+      _output: "ctd_drops",
+      serial_number: {
+        output: "CTD_ID",
+        matches: ["sn"],
+      },
+      cast_type: {
+        output: "Cast_Type",
+      },
+      miscast: {
+        output: "Re_Drop_",
+        matches: ["re_drop"],
+      },
+      niskin_drop: {
+        output: "Niskin_Drop_",
+      },
+      gps_site: {
+        output: "Station",
+      },
+      target_depth: {
+        matches: ["Target Depth", "depth", "target depth (m)", "target_depth_m"],
+        output: "CTD_Depth",
+      },
+      drop_start_time: {
+        output: "Start_Time",
+        joi: Joi.date(),
+      },
+      drop_bottom_time: {
+        output: "Bottom_Time",
+        joi: Joi.date(),
+      },
+      drop_end_time: {
+        output: "End_Time",
+        joi: Joi.date(),
+      },
+      start_location: {
+        output: "Start_Location",
+      },
+      bottom_location: {
+        output: "Bottom_Location",
+      },
+      end_location: {
+        output: "End_Location",
+      },
+      quality_log: {
+        output: "CTD_Notes",
+      },
+      visually_inspected: {
+        output: "Visualy_Inspected",
+      },
+      maintenence_performed: {
+        output: "Maintenance_Performed",
+      },
+      issues: {
+        output: "Issue",
+      },
+      inspectors: {
+        output: "Inspectors_Name"
+      },
+      sky_cover: {
+        output: "Sky_Cover",
+      },
+      wind_speed: {
+        matches: ["Wind", "Wind Speed (knots)"],
+        output: "Wind",
+      },
+      swell_height: {
+        matches: ["Swell", "Swell Height (m)"],
+        output: "Swell",
+      },
+      ctd_cast_id: {},
+      pk: {
+        matches: ["Primary Key"],
+        drop: true,
+      },
+      drop_lat: {
+        drop: true,
+      },
+      drop_long: {
+        drop: true,
+      },
+      distance_from_sample_site: {
+        drop: true,
+      },
+      distance_from_gps_site: {
+        drop: true,
+      },
+      // Nature Trust Specific Columns
+      weather_notes: {},
+      tide: {},
+      soak_start: {
+        joi: Joi.date(),
+      },
+      soak_end: {
+        joi: Joi.date(),
+      },
+      water_depth: {
+        matches: ["Water Depth (m)"],
+      },
+      sensors_submerged: {},
     },
-    cast_type: {
-      output: "Cast_Type",
-    },
-    miscast: {
-      output: "Re_Drop_",
-      matches: ["re_drop"],
-    },
-    niskin_drop: {
-      output: "Niskin_Drop_",
-    },
-    gps_site: {
-      output: "Station",
-    },
-    target_depth: {
-      matches: ["Target Depth", "depth", "target depth (m)", "target_depth_m"],
-      output: "CTD_Depth",
-    },
-    drop_start_time: {
-      output: "Start_Time",
-      joi: Joi.date(),
-    },
-    drop_bottom_time: {
-      output: "Bottom_Time",
-      joi: Joi.date(),
-    },
-    drop_end_time: {
-      output: "End_Time",
-      joi: Joi.date(),
-    },
-    start_location: {
-      output: "Start_Location",
-    },
-    bottom_location: {
-      output: "Bottom_Location",
-    },
-    end_location: {
-      output: "End_Location",
-    },
-    quality_log: {
-      output: "CTD_Notes",
-    },
-    visually_inspected: {
-      output: "Visualy_Inspected",
-    },
-    maintenence_performed: {
-      output: "Maintenance_Performed",
-    },
-    issues: {
-      output: "Issue",
-    },
-    inspectors: {
-      output: "Inspectors_Name"
-    },
-    sky_cover: {
-      output: "Sky_Cover",
-    },
-    wind_speed: {
-      matches: ["Wind", "Wind Speed (knots)"],
-      output: "Wind",
-    },
-    swell_height: {
-      matches: ["Swell", "Swell Height (m)"],
-      output: "Swell",
-    },
-    ctd_cast_id: {},
-    pk: {
-      matches: ["Primary Key"],
-      drop: true,
-    },
-    drop_lat: {
-      drop: true,
-    },
-    drop_long: {
-      drop: true,
-    },
-    distance_from_sample_site: {
-      drop: true,
-    },
-    distance_from_gps_site: {
-      drop: true,
-    },
-    // Nature Trust Specific Columns
-    weather_notes: {},
-    tide: {},
-    soak_start: {
-      joi: Joi.date(),
-    },
-    soak_end: {
-      joi: Joi.date(),
-    },
-    water_depth: {
-      matches: ["Water Depth (m)"],
-    },
-    sensors_submerged: {},
   },
 
   STAFF_GAUGE: {
     ...defaultHeaders,
-    _output: "staff_gauge",
-    gauge_reading: {
-      output: "Water_Stage__cm_",
-      level: 1,
-      matches: ["Water_Stage__cm_"],
-      joi: Joi.number(),
+    ...{
+      _output: "staff_gauge",
+      gauge_reading: {
+        output: "Water_Stage__cm_",
+        level: 1,
+        matches: ["Water_Stage__cm_"],
+        joi: Joi.number(),
+      },
+      water_stage_flag: {
+        level: 1,
+        matches: ["gauge_flag"],
+        joi: Joi.string(),
     },
-    water_stage_flag: {
-      level: 1,
-      matches: ["gauge_flag"],
-      joi: Joi.string(),
-    },
+  }
 
   }
 };
