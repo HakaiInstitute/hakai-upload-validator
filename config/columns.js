@@ -2374,8 +2374,12 @@ const definitions = {
         matches: ["dry_sample_weight_mg", "dry sample weight (mg)"],
         joi: Joi.number(),
       },
-      lab_date: {},
-      seagrass_biomass_notes: {},
+      lab_date: {
+        output: "lab_date",
+        matches: ["lab_date", "lab date"],
+        joi: Joi.alternatives().try(Joi.number(), Joi.date().max("now")),
+      },
+      seagrass_biomass_notes: {}, 
       bag_uid: {
         level: 1,
         joi: Joi.alternatives([
@@ -2456,7 +2460,9 @@ const definitions = {
         matches: ["dry sample weight (mg)"],
       },
       lab_date: {
-        matches: ["lab date"],
+        output: "lab_date",
+        matches: ["lab_date", "lab date"],
+        joi: Joi.alternatives().try(Joi.number(), Joi.date().max("now")),
       },
       mesograzer_notes: {},
       bag_uid: {
@@ -2509,7 +2515,11 @@ const definitions = {
         output: "dry_sample_weight_mg",
         matches: ["dry sample weight (mg)"],
       },
-      lab_date: {},
+      lab_date: {
+        output: "lab_date",
+        matches: ["lab_date", "lab date"],
+        joi: Joi.alternatives().try(Joi.number(), Joi.date().max("now")),
+      },
       macroalgae_notes: {},
       bag_uid: {
         level: 1,
@@ -2587,7 +2597,11 @@ const definitions = {
         output: "dry_sample_weight_mg",
         matches: ["dry_sample_weight_mg", "dry sample weight (mg)"],
       },
-      lab_date: {},
+      lab_date: {
+        output: "lab_date",
+        matches: ["lab_date", "lab date"],
+        joi: Joi.alternatives().try(Joi.number(), Joi.date().max("now")),
+      },
       epiphyte_notes: {},
       bag_uid: {
         level: 1,
@@ -2628,7 +2642,11 @@ const definitions = {
       },
       fouling_percent: {},
       otter_predation: {},
-      lab_date: {},
+      lab_date: {
+        output: "lab_date",
+        matches: ["lab_date", "lab date"],
+        joi: Joi.alternatives().try(Joi.number(), Joi.date().max("now")),
+      },
       notes: {},
     },
   },
