@@ -23,8 +23,8 @@ supports browsers nativly.
 
 ## The URL where this code is deployed
 as this package is used by both the hakai front end portal and api services it is included any where these services are running. currently that is on
-* hecate at https://hecate.hakai.org/api/ and https://hecate.hakai.org/portal2/
-* goose  at https://goose.hakai.org/api/ and https://goose.hakai.org/portal2/
+* hecate at https://portal.hakai.org/api/ and https://portal.hakai.org/portal2/
+* goose  at https://portaldev.hakai.org/api/ and https://portaldev.hakai.org/portal2/
 
 ## Changes to columns.js
 
