@@ -3064,6 +3064,14 @@ const definitions = {
   }
 };
 
+definitions.FLUROMETER_CALIBRATION = {
+  ...definitions.CHLOROPHYLL,
+  ...{
+    _output: "Chlorophyll",
+      _joiobj: Joi.object(),
+  },
+};
+
 definitions.CHLOROPHYLL_BLANKS = {
   ...definitions.CHLOROPHYLL,
   ...{
