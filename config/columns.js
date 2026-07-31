@@ -185,6 +185,9 @@ const defaultHeaders = {
     matches: ["collected", "Field Time", "Time", "YSI Time"],
     joi: Joi.alternatives().try(Joi.number(), Joi.date().max("now")),
   },
+  collection_datetime_flag: {
+    matches: ["collected_flag", "collected_datetime_flag", "collection_datetime_flag"],
+  },
   preserved: {
     matches: ["preserved", "Lab Time"],
     joi: Joi.alternatives().try(Joi.number(), Joi.date().max("now")),
