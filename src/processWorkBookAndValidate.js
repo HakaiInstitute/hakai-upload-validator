@@ -13,7 +13,7 @@ const xmlnsFromMetadata = require("../config/xmlnsFromMetadata");
 const joiValidate = require("./joiValidate");
 // const { prettyConsoleLog } = require("./common");
 
-moment.tz.setDefault("America/Vancouver");
+const TIMEZONE = "America/Vancouver";
 
 // TODO write more tests
 
@@ -225,7 +225,7 @@ function processWorkBookAndValidate(
         form_xmlns: xmlnsFromMetadata(metadata),
         submissionIdentifier: uuidv4(),
         dm_submit_time: moment.utc().format(),
-        writeTime: moment().format(),
+        writeTime: moment.tz(TIMEZONE).format(),
         dm_form: formname,
         formVersion: "0.1",
         source_file: filename,
