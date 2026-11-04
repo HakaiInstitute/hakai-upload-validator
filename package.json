@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "joi": "^17.13.3",
-    "moment-timezone": "^0.5.14",
+    "moment-timezone": "^0.6.5",
     "uuid": "^3.1.0"
   }
 }
