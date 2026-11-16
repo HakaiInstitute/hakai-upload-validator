@@ -1,6 +1,6 @@
 const moment = require("moment-timezone");
 
-moment.tz.setDefault("America/Vancouver");
+const TIMEZONE = "America/Vancouver";
 
 /**
  * Date parsing including parsing of weird Excel dates
@@ -20,10 +20,13 @@ const dateParser = (cell, date = "") => {
     // javascript data object converts to utc automaticly. in order to adjust back to local time we must add the timezone offset
     const tzoffset = jdate.getTimezoneOffset() / 60;
     jdate.setHours(jdate.getHours() + tzoffset);
-    formattedDateCell = moment(jdate).format("YYYY-MM-DDTHH:mm:ssZZ");
+    formattedDateCell = moment
+      .tz(jdate, TIMEZONE)
+      .format("YYYY-MM-DDTHH:mm:ssZZ");
   } else if (pattern2.test(cell)) {
     // Convert Excel days since 1900-Jan-0 to iso format
-    const d = moment(0)
+    const d = moment
+      .tz(0, TIMEZONE)
       .subtract(70, "years")
       .subtract(2, "days");
     d.add(Math.round(cell * 24 * 60 * 60), "seconds");
@@ -31,7 +34,7 @@ const dateParser = (cell, date = "") => {
     d.subtract(d.utcOffset(), "minutes");
     formattedDateCell = d.format("YYYY-MM-DDTHH:mm:ssZZ"); // store in iso format
   } else {
-    formattedDateCell = moment(
+    formattedDateCell = moment.tz(
       cell,
       [
         "YYYY/MM/DD HH:mm:ss",
@@ -44,7 +47,8 @@ const dateParser = (cell, date = "") => {
         "YYYY/MM/DD",
         "MM/DD/YYYY HH:mm:ss"
       ],
-      true
+      true,
+      TIMEZONE
     ).format("YYYY-MM-DDTHH:mm:ssZZ");
   }
   return formattedDateCell;
