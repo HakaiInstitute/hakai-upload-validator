@@ -5,4 +5,4 @@ dist/validate.js
 test/excelFiles
 
 yarn\.lock
-.idea/git
+.idea/
