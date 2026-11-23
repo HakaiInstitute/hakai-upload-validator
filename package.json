@@ -4,11 +4,12 @@
   "description": "",
   "main": "./src/processWorkBookAndValidate.js",
   "scripts": {
-    "test": "mocha test/*.spec.js",
+    "test": "npm run test:node && npm run test:browser",
+    "test:node": "mocha --require test/node/setup.js test/*.spec.js",
+    "test:browser": "node test/browser/run.mjs",
     "testexcel": "node test/testExcel.js",
     "prepare": "husky install",
-    "lint": "eslint .",
-    "test:browser": "node test/browser/run.mjs"
+    "lint": "eslint ."
   },
   "author": "",
   "engines": {

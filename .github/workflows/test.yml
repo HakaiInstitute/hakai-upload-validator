@@ -14,7 +14,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test:
+  node:
+    name: Node
     runs-on: ubuntu-latest
     timeout-minutes: 10
     env:
@@ -35,10 +36,11 @@ jobs:
       - name: Lint
         run: npm run lint
 
-      - name: Test
-        run: npm test
+      - name: Test in Node
+        run: npm run test:node
 
   browser:
+    name: Browser
     runs-on: ubuntu-latest
     timeout-minutes: 10
     env:
