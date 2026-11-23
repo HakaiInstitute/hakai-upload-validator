@@ -7,24 +7,26 @@
 This package parses and validates excel files that have first been converted to
 JSON, and then formats for entry into the database.
 
-* **Parsing** - Takes JSON version of workbook and converts it to an array of
+- **Parsing** - Takes JSON version of workbook and converts it to an array of
   objects with one object per row. The keys of this object are the database
   field names.
-* **Validating** - Uses Joi and the Joi definition file, columns.js, to
+- **Validating** - Uses Joi and the Joi definition file, columns.js, to
   validate. Also reformats dates and checks for duplicates of data in same
   sheet.
-* **Formatting** for entry into the database - Makes the DB entry for this
+- **Formatting** for entry into the database - Makes the DB entry for this
   datatype a subobject, and make certain metadata fields properties of the
   object
 
 This project is to be used for validation in both browser and server, so
-packages that can run on both are being used. Noet that as of v16 joi now 
+packages that can run on both are being used. Noet that as of v16 joi now
 supports browsers nativly.
 
 ## The URL where this code is deployed
+
 as this package is used by both the hakai front end portal and api services it is included any where these services are running. currently that is on
-* hecate at https://portal.hakai.org/api/ and https://portal.hakai.org/portal2/
-* goose  at https://portaldev.hakai.org/api/ and https://portaldev.hakai.org/portal2/
+
+- hecate at https://portal.hakai.org/api/ and https://portal.hakai.org/portal2/
+- goose at https://portaldev.hakai.org/api/ and https://portaldev.hakai.org/portal2/
 
 ## Changes to columns.js
 

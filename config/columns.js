@@ -99,9 +99,7 @@ const defaultHeaders = {
   project_id: {
     output: "sample_id_other",
     matches: ["Project Specific ID", "project_sample_id"],
-    joi: Joi.string()
-      .invalid("na", "nd", "n/d", "n/a")
-      .insensitive(),
+    joi: Joi.string().invalid("na", "nd", "n/d", "n/a").insensitive(),
   },
   hakai_id: {
     output: "_1__Sample_ID",
@@ -186,7 +184,11 @@ const defaultHeaders = {
     joi: Joi.alternatives().try(Joi.number(), Joi.date().max("now")),
   },
   collection_datetime_flag: {
-    matches: ["collected_flag", "collected_datetime_flag", "collection_datetime_flag"],
+    matches: [
+      "collected_flag",
+      "collected_datetime_flag",
+      "collection_datetime_flag",
+    ],
   },
   preserved: {
     matches: ["preserved", "Lab Time"],
@@ -252,7 +254,8 @@ const defaultHeaders = {
     output: "Flag",
     matches: ["Flags"],
   },
-  process: { // added here so that it works when entered on the metadata tab. technicly only relevent to zooplankton samples
+  process: {
+    // added here so that it works when entered on the metadata tab. technicly only relevent to zooplankton samples
     output: "Size_Fraction__Unfiltered_or_Total_Biomass",
     matches: ["Process", "Size_Fraction__Unfiltered_or_Total_Biomass"],
   },
@@ -450,7 +453,12 @@ const defaultZooplanktonHeaders = {
       matches: ["Fraction Of Sample", "sample_portion"],
     },
     screen_size: {
-      matches: ["Size Fraction (um)", "Size Fraction", "screen_size", "size_fraction__um_"],
+      matches: [
+        "Size Fraction (um)",
+        "Size Fraction",
+        "screen_size",
+        "size_fraction__um_",
+      ],
       joi: Joi.alternatives([
         Joi.number()
           .integer()
@@ -521,9 +529,7 @@ const defaultZooplanktonHeaders = {
     vol_biomass_method: {
       output: "volumetric_biomass_method",
       matches: ["Volumetric Biomass Method"],
-      joi: Joi.any()
-        .valid("DE", "FE")
-        .optional(),
+      joi: Joi.any().valid("DE", "FE").optional(),
     },
     volumetric_biomass_final: {},
     vol_biomass_final_flag: {
@@ -981,7 +987,6 @@ const definitions = {
     },
   },
 
-
   YSI_CALIBRATION_STANDARDS: {
     ...defaultHeaders,
     ...{
@@ -1231,10 +1236,14 @@ const definitions = {
         matches: ["Stock DNA Conentration (ng/ul)"],
       },
       rna_extraction_date: {
-        matches: ["RNA Extraction Date", "rna_extraction_date"]
+        matches: ["RNA Extraction Date", "rna_extraction_date"],
       },
       rna_concentration: {
-        matches: ["RNA Concentration (ng/ul)", "RNA Concentration", "rna_concentration"]
+        matches: [
+          "RNA Concentration (ng/ul)",
+          "RNA Concentration",
+          "rna_concentration",
+        ],
       },
       extracting_staff: {
         matches: ["Extraction Staff"],
@@ -1257,7 +1266,7 @@ const definitions = {
       p_coi_amplified: {
         output: "COI_amplified",
         matches: ["COI_amplified"],
-      }
+      },
     },
   },
 
@@ -1316,7 +1325,7 @@ const definitions = {
         // p_coi_amplified: {
         //   output: "COI_amplified",
         //   matches: ["COI_amplified"],
-      }
+      },
     },
   },
 
@@ -1571,9 +1580,7 @@ const definitions = {
       },
       calibration_slope: {},
       acidification_coefficient: {
-        matches: [
-          "acid_coefficient"
-        ],
+        matches: ["acid_coefficient"],
       },
       acid_ratio_correction_factor: {},
       acetone_volume: {
@@ -1610,7 +1617,7 @@ const definitions = {
       percent_deviation: {},
       calibration_coefficient: {},
       distance_calculated: {},
-    }
+    },
   },
 
   FLUROMETER_CALIBRATION_DETAIL: {
@@ -1638,7 +1645,7 @@ const definitions = {
       avg_fm: {},
       r2: {},
       comments: {},
-    }
+    },
   },
 
   ZOOPLANKTON_ISOTOPE: {
@@ -1823,11 +1830,10 @@ const definitions = {
             "net_mesh_size_um",
             "net_type",
           )
-          .when(
-            Joi.object({ flow_meter: "NO FLOWMETER" }).unknown(), {
+          .when(Joi.object({ flow_meter: "NO FLOWMETER" }).unknown(), {
             then: Joi.object().and("flow_meter"),
-            otherwise: Joi.object().and("flow_meter", "flow_in", "flow_out")
-          })
+            otherwise: Joi.object().and("flow_meter", "flow_in", "flow_out"),
+          }),
         // ".and('tow_duration','tow_start_time','tow_end_time')"
       ),
       tow_type: {
@@ -1923,7 +1929,11 @@ const definitions = {
       },
       flow_meter_volume2: {
         output: "Flow_meter_volume2",
-        matches: ["Flow_Meter_Volume_2", "Flow Meter Volume 2", "flowmeter_volume2"],
+        matches: [
+          "Flow_Meter_Volume_2",
+          "Flow Meter Volume 2",
+          "flowmeter_volume2",
+        ],
       },
       flow_meter_volume_flag2: {
         output: "Flow_Meter_Volume_Flag2",
@@ -2029,7 +2039,11 @@ const definitions = {
     ...{
       _output: "Zooplankton",
       _joiobj: defaultZooplanktonHeaders._joiobj.concat(
-        Joi.object().xor("plankton_isotope_id", "plankton_total_biomass_id", "plankton_fatty_acids_id"),
+        Joi.object().xor(
+          "plankton_isotope_id",
+          "plankton_total_biomass_id",
+          "plankton_fatty_acids_id",
+        ),
       ),
       filter_uid: {},
       plankton_isotope_id: {
@@ -2050,7 +2064,8 @@ const definitions = {
           .invalid("na", "nd", "n/d", "n/a")
           .insensitive(),
       },
-      process: { // This is added here to overwrite the default global. process is not required for zooplankton_biomass
+      process: {
+        // This is added here to overwrite the default global. process is not required for zooplankton_biomass
         output: "Size_Fraction__Unfiltered_or_Total_Biomass",
         matches: ["Process", "Size_Fraction__Unfiltered_or_Total_Biomass"],
         joi: Joi.string(),
@@ -2261,7 +2276,7 @@ const definitions = {
         matches: ["Enriched?"],
       },
       estimated_enrichment: {},
-    }
+    },
   },
 
   MG_SEAGRASS_HABITAT: {
@@ -2299,7 +2314,7 @@ const definitions = {
     ...{
       _output: "seagrass_list",
       _joiobj: defaultMarineGEO._joiobj.concat(
-        Joi.object().or("seagrass_habitat_id", "bag_uid", "sample_uid")
+        Joi.object().or("seagrass_habitat_id", "bag_uid", "sample_uid"),
       ),
       density: {
         matches: ["density_range", "density range"],
@@ -2374,7 +2389,7 @@ const definitions = {
         matches: ["lab_date", "lab date"],
         joi: Joi.alternatives().try(Joi.number(), Joi.date().max("now")),
       },
-      seagrass_biomass_notes: {}, 
+      seagrass_biomass_notes: {},
       bag_uid: {
         level: 1,
         joi: Joi.alternatives([
@@ -2390,7 +2405,7 @@ const definitions = {
     ...{
       _output: "mesograzers_list",
       _joiobj: defaultMarineGEO._joiobj.concat(
-        Joi.object().or("seagrass_habitat_id", "bag_uid", "sample_uid")
+        Joi.object().or("seagrass_habitat_id", "bag_uid", "sample_uid"),
       ),
       density: {
         matches: ["density_range", "density range"],
@@ -2475,7 +2490,7 @@ const definitions = {
     ...{
       _output: "macroalgae_list",
       _joiobj: defaultMarineGEO._joiobj.concat(
-        Joi.object().or("seagrass_habitat_id", "bag_uid", "sample_uid")
+        Joi.object().or("seagrass_habitat_id", "bag_uid", "sample_uid"),
       ),
       density: {
         matches: ["density_range", "density range"],
@@ -2531,7 +2546,7 @@ const definitions = {
     ...{
       _output: "epiphytes_list",
       _joiobj: defaultMarineGEO._joiobj.concat(
-        Joi.object().or("seagrass_habitat_id", "bag_uid", "sample_uid")
+        Joi.object().or("seagrass_habitat_id", "bag_uid", "sample_uid"),
       ),
       density: {
         matches: ["density_range", "density range"],
@@ -2651,7 +2666,7 @@ const definitions = {
     ...{
       _output: "filtered_epiphytes_list",
       _joiobj: defaultMarineGEO._joiobj.concat(
-        Joi.object().or("seagrass_habitat_id", "bag_uid", "sample_uid")
+        Joi.object().or("seagrass_habitat_id", "bag_uid", "sample_uid"),
       ),
       density: {
         matches: ["density_range", "density range"],
@@ -2699,7 +2714,7 @@ const definitions = {
           Joi.number(),
         ]),
       },
-    }
+    },
   },
 
   MG_FISH: {
@@ -2713,7 +2728,7 @@ const definitions = {
       },
       estimated_quantity: {},
       notes: {},
-    }
+    },
   },
 
   MG_SEAGRASS_DENSITY: {
@@ -2725,23 +2740,29 @@ const definitions = {
       },
       flowering_shoots: {
         output: "Flowering_Shoots",
-        matches: ["flowering_shoots", "Flowering Shoots"]
+        matches: ["flowering_shoots", "Flowering Shoots"],
       },
       flowering_quadrat_density: {
         output: "Zostera_flowering_quadrat_density",
-        matches: ["flowering_quadrat_density", "Zostera flowering quadrat density"]
+        matches: [
+          "flowering_quadrat_density",
+          "Zostera flowering quadrat density",
+        ],
       },
       quadrat_percent_cover: {
         output: "zostera_quadrat_percent_cover",
-        matches: ["quadrat_percent_cover", "Zostera quadrat percent cover"]
+        matches: ["quadrat_percent_cover", "Zostera quadrat percent cover"],
       },
       phyllospadix_present: {
         output: "Phyllospadix_present_",
-        matches: ["phyllospadix_present", "Phyllospadix present"]
+        matches: ["phyllospadix_present", "Phyllospadix present"],
       },
       phyllospadix_quadrat_density: {
         output: "Phyllospadix_quadrat_density",
-        matches: ["phyllospadix_quadrat_density", "Phyllospadix Quadrat Density"]
+        matches: [
+          "phyllospadix_quadrat_density",
+          "Phyllospadix Quadrat Density",
+        ],
       },
       notes: {},
     },
@@ -2757,7 +2778,7 @@ const definitions = {
         matches: ["size (cm)"],
       },
       notes: {},
-    }
+    },
   },
 
   SOLO_DROPS: {
@@ -2780,7 +2801,12 @@ const definitions = {
       drop_type: {},
       target_depth_m: {
         output: "Depth",
-        matches: ["Target Depth", "depth", "target depth (m)", "target_depth_m"],
+        matches: [
+          "Target Depth",
+          "depth",
+          "target depth (m)",
+          "target_depth_m",
+        ],
         joi: Joi.number().min(0),
       },
     },
@@ -2823,7 +2849,12 @@ const definitions = {
       _joiobj: Joi.object(),
       _output: "ctd_qc",
       target_depth: {
-        matches: ["Target Depth", "depth", "target depth (m)", "target_depth_m"],
+        matches: [
+          "Target Depth",
+          "depth",
+          "target depth (m)",
+          "target_depth_m",
+        ],
         output: "CTD_Depth",
       },
       start_depth: {
@@ -2839,13 +2870,11 @@ const definitions = {
         output: "conductivity_flag",
         matches: ["Conductivity Flag"],
         joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
-
       },
       temperature_flag: {
         output: "temperature_flag",
         matches: ["Temperature Flag"],
         joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
-
       },
       depth_flag: {
         output: "depth_flag",
@@ -2881,7 +2910,6 @@ const definitions = {
         output: "spec_cond_flag",
         matches: ["Specific Conductivity Flag"],
         joi: Joi.string().valid("AV", "SVC", "SVD", "NA"),
-
       },
       dissolved_oxygen_ml_l_flag: {
         output: "dissolved_oxygen_ml_l_flag",
@@ -2930,7 +2958,7 @@ const definitions = {
       },
     },
   },
-  
+
   // don't update disance from sample site, which is calculated from lat long
   // redrop is the same as miscast, output twice in the view
   // drop lat and long are pulled from the first available of start, bottom, end location
@@ -2956,7 +2984,12 @@ const definitions = {
         output: "Station",
       },
       target_depth: {
-        matches: ["Target Depth", "depth", "target depth (m)", "target_depth_m"],
+        matches: [
+          "Target Depth",
+          "depth",
+          "target depth (m)",
+          "target_depth_m",
+        ],
         output: "CTD_Depth",
       },
       drop_start_time: {
@@ -2993,7 +3026,7 @@ const definitions = {
         output: "Issue",
       },
       inspectors: {
-        output: "Inspectors_Name"
+        output: "Inspectors_Name",
       },
       sky_cover: {
         output: "Sky_Cover",
@@ -3053,17 +3086,16 @@ const definitions = {
         level: 1,
         matches: ["gauge_flag"],
         joi: Joi.string(),
+      },
     },
-  }
-
-  }
+  },
 };
 
 definitions.FLUROMETER_CALIBRATION = {
   ...definitions.CHLOROPHYLL,
   ...{
     _output: "Chlorophyll",
-      _joiobj: Joi.object(),
+    _joiobj: Joi.object(),
   },
 };
 
