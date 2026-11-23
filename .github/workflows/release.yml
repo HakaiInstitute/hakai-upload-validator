@@ -1,0 +1,136 @@
+name: Release
+
+# Releasing = merging a PR that bumps "version" in package.json. When a push
+# to master changes the version and there is no matching vX.Y.Z tag yet, this
+# runs the tests, then tags the pushed commit and creates a GitHub Release.
+# Consumers install by tag:
+#   npm install github:HakaiInstitute/hakai-upload-validator#vX.Y.Z
+#
+# Running it manually on master releases master's current version if it has
+# no tag yet (e.g. after a failed run you can't re-run).
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    # Manual runs can pick any branch; only release merged code
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      tag: ${{ steps.version.outputs.tag }}
+      release: ${{ steps.version.outputs.release }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Decide whether to release
+        id: version
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EVENT: ${{ github.event_name }}
+          BEFORE: ${{ github.event.before }}
+        run: |
+          set -o pipefail
+          # Exit 0 if the resource exists, 1 if GitHub says 404. Any other
+          # failure stops the job, so an API error never reads as "missing".
+          exists() {
+            local err
+            if err="$(gh api "$1" --silent 2>&1)"; then return 0; fi
+            case "$err" in *"(HTTP 404)"*) return 1 ;; esac
+            echo "::error::GitHub API request for $1 failed: $err"
+            exit 1
+          }
+
+          version="$(node -p 'require("./package.json").version')"
+          tag="v$version"
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+
+          if [ "$EVENT" = push ]; then
+            # If the previous version can't be read (API error, force push),
+            # fail instead of guessing. Run the workflow manually to release.
+            if ! previous="$(gh api "repos/${GITHUB_REPOSITORY}/contents/package.json?ref=${BEFORE}" \
+              -H 'Accept: application/vnd.github.raw' | node -p 'JSON.parse(require("fs").readFileSync(0)).version')"; then
+              echo "::error::Couldn't read package.json at ${BEFORE}. Not releasing; run this workflow manually on master if a release is needed."
+              exit 1
+            fi
+            if [ "$previous" = "$version" ]; then
+              echo "release=false" >> "$GITHUB_OUTPUT"
+              echo "Version is still $version, nothing to release"
+              exit 0
+            fi
+          fi
+
+          if exists "repos/${GITHUB_REPOSITORY}/git/ref/tags/${tag}"; then
+            echo "release=false" >> "$GITHUB_OUTPUT"
+            echo "$tag already exists, nothing to release"
+          else
+            echo "release=true" >> "$GITHUB_OUTPUT"
+            echo "$tag will be released"
+          fi
+
+  test:
+    needs: check
+    if: needs.check.outputs.release == 'true'
+    uses: ./.github/workflows/test.yml
+
+  release:
+    needs: [check, test]
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    # Only runs for the same tag wait on each other. A queued run may replace
+    # another queued run, but both would release the same version.
+    concurrency:
+      group: release-${{ needs.check.outputs.tag }}
+      cancel-in-progress: false
+    steps:
+      - name: Create tag and GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ needs.check.outputs.tag }}
+        run: |
+          set -o pipefail
+          # Exit 0 if the resource exists, 1 if GitHub says 404. Any other
+          # failure stops the job, so an API error never reads as "missing".
+          exists() {
+            local err
+            if err="$(gh api "$1" --silent 2>&1)"; then return 0; fi
+            case "$err" in *"(HTTP 404)"*) return 1 ;; esac
+            echo "::error::GitHub API request for $1 failed: $err"
+            exit 1
+          }
+
+          ref="repos/${GITHUB_REPOSITORY}/git/ref/tags/${TAG}"
+          if exists "$ref"; then
+            # Another run may have tagged this version while we were testing.
+            # Only finish the release if the tag is on the commit we tested.
+            tagged="$(gh api "$ref" --jq .object.sha)"
+            if [ "$tagged" != "$GITHUB_SHA" ]; then
+              echo "::warning::$TAG already points at $tagged, not $GITHUB_SHA. Skipping."
+              exit 0
+            fi
+          else
+            # Tag the tested commit ourselves. This fails if the tag was
+            # created since the check above, instead of reusing it.
+            gh api "repos/${GITHUB_REPOSITORY}/git/refs" \
+              -f ref="refs/tags/${TAG}" -f sha="$GITHUB_SHA" --silent
+          fi
+
+          if exists "repos/${GITHUB_REPOSITORY}/releases/tags/${TAG}"; then
+            echo "Release $TAG already exists, nothing to do"
+            exit 0
+          fi
+          # --verify-tag: release the tag above, never create one elsewhere
+          gh release create "$TAG" \
+            --repo "$GITHUB_REPOSITORY" \
+            --verify-tag \
+            --title "$TAG" \
+            --generate-notes

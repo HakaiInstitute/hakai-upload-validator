@@ -62,11 +62,16 @@ Consumers are the API (hakai-api) and the data portal (hakai-data-portal-v2).
 
 ## Releasing a new version
 
-1. Bump `version` in `package.json` and commit. The husky `post-commit` hook
-   creates a matching `vX.Y.Z` tag.
-2. Push the commit and the tag: `git push --follow-tags`.
+1. Bump `version` in `package.json` (`npm version patch --no-git-tag-version`,
+   or `minor`/`major`) in a pull request.
+2. Merge it. The Release workflow runs the tests, tags the merge commit
+   `vX.Y.Z`, and creates a GitHub Release with generated notes.
 3. In each consumer, update the dependency to the new tag and commit the
    updated lockfile.
+
+If a release fails and can't be re-run, run the Release workflow manually on
+`master` (Actions → Release → Run workflow). It releases master's current
+version if that version has no tag yet.
 
 ## Testing
 
@@ -85,8 +90,10 @@ depends on the machine's timezone. The browser run bundles the specs with
 esbuild, so it also fails if anything in `src/` or `config/` starts depending
 on a Node built-in.
 
-Run the linter with `npm run lint`. Prettier formats the code: run
-`npm run format` before committing (CI runs `npm run format:check`).
+Run the linter with `npm run lint` and format with `npm run format`. CI runs
+both (`npm run format:check`). `npm install` also sets up a pre-commit hook
+(husky + lint-staged) that formats staged files with Prettier and blocks the
+commit if ESLint reports errors in them.
 
 To see what the validator produces for a real workbook, run:
 
