@@ -25,31 +25,30 @@ const dateParser = (cell, date = "") => {
       .format("YYYY-MM-DDTHH:mm:ssZZ");
   } else if (pattern2.test(cell)) {
     // Convert Excel days since 1900-Jan-0 to iso format
-    const d = moment
-      .tz(0, TIMEZONE)
-      .subtract(70, "years")
-      .subtract(2, "days");
+    const d = moment.tz(0, TIMEZONE).subtract(70, "years").subtract(2, "days");
     d.add(Math.round(cell * 24 * 60 * 60), "seconds");
     // Need to reset hours since Excel assumes UTC times
     d.subtract(d.utcOffset(), "minutes");
     formattedDateCell = d.format("YYYY-MM-DDTHH:mm:ssZZ"); // store in iso format
   } else {
-    formattedDateCell = moment.tz(
-      cell,
-      [
-        "YYYY/MM/DD HH:mm:ss",
-        "YYYY-MM-DD HH:mm:ssZZ",
-        "YYYY-MM-DDTHH:mm:ssZZ",
-        "YYYY-MM-DD HH:mm:ss",
-        "YYYY-MM-DD",
-        "MM-DD-YYYY",
-        "MM/DD/YYYY",
-        "YYYY/MM/DD",
-        "MM/DD/YYYY HH:mm:ss"
-      ],
-      true,
-      TIMEZONE
-    ).format("YYYY-MM-DDTHH:mm:ssZZ");
+    formattedDateCell = moment
+      .tz(
+        cell,
+        [
+          "YYYY/MM/DD HH:mm:ss",
+          "YYYY-MM-DD HH:mm:ssZZ",
+          "YYYY-MM-DDTHH:mm:ssZZ",
+          "YYYY-MM-DD HH:mm:ss",
+          "YYYY-MM-DD",
+          "MM-DD-YYYY",
+          "MM/DD/YYYY",
+          "YYYY/MM/DD",
+          "MM/DD/YYYY HH:mm:ss",
+        ],
+        true,
+        TIMEZONE,
+      )
+      .format("YYYY-MM-DDTHH:mm:ssZZ");
   }
   return formattedDateCell;
 };

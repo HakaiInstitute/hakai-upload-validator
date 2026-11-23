@@ -1,19 +1,19 @@
 const getKeyByValue = (object, value) =>
-  Object.keys(object).find(key => object[key] === value);
+  Object.keys(object).find((key) => object[key] === value);
 
 /**
  * Returns a new array with duplicate values removed
  * @param {Array} arr
  * @returns {Array}
  */
-const deDupArray = arr => [...new Set(arr)];
+const deDupArray = (arr) => [...new Set(arr)];
 
 /**
  * Returns a new array that is all uppercase
  * @param {Array} arr
  * @returns {Array}
  */
-const toUpperCaseArray = arr => arr.map(str => str.toUpperCase());
+const toUpperCaseArray = (arr) => arr.map((str) => str.toUpperCase());
 
 /**
  * Returns true if arr1 contains all the values in arr2
@@ -38,5 +38,5 @@ module.exports = {
   getKeyByValue,
   toUpperCaseArray,
   arrayIncludesArray,
-  arrayFindMultipleIndices
+  arrayFindMultipleIndices,
 };

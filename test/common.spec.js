@@ -7,7 +7,7 @@ const {
   deDupArray,
   toUpperCaseArray,
   arrayIncludesArray,
-  arrayFindMultipleIndices
+  arrayFindMultipleIndices,
 } = require("../src/common.js");
 
 describe("Common functions", () => {
@@ -42,11 +42,11 @@ describe("Common functions", () => {
   describe("arrayFindMultipleIndices", () => {
     it("should return an array with indices of value found", () => {
       expect(
-        arrayFindMultipleIndices(["a", "c", "e", "g", "e"], "e")
+        arrayFindMultipleIndices(["a", "c", "e", "g", "e"], "e"),
       ).to.deep.equal([2, 4]);
       expect(arrayFindMultipleIndices([], "e")).to.deep.equal([]);
       expect(
-        arrayFindMultipleIndices(["a", "c", "e", "g", "e"], "")
+        arrayFindMultipleIndices(["a", "c", "e", "g", "e"], ""),
       ).to.deep.equal([]);
     });
   });
