@@ -2,7 +2,7 @@
  * Determines xml namespace based on the metadata
  * @param {Object} metadata Metadata values
  */
-const xmlnsFromMetadata = metadata => {
+const xmlnsFromMetadata = (metadata) => {
   const { data_type, program, project } = metadata;
   let xmlns;
 

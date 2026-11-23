@@ -8,9 +8,9 @@ const { toUpperCaseArray, deDupArray } = require("./common.js");
  *   @returns {String} the proper field name to use
  */
 const getDBFieldByRelatedText = (text = "", fieldGroup) => {
-  const getAllPossibleMatches = arr => {
-    const withUnderLines = arr.map(matches => matches.replace(/ /g, "_"));
-    const withSpaces = arr.map(matches => matches.replace(/_/g, " "));
+  const getAllPossibleMatches = (arr) => {
+    const withUnderLines = arr.map((matches) => matches.replace(/ /g, "_"));
+    const withSpaces = arr.map((matches) => matches.replace(/_/g, " "));
     return deDupArray([...arr, ...withUnderLines, ...withSpaces]);
   };
 
@@ -18,21 +18,23 @@ const getDBFieldByRelatedText = (text = "", fieldGroup) => {
 
   const matches = Object.keys(fieldGroup)
     // ignore the _joi properties
-    .filter(f => f.charAt(0) !== "_")
-    .map(fieldName => ({
+    .filter((f) => f.charAt(0) !== "_")
+    .map((fieldName) => ({
       fieldName,
       matches: deDupArray(
         toUpperCaseArray(
           getAllPossibleMatches(
             (fieldGroup[fieldName].matches || [])
               .concat([fieldName, fieldGroup[fieldName].output])
-              .filter(ele => typeof ele === "string")
-          )
-        )
-      )
+              .filter((ele) => typeof ele === "string"),
+          ),
+        ),
+      ),
     }));
   // console.log(matches);
-  const m = matches.filter(mo => mo.matches.includes(text.toUpperCase())).pop();
+  const m = matches
+    .filter((mo) => mo.matches.includes(text.toUpperCase()))
+    .pop();
   if (m) return m.fieldName;
   return false;
 };

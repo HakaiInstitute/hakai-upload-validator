@@ -37,7 +37,7 @@ module.exports = [
     phaeo_final: "1.169474988",
     row_flag: "Results",
     quality_level: "Principal Investigator",
-    quality_log: "Calibration inputs and final concentrations updated by JD"
+    quality_log: "Calibration inputs and final concentrations updated by JD",
   },
   {
     source: "undefined",
@@ -77,6 +77,6 @@ module.exports = [
     phaeo_final: "1.169474988",
     row_flag: "Results",
     quality_level: "Principal Investigator",
-    quality_log: "Calibration inputs and final concentrations updated by JD"
-  }
+    quality_log: "Calibration inputs and final concentrations updated by JD",
+  },
 ];

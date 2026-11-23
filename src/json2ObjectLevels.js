@@ -7,11 +7,11 @@ const columnSchema = require("../config/columns");
  * @returns {Array} A new array with objects put into 'levels'
  */
 const json2ObjectLevels = (arr, dataType) =>
-  arr.map(row => {
+  arr.map((row) => {
     const rowOut = {};
     // allheaders being metadata and datasheets headers
     const allHeaders = Object.keys(row);
-    allHeaders.forEach(headerName => {
+    allHeaders.forEach((headerName) => {
       const field = columnSchema[dataType][headerName];
       const outputName = columnSchema[dataType]._output;
       if (field) {

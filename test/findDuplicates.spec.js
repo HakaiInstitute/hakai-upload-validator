@@ -10,7 +10,7 @@ const { expect } = require("chai");
 describe("Find duplicates", () => {
   let inputWithoutAnalyzingLab;
   before(() => {
-    inputWithoutAnalyzingLab = input.map(row => {
+    inputWithoutAnalyzingLab = input.map((row) => {
       const { analyzing_lab, ...withoutAnalyzingLab } = row;
       return withoutAnalyzingLab;
     });
@@ -22,7 +22,7 @@ describe("Find duplicates", () => {
   it("should find duplicates also if analyzing lab is empty (but header exists)", () => {
     const duplicatesFound = findDuplicates(
       uniqueSets,
-      inputWithoutAnalyzingLab
+      inputWithoutAnalyzingLab,
     );
 
     expect(duplicatesFound).to.not.be.empty;
@@ -32,16 +32,16 @@ describe("Find duplicates", () => {
     inputWithoutAnalyzingLab[1].analyzing_lab = undefined;
     const duplicatesFound = findDuplicates(
       uniqueSets,
-      inputWithoutAnalyzingLab
+      inputWithoutAnalyzingLab,
     );
     expect(duplicatesFound).to.be.empty;
   });
-  it("should not find duplicates if one record has a value for analyzing lab and the other doesnt", () => {
+  it("should find duplicates if neither record has a value for analyzing lab", () => {
     inputWithoutAnalyzingLab[0].analyzing_lab = undefined;
     inputWithoutAnalyzingLab[1].analyzing_lab = undefined;
     const duplicatesFound = findDuplicates(
       uniqueSets,
-      inputWithoutAnalyzingLab
+      inputWithoutAnalyzingLab,
     );
     expect(duplicatesFound).to.not.be.empty;
   });
@@ -50,7 +50,7 @@ describe("Find duplicates", () => {
     inputWithoutAnalyzingLab[1].analyzing_lab = "Lab 2";
     const duplicatesFound = findDuplicates(
       uniqueSets,
-      inputWithoutAnalyzingLab
+      inputWithoutAnalyzingLab,
     );
     expect(duplicatesFound).to.be.empty;
   });

@@ -1,7 +1,5 @@
 const dateParser = require("./dateParser");
-const {
-  getKeyByValue
-} = require("./common");
+const { getKeyByValue } = require("./common");
 const dateTimeFields = require("../config/dateTimeFields");
 /**
  *  Cleans up row data - parses dates and splits site names into watershed ID, site name
