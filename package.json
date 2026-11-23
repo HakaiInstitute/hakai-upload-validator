@@ -8,7 +8,6 @@
     "test:node": "mocha --require test/node/setup.js test/*.spec.js",
     "test:browser": "node test/browser/run.mjs",
     "testexcel": "node test/testExcel.js",
-    "prepare": "husky install",
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
@@ -30,7 +29,6 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-mocha": "^12.0.2",
     "globals": "^17.14.0",
-    "husky": "^7.0.0",
     "mocha": "^5.2.0",
     "playwright": "^1.65.1",
     "prettier": "^3.10.1",

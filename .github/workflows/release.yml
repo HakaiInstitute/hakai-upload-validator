@@ -1,0 +1,67 @@
+name: Release
+
+# Releasing = merging a PR that bumps "version" in package.json. When master
+# has a version with no matching vX.Y.Z tag, this runs the tests, then tags
+# the commit and creates a GitHub Release. Consumers install by tag:
+#   npm install github:HakaiInstitute/hakai-upload-validator#vX.Y.Z
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      tag: ${{ steps.version.outputs.tag }}
+      exists: ${{ steps.version.outputs.exists }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Check for an existing tag
+        id: version
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag="v$(node -p 'require("./package.json").version')"
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+          if gh api "repos/${GITHUB_REPOSITORY}/git/ref/tags/${tag}" --silent 2>/dev/null; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+            echo "$tag already exists, nothing to release"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+            echo "$tag will be released"
+          fi
+
+  test:
+    needs: check
+    if: needs.check.outputs.exists == 'false'
+    uses: ./.github/workflows/test.yml
+
+  release:
+    needs: [check, test]
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - name: Create tag and GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ needs.check.outputs.tag }}
+        run: |
+          gh release create "$TAG" \
+            --repo "$GITHUB_REPOSITORY" \
+            --target "$GITHUB_SHA" \
+            --title "$TAG" \
+            --generate-notes
