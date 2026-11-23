@@ -1,5 +1,4 @@
 const moment = require("moment-timezone");
-const uuidv4 = require("uuid/v4");
 const Joi = require("joi");
 const uniqueSets = require("../config/uniqueSets");
 
@@ -223,7 +222,7 @@ function processWorkBookAndValidate(
       // Faking submission from device magic?
       const attributes = {
         form_xmlns: xmlnsFromMetadata(metadata),
-        submissionIdentifier: uuidv4(),
+        submissionIdentifier: globalThis.crypto.randomUUID(),
         dm_submit_time: moment.utc().format(),
         writeTime: moment.tz(TIMEZONE).format(),
         dm_form: formname,
