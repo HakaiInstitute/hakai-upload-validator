@@ -4,7 +4,6 @@ const processWorkBookAndValidate = require("../src/processWorkBookAndValidate");
 
 const filePath = process.argv.pop();
 
-// eslint-disable-next-line no-console
 const prettyConsoleLog = str => console.log(JSON.stringify(str, null, 2));
 const workbookRaw = XLSX.readFile(filePath);
 

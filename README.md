@@ -68,7 +68,18 @@ Consumers are the API (hakai-api) and the data portal (hakai-data-portal-v2).
 
 ## Testing
 
-Run the test suite with `npm test`.
+Run the test suite with `npm test` and the linter with `npm run lint`.
+
+The data portal runs this package in the browser, so CI also runs the test
+suite in headless Chromium:
+
+```bash
+npx playwright install chromium  # first time only
+npm run test:browser
+```
+
+This bundles the specs for the browser with esbuild, so it also fails if
+anything in `src/` or `config/` starts depending on a Node built-in.
 
 To see what the validator produces for a real workbook, run:
 

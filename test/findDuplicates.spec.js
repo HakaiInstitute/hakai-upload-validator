@@ -36,7 +36,7 @@ describe("Find duplicates", () => {
     );
     expect(duplicatesFound).to.be.empty;
   });
-  it("should not find duplicates if one record has a value for analyzing lab and the other doesnt", () => {
+  it("should find duplicates if neither record has a value for analyzing lab", () => {
     inputWithoutAnalyzingLab[0].analyzing_lab = undefined;
     inputWithoutAnalyzingLab[1].analyzing_lab = undefined;
     const duplicatesFound = findDuplicates(
