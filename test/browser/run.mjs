@@ -12,7 +12,10 @@ import * as esbuild from "esbuild";
 import { chromium } from "playwright";
 
 const require = createRequire(import.meta.url);
-const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
+const root = path.resolve(
+  path.dirname(fileURLToPath(import.meta.url)),
+  "../..",
+);
 
 const { outputFiles } = await esbuild.build({
   stdin: {
@@ -50,12 +53,14 @@ try {
   await page.route("http://localhost/**", (route) =>
     route.fulfill({
       contentType: "text/html",
-      body: "<!doctype html><html><body><div id=\"mocha\"></div></body></html>",
-    })
+      body: '<!doctype html><html><body><div id="mocha"></div></body></html>',
+    }),
   );
   await page.goto("http://localhost/");
   await page.addScriptTag({ content: mochaJs });
-  await page.evaluate(() => window.mocha.setup({ ui: "bdd", reporter: "html" }));
+  await page.evaluate(() =>
+    window.mocha.setup({ ui: "bdd", reporter: "html" }),
+  );
   await page.addScriptTag({ content: specs });
 
   const results = await page.evaluate(
@@ -63,12 +68,18 @@ try {
       new Promise((resolve) => {
         const tests = [];
         const runner = window.mocha.run();
-        runner.on("pass", (test) => tests.push({ title: test.fullTitle(), passed: true }));
+        runner.on("pass", (test) =>
+          tests.push({ title: test.fullTitle(), passed: true }),
+        );
         runner.on("fail", (test, err) =>
-          tests.push({ title: test.fullTitle(), passed: false, error: err.message })
+          tests.push({
+            title: test.fullTitle(),
+            passed: false,
+            error: err.message,
+          }),
         );
         runner.on("end", () => resolve(tests));
-      })
+      }),
   );
 
   for (const test of results) {
@@ -80,7 +91,9 @@ try {
     }
   }
   const passed = results.filter((test) => test.passed).length;
-  console.log(`\n${passed} passing, ${results.length - passed} failing (Chromium ${browser.version()})`);
+  console.log(
+    `\n${passed} passing, ${results.length - passed} failing (Chromium ${browser.version()})`,
+  );
   if (results.length === 0) {
     console.error("No tests ran");
     failures += 1;

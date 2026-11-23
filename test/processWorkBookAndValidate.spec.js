@@ -19,7 +19,14 @@ const chlorophyllWorkbook = () => [
   {
     name: "Hakai Data",
     data: [
-      ["Hakai ID", "Date", "Site ID", "Sampling Bout", "Acetone Volume", "Unknown Column"],
+      [
+        "Hakai ID",
+        "Date",
+        "Site ID",
+        "Sampling Bout",
+        "Acetone Volume",
+        "Unknown Column",
+      ],
       ["QCHL1", "2020-06-01", "QU39", 1, 10, "a"],
       ["QCHL2", "2020-06-01", "QU39", 1, "not a number", "b"],
       ["QCHL1", "2020-06-01", "QU39", 1, 10, "c"],
@@ -32,7 +39,7 @@ describe("processWorkBookAndValidate", () => {
     const { metadataErrorLog, submissions } = processWorkBookAndValidate(
       [{ name: "Sheet1", data: [] }],
       "someone@example.org",
-      "test.xlsx"
+      "test.xlsx",
     );
     expect(submissions).to.equal(undefined);
     expect(metadataErrorLog.map((log) => log.message)).to.deep.equal([
@@ -46,10 +53,10 @@ describe("processWorkBookAndValidate", () => {
     const { metadataErrorLog } = processWorkBookAndValidate(
       workbook,
       "someone@example.org",
-      "test.xlsx"
+      "test.xlsx",
     );
     expect(metadataErrorLog.map((log) => log.message)).to.include(
-      "Could not determine definition for data type NOT A REAL TYPE"
+      "Could not determine definition for data type NOT A REAL TYPE",
     );
   });
 
@@ -61,7 +68,7 @@ describe("processWorkBookAndValidate", () => {
         chlorophyllWorkbook(),
         "someone@example.org",
         "test.xlsx",
-        false
+        false,
       );
       expect(metadataErrorLog).to.be.empty;
       expect(submissions).to.have.lengthOf(1);
@@ -72,11 +79,13 @@ describe("processWorkBookAndValidate", () => {
       const attributes = submission.results["@attributes"];
       expect(submission.worksheet).to.equal("Hakai Data");
       expect(submission.form_name).to.equal("Chlorophyll:Hakai:Oceanography");
-      expect(attributes.form_xmlns).to.equal("http://hakai.org/xforms/SAMPLING_DATA");
+      expect(attributes.form_xmlns).to.equal(
+        "http://hakai.org/xforms/SAMPLING_DATA",
+      );
       expect(attributes.source_file).to.equal("test.xlsx");
       expect(attributes.submission_source).to.equal("someone@example.org");
       expect(attributes.submissionIdentifier).to.match(
-        /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/
+        /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/,
       );
     });
 
@@ -89,20 +98,24 @@ describe("processWorkBookAndValidate", () => {
     });
 
     it("should report duplicate samples", () => {
-      expect(submission.validationLog.mlog.map((log) => log.message)).to.deep.equal([
-        "Duplicates found: QCHL1,Hakai",
-      ]);
+      expect(
+        submission.validationLog.mlog.map((log) => log.message),
+      ).to.deep.equal(["Duplicates found: QCHL1,Hakai"]);
     });
 
     it("should report columns it could not map", () => {
-      expect(submission.debugObj.fieldsNotMapped).to.deep.equal(["Unknown Column"]);
+      expect(submission.debugObj.fieldsNotMapped).to.deep.equal([
+        "Unknown Column",
+      ]);
     });
 
     it("should output valid rows in levels with dates in America/Vancouver", () => {
       expect(submission.results.inputs).to.have.lengthOf(2);
       // Compare as JSON, the form the rows are sent in; it drops keys that are
       // undefined because the metadata didn't set them (e.g. process)
-      expect(JSON.parse(JSON.stringify(submission.results.inputs[0]))).to.deep.equal({
+      expect(
+        JSON.parse(JSON.stringify(submission.results.inputs[0])),
+      ).to.deep.equal({
         source: "Marine",
         Chlorophyll: {
           analyzing_lab: "Hakai",

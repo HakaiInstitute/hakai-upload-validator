@@ -15,19 +15,19 @@ describe("dateParser", () => {
 
   it("should parse summer dates as PDT", () => {
     expect(dateParser("2017/07/22 12:01:22")).to.equal(
-      "2017-07-22T12:01:22-0700"
+      "2017-07-22T12:01:22-0700",
     );
   });
 
   it("should parse dates after 2026-11-01 as permanent UTC-7", () => {
     expect(dateParser("2026-12-15 10:00:00")).to.equal(
-      "2026-12-15T10:00:00-0700"
+      "2026-12-15T10:00:00-0700",
     );
   });
 
   it("should convert dates with an explicit offset to local time", () => {
     expect(dateParser("2017-01-22 20:01:22+0000")).to.equal(
-      "2017-01-22T12:01:22-0800"
+      "2017-01-22T12:01:22-0800",
     );
   });
 

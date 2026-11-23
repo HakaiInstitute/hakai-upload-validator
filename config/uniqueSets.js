@@ -16,7 +16,7 @@ const uniqueSets = [
   ["hakai_biomass_id", "analyzing_lab"],
   ["result_uid", "analyzing_lab"],
   ["solo_hakai_id", "analyzing_lab"],
-  ["filter_no", "analyzing_lab"]
+  ["filter_no", "analyzing_lab"],
 ];
 
 module.exports = uniqueSets;
