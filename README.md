@@ -86,8 +86,10 @@ depends on the machine's timezone. The browser run bundles the specs with
 esbuild, so it also fails if anything in `src/` or `config/` starts depending
 on a Node built-in.
 
-Run the linter with `npm run lint`. Prettier formats the code: run
-`npm run format` before committing (CI runs `npm run format:check`).
+Run the linter with `npm run lint` and format with `npm run format`. CI runs
+both (`npm run format:check`). `npm install` also sets up a pre-commit hook
+(husky + lint-staged) that formats staged files with Prettier and blocks the
+commit if ESLint reports errors in them.
 
 To see what the validator produces for a real workbook, run:
 
