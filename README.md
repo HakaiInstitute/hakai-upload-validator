@@ -77,7 +77,7 @@ npm run testexcel <path-to-an-excel-file>
 ```
 
 This prints a large JSON document containing the database output
-(`results.input`) and debugging info about the workbook.
+(`results.inputs` on each submission) and debugging info about the workbook.
 
 ## Developing against a consumer
 
