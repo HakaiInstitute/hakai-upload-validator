@@ -1,5 +1,5 @@
-// This spec also runs in a browser (see test/browser/run.mjs), so it must not
-// use Node-only APIs.
+// Every spec runs in Node (npm run test:node) and in headless Chromium
+// (npm run test:browser), so it must not use Node-only APIs.
 const { expect } = require("chai");
 
 const processWorkBookAndValidate = require("../src/processWorkBookAndValidate");

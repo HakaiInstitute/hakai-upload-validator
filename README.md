@@ -68,18 +68,20 @@ Consumers are the API (hakai-api) and the data portal (hakai-data-portal-v2).
 
 ## Testing
 
-Run the test suite with `npm test` and the linter with `npm run lint`.
-
-The data portal runs this package in the browser, so CI also runs the test
-suite in headless Chromium:
+The API runs this package in Node and the data portal runs it in the browser,
+so every spec runs in both:
 
 ```bash
 npx playwright install chromium  # first time only
-npm run test:browser
+npm test               # both
+npm run test:node      # mocha in Node
+npm run test:browser   # mocha in headless Chromium
 ```
 
-This bundles the specs for the browser with esbuild, so it also fails if
-anything in `src/` or `config/` starts depending on a Node built-in.
+Both runs use the `Pacific/Auckland` timezone so tests catch output that
+depends on the machine's timezone. The browser run bundles the specs with
+esbuild, so it also fails if anything in `src/` or `config/` starts depending
+on a Node built-in. Run the linter with `npm run lint`.
 
 To see what the validator produces for a real workbook, run:
 
