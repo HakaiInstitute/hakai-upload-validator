@@ -37,14 +37,19 @@ jobs:
           EVENT: ${{ github.event_name }}
           BEFORE: ${{ github.event.before }}
         run: |
+          set -o pipefail
           version="$(node -p 'require("./package.json").version')"
           tag="v$version"
           echo "tag=$tag" >> "$GITHUB_OUTPUT"
 
           if [ "$EVENT" = push ]; then
-            # Empty if the previous commit can't be read (e.g. after a force push)
-            previous="$(gh api "repos/${GITHUB_REPOSITORY}/contents/package.json?ref=${BEFORE}" \
-              -H 'Accept: application/vnd.github.raw' | node -p 'JSON.parse(require("fs").readFileSync(0)).version' || true)"
+            # If the previous version can't be read (API error, force push),
+            # fail instead of guessing. Run the workflow manually to release.
+            if ! previous="$(gh api "repos/${GITHUB_REPOSITORY}/contents/package.json?ref=${BEFORE}" \
+              -H 'Accept: application/vnd.github.raw' | node -p 'JSON.parse(require("fs").readFileSync(0)).version')"; then
+              echo "::error::Couldn't read package.json at ${BEFORE}. Not releasing; run this workflow manually on master if a release is needed."
+              exit 1
+            fi
             if [ "$previous" = "$version" ]; then
               echo "release=false" >> "$GITHUB_OUTPUT"
               echo "Version is still $version, nothing to release"
