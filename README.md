@@ -53,7 +53,7 @@ When adding a date/time to `columns.js` the column name also has to be added to 
 Install from GitHub, pinned to a release tag:
 
 ```bash
-yarn add github:HakaiInstitute/hakai-upload-validator#v1.1.1
+npm install github:HakaiInstitute/hakai-upload-validator#v1.1.1
 ```
 
 Consumers are the API (hakai-api) and the data portal (hakai-data-portal-v2).
@@ -85,17 +85,17 @@ To try local changes in the API or portal before releasing, link this package.
 In `hakai-upload-validator/`:
 
 ```bash
-yarn link && yarn
+npm install && npm link
 ```
 
 Then in the consumer (`hakai-api/` or `hakai-data-portal-v2/`):
 
 ```bash
-yarn link hakai-upload-validator && yarn
+npm link hakai-upload-validator
 ```
 
 To go back to the released version:
 
 ```bash
-yarn unlink hakai-upload-validator && yarn install --force
+npm unlink --no-save hakai-upload-validator && npm install
 ```
