@@ -38,6 +38,16 @@ jobs:
           BEFORE: ${{ github.event.before }}
         run: |
           set -o pipefail
+          # Exit 0 if the resource exists, 1 if GitHub says 404. Any other
+          # failure stops the job, so an API error never reads as "missing".
+          exists() {
+            local err
+            if err="$(gh api "$1" --silent 2>&1)"; then return 0; fi
+            case "$err" in *"(HTTP 404)"*) return 1 ;; esac
+            echo "::error::GitHub API request for $1 failed: $err"
+            exit 1
+          }
+
           version="$(node -p 'require("./package.json").version')"
           tag="v$version"
           echo "tag=$tag" >> "$GITHUB_OUTPUT"
@@ -57,7 +67,7 @@ jobs:
             fi
           fi
 
-          if gh api "repos/${GITHUB_REPOSITORY}/git/ref/tags/${tag}" --silent 2>/dev/null; then
+          if exists "repos/${GITHUB_REPOSITORY}/git/ref/tags/${tag}"; then
             echo "release=false" >> "$GITHUB_OUTPUT"
             echo "$tag already exists, nothing to release"
           else
@@ -87,13 +97,40 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           TAG: ${{ needs.check.outputs.tag }}
         run: |
-          # Another run may have released this version while we were testing
-          if gh api "repos/${GITHUB_REPOSITORY}/git/ref/tags/${TAG}" --silent 2>/dev/null; then
-            echo "$TAG already exists, skipping"
+          set -o pipefail
+          # Exit 0 if the resource exists, 1 if GitHub says 404. Any other
+          # failure stops the job, so an API error never reads as "missing".
+          exists() {
+            local err
+            if err="$(gh api "$1" --silent 2>&1)"; then return 0; fi
+            case "$err" in *"(HTTP 404)"*) return 1 ;; esac
+            echo "::error::GitHub API request for $1 failed: $err"
+            exit 1
+          }
+
+          ref="repos/${GITHUB_REPOSITORY}/git/ref/tags/${TAG}"
+          if exists "$ref"; then
+            # Another run may have tagged this version while we were testing.
+            # Only finish the release if the tag is on the commit we tested.
+            tagged="$(gh api "$ref" --jq .object.sha)"
+            if [ "$tagged" != "$GITHUB_SHA" ]; then
+              echo "::warning::$TAG already points at $tagged, not $GITHUB_SHA. Skipping."
+              exit 0
+            fi
+          else
+            # Tag the tested commit ourselves. This fails if the tag was
+            # created since the check above, instead of reusing it.
+            gh api "repos/${GITHUB_REPOSITORY}/git/refs" \
+              -f ref="refs/tags/${TAG}" -f sha="$GITHUB_SHA" --silent
+          fi
+
+          if exists "repos/${GITHUB_REPOSITORY}/releases/tags/${TAG}"; then
+            echo "Release $TAG already exists, nothing to do"
             exit 0
           fi
+          # --verify-tag: release the tag above, never create one elsewhere
           gh release create "$TAG" \
             --repo "$GITHUB_REPOSITORY" \
-            --target "$GITHUB_SHA" \
+            --verify-tag \
             --title "$TAG" \
             --generate-notes
