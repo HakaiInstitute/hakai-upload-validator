@@ -1,6 +1,7 @@
 import js from "@eslint/js";
 import globals from "globals";
 import mocha from "eslint-plugin-mocha";
+import eslintConfigPrettier from "eslint-config-prettier/flat";
 
 export default [
   {
@@ -51,4 +52,7 @@ export default [
       "mocha/no-mocha-arrows": "off",
     },
   },
+  // Prettier handles formatting, so turn off ESLint rules that conflict with it.
+  // Must stay last.
+  eslintConfigPrettier,
 ];
