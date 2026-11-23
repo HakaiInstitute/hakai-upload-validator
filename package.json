@@ -10,7 +10,8 @@
     "testexcel": "node test/testExcel.js",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "prepare": "husky"
   },
   "author": "",
   "engines": {
@@ -29,6 +30,8 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-mocha": "^12.0.2",
     "globals": "^17.14.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.6.2",
     "mocha": "^5.2.0",
     "playwright": "^1.65.1",
     "prettier": "^3.10.1",
@@ -37,5 +40,12 @@
   "dependencies": {
     "joi": "^17.13.3",
     "moment-timezone": "^0.6.6"
+  },
+  "lint-staged": {
+    "*.{js,mjs}": [
+      "prettier --write",
+      "eslint"
+    ],
+    "*.{json,md,yml,yaml}": "prettier --write"
   }
 }
