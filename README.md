@@ -69,6 +69,10 @@ Consumers are the API (hakai-api) and the data portal (hakai-data-portal-v2).
 3. In each consumer, update the dependency to the new tag and commit the
    updated lockfile.
 
+If a release fails and can't be re-run, run the Release workflow manually on
+`master` (Actions → Release → Run workflow). It releases master's current
+version if that version has no tag yet.
+
 ## Testing
 
 The API runs this package in Node and the data portal runs it in the browser,

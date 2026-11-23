@@ -1,9 +1,13 @@
 name: Release
 
-# Releasing = merging a PR that bumps "version" in package.json. When master
-# has a version with no matching vX.Y.Z tag, this runs the tests, then tags
-# the commit and creates a GitHub Release. Consumers install by tag:
+# Releasing = merging a PR that bumps "version" in package.json. When a push
+# to master changes the version and there is no matching vX.Y.Z tag yet, this
+# runs the tests, then tags the pushed commit and creates a GitHub Release.
+# Consumers install by tag:
 #   npm install github:HakaiInstitute/hakai-upload-validator#vX.Y.Z
+#
+# Running it manually on master releases master's current version if it has
+# no tag yet (e.g. after a failed run you can't re-run).
 on:
   push:
     branches: [master]
@@ -12,40 +16,53 @@ on:
 permissions:
   contents: read
 
-concurrency:
-  group: release
-  cancel-in-progress: false
-
 jobs:
   check:
+    # Manual runs can pick any branch; only release merged code
+    if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     timeout-minutes: 5
     outputs:
       tag: ${{ steps.version.outputs.tag }}
-      exists: ${{ steps.version.outputs.exists }}
+      release: ${{ steps.version.outputs.release }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
 
-      - name: Check for an existing tag
+      - name: Decide whether to release
         id: version
         env:
           GH_TOKEN: ${{ github.token }}
+          EVENT: ${{ github.event_name }}
+          BEFORE: ${{ github.event.before }}
         run: |
-          tag="v$(node -p 'require("./package.json").version')"
+          version="$(node -p 'require("./package.json").version')"
+          tag="v$version"
           echo "tag=$tag" >> "$GITHUB_OUTPUT"
+
+          if [ "$EVENT" = push ]; then
+            # Empty if the previous commit can't be read (e.g. after a force push)
+            previous="$(gh api "repos/${GITHUB_REPOSITORY}/contents/package.json?ref=${BEFORE}" \
+              -H 'Accept: application/vnd.github.raw' | node -p 'JSON.parse(require("fs").readFileSync(0)).version' || true)"
+            if [ "$previous" = "$version" ]; then
+              echo "release=false" >> "$GITHUB_OUTPUT"
+              echo "Version is still $version, nothing to release"
+              exit 0
+            fi
+          fi
+
           if gh api "repos/${GITHUB_REPOSITORY}/git/ref/tags/${tag}" --silent 2>/dev/null; then
-            echo "exists=true" >> "$GITHUB_OUTPUT"
+            echo "release=false" >> "$GITHUB_OUTPUT"
             echo "$tag already exists, nothing to release"
           else
-            echo "exists=false" >> "$GITHUB_OUTPUT"
+            echo "release=true" >> "$GITHUB_OUTPUT"
             echo "$tag will be released"
           fi
 
   test:
     needs: check
-    if: needs.check.outputs.exists == 'false'
+    if: needs.check.outputs.release == 'true'
     uses: ./.github/workflows/test.yml
 
   release:
@@ -54,12 +71,22 @@ jobs:
     timeout-minutes: 5
     permissions:
       contents: write
+    # Only runs for the same tag wait on each other. A queued run may replace
+    # another queued run, but both would release the same version.
+    concurrency:
+      group: release-${{ needs.check.outputs.tag }}
+      cancel-in-progress: false
     steps:
       - name: Create tag and GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
           TAG: ${{ needs.check.outputs.tag }}
         run: |
+          # Another run may have released this version while we were testing
+          if gh api "repos/${GITHUB_REPOSITORY}/git/ref/tags/${TAG}" --silent 2>/dev/null; then
+            echo "$TAG already exists, skipping"
+            exit 0
+          fi
           gh release create "$TAG" \
             --repo "$GITHUB_REPOSITORY" \
             --target "$GITHUB_SHA" \
