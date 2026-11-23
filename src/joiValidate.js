@@ -1,6 +1,3 @@
-const Joi = require("joi");
-
-
 const _serializer = function () {
 
   const keys = [];
@@ -73,15 +70,15 @@ const _annotate = function (joiError) {
   }
 
   message = message + JSON.stringify(obj._original, _serializer(), 2)
-    .replace(/_\$key\$_([, \d]+)_\$end\$_\"/g, ($0, $1) => {
+    .replace(/_\$key\$_([, \d]+)_\$end\$_"/g, ($0, $1) => {
 
       return '" \u001b[31m[' + $1 + ']\u001b[0m';
-    }).replace(/\"([\w]*)\": \"-- missing --\"/g, ($0, $1) => {
+    }).replace(/"([\w]*)": "-- missing --"/g, ($0, $1) => {
 
       return '\u001b[41m"' + $1 + '"\u001b[0m\u001b[31m : -- missing --\u001b[0m';
-    }).replace(/\"([\w]*)\": \"(.*?) ([\[\d \]]+)\"/g, ($0, $1, $2, $3) => {
+    }).replace(/"([\w]*)": "(.*?) ([[\d \]]+)"/g, ($0, $1, $2, $3) => {
 
-      return '\u001b[41m"' + $1 + '"\u001b[0m\u001b[31m : \"' + $2 + '\" ' + $3 + '\u001b[0m';
+      return '\u001b[41m"' + $1 + '"\u001b[0m\u001b[31m : "' + $2 + '" ' + $3 + '\u001b[0m';
     });
 
   message = message + '\n\u001b[31m';
