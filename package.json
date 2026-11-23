@@ -9,7 +9,9 @@
     "test:browser": "node test/browser/run.mjs",
     "testexcel": "node test/testExcel.js",
     "prepare": "husky install",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "author": "",
   "engines": {
@@ -25,11 +27,13 @@
     "chai-datetime": "^1.5.0",
     "esbuild": "^0.28.2",
     "eslint": "^10.15.0",
+    "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-mocha": "^12.0.2",
     "globals": "^17.14.0",
     "husky": "^7.0.0",
     "mocha": "^5.2.0",
     "playwright": "^1.65.1",
+    "prettier": "^3.10.1",
     "xlsx": "^0.11.10"
   },
   "dependencies": {
