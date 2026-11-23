@@ -48,91 +48,53 @@ When there are multiple matches found, the _last_ one is taken. See CHLOROPHYLL
 
 When adding a date/time to `columns.js` the column name also has to be added to `dateTimeFields.json`. If this is not done the timezone is set incorrectly on file upload.
 
-## How to install this code
+## Installing
 
-Add this package to another project with `yarn add
-github:HakaiInstitute/hakai-upload-validator`
-
-## How to run/deploy this code
-New update method as of 2019-04-11 that doesn't require ssh to server:
-- update validator locally
-- commit new yarn.lock file that includes the updated validator commit hash to api and portal
-- push updated api and portal branches to server
-
-Update the portal (locally then push):
+Install from GitHub, pinned to a release tag:
 
 ```bash
-cd ~/hakai-data-portal-v2
-yarn add github:HakaiInstitute/hakai-upload-validator
-```
-Commit the new yarn.lock file
-```bash
-git push hecate master
+yarn add github:HakaiInstitute/hakai-upload-validator#v1.1.1
 ```
 
+Consumers are the API (hakai-api) and the data portal (hakai-data-portal-v2).
 
-~~To update the forms-parser:~~ The forms parser is not used anymore. It has
-been merged into the API.
+## Releasing a new version
 
-To update the API (locally then push):
-
-```bash
-cd ~/hakai-api
-yarn add github:HakaiInstitute/hakai-upload-validator
-```
-Commit the new yarn.lock file
-```bash
-git push hecate master
-```
+1. Bump `version` in `package.json` and commit. The husky `post-commit` hook
+   creates a matching `vX.Y.Z` tag.
+2. Push the commit and the tag: `git push --follow-tags`.
+3. In each consumer, update the dependency to the new tag and commit the
+   updated lockfile.
 
 ## Testing
 
-To test the changes you have made, run:
+Run the test suite with `npm test`.
 
-`npm run testexcel <path-to-an-excel-file>`
-
-This will spit out a large json file including the output to the database
-(results.input) as well as a ton of debugging info about the excel file.
-
-If you want to test further, you can include a local version of
-hakai-upload-validator before pushing changes by using local paths in
-package.json. Run the following, changing the paths as needed:
+To see what the validator produces for a real workbook, run:
 
 ```bash
-cd ~/hakai-data-portal-v2
-yarn add file: ../hakai-upload-validator
-<restart pm2 if needed>
+npm run testexcel <path-to-an-excel-file>
 ```
 
-```bash
-cd ~/hakai-api
-yarn add file: ../hakai-upload-validator
-pm2 restart hakai-api
-```
+This prints a large JSON document containing the database output
+(`results.input`) and debugging info about the workbook.
 
-If having trouble getting the updated version of the validator, try rebuilding the packages with `yarn`.
+## Developing against a consumer
 
-To run the test suite, which tests various functions used, do `npm test`.
-
-## Use local files for development
-
-[yarn link](https://classic.yarnpkg.com/en/docs/cli/link)
-
-To use a local verion of hakai-upload-validator, run the following in `hakai-upload-validator/`:
+To try local changes in the API or portal before releasing, link this package.
+In `hakai-upload-validator/`:
 
 ```bash
 yarn link && yarn
 ```
 
-And then in `hakai-api/` and `hakai-data-portal-v2/` run:
+Then in the consumer (`hakai-api/` or `hakai-data-portal-v2/`):
 
 ```bash
 yarn link hakai-upload-validator && yarn
 ```
 
-[yarn unlink](https://classic.yarnpkg.com/en/docs/cli/unlink)
-
-To return to using the github files, in `hakai-api/` and `hakai-data-portal-v2/` run:
+To go back to the released version:
 
 ```bash
 yarn unlink hakai-upload-validator && yarn install --force
