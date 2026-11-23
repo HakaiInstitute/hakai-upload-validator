@@ -62,9 +62,10 @@ Consumers are the API (hakai-api) and the data portal (hakai-data-portal-v2).
 
 ## Releasing a new version
 
-1. Bump `version` in `package.json` and commit. The husky `post-commit` hook
-   creates a matching `vX.Y.Z` tag.
-2. Push the commit and the tag: `git push --follow-tags`.
+1. Bump `version` in `package.json` (`npm version patch --no-git-tag-version`,
+   or `minor`/`major`) in a pull request.
+2. Merge it. The Release workflow runs the tests, tags the merge commit
+   `vX.Y.Z`, and creates a GitHub Release with generated notes.
 3. In each consumer, update the dependency to the new tag and commit the
    updated lockfile.
 
