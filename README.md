@@ -55,7 +55,7 @@ When adding a date/time to `columns.js` the column name also has to be added to 
 Install from GitHub, pinned to a release tag:
 
 ```bash
-npm install github:HakaiInstitute/hakai-upload-validator#v1.1.1
+npm install github:HakaiInstitute/hakai-upload-validator#v1.1.2
 ```
 
 Consumers are the API (hakai-api) and the data portal (hakai-data-portal-v2).
@@ -70,7 +70,7 @@ Consumers are the API (hakai-api) and the data portal (hakai-data-portal-v2).
    updated lockfile.
 
 If a release fails and can't be re-run, run the Release workflow manually on
-`master` (Actions → Release → Run workflow). It releases master's current
+`main` (Actions → Release → Run workflow). It releases main's current
 version if that version has no tag yet.
 
 ## Testing
