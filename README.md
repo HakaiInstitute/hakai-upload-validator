@@ -91,9 +91,12 @@ esbuild, so it also fails if anything in `src/` or `config/` starts depending
 on a Node built-in.
 
 Run the linter with `npm run lint` and format with `npm run format`. CI runs
-both (`npm run format:check`). `npm install` also sets up a pre-commit hook
-(husky + lint-staged) that formats staged files with Prettier and blocks the
-commit if ESLint reports errors in them.
+both (`npm run format:check`). After cloning, run `npm run hooks` once to set
+up a pre-commit hook (husky + lint-staged) that formats staged files with
+Prettier and blocks the commit if ESLint reports errors in them. This is
+deliberately not wired into `prepare`: npm and yarn both run `prepare` when
+this repo is installed as a git dependency, which makes them install the whole
+devDependency tree inside the consumer's install.
 
 To see what the validator produces for a real workbook, run:
 
